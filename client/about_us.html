@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - DataraAI</title>
+    <link href="css/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-effect {
+            background: rgba(20, 30, 40, 0.7);
+            backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1.5px solid rgba(60,255,180,0.08);
+            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.12);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: -4px;
+            height: 2px;
+            background: linear-gradient(90deg, #1de9b6, #1e88e5);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+        .modern-card {
+            background: rgba(18, 28, 38, 0.95);
+            border: 1.5px solid rgba(60,255,180,0.08);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+            border-radius: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .modern-card:hover {
+            transform: translateY(-8px) scale(1.03) rotate(-1deg);
+            box-shadow: 0 16px 48px 0 rgba(30,232,181,0.12);
+        }
+        .animated-gradient-bg {
+            background: linear-gradient(120deg, #0a192f 0%, #1e293b 50%, #1de9b6 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 12s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .glow {
+            box-shadow: 0 0 24px 4px #1de9b6, 0 0 48px 8px #1e88e5;
+        }
+        .section-divider {
+            display: block;
+            width: 100vw;
+            height: 60px;
+            margin: 0;
+            background: none;
+            border: none;
+        }
+        .footer-ambience {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .footer-ambience svg {
+            width: 100%; height: 100%;
+            opacity: 0.12;
+        }
+    </style>
+</head>
+<body class="bg-darker text-light font-sans antialiased overflow-x-hidden">
+    <style>
+    @keyframes glimmer {
+        0% { filter: brightness(1) drop-shadow(0 0 0 #1de9b6); }
+        100% { filter: brightness(2) drop-shadow(0 0 32px #1de9b6); }
+    }
+    html { scroll-behavior: smooth; overscroll-behavior-y: contain; }
+    body { overscroll-behavior-y: contain; }
+    </style>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <a href="/" style="display:inline-flex;align-items:center;" tabindex="0">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center animate-glow glow cursor-pointer">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" fill="#148c3f"></circle>
+                        <path d="M20 10 L30 20 L20 30 L10 20 L20 10" fill="#0a5930"></path>
+                        <circle cx="20" cy="20" r="5" fill="#FF6600"></circle>
+                        <path d="M25 20 L35 20" stroke="#FF6600" stroke-width="2"></path>
+                        <path d="M5 20 L15 20" stroke="#FF6600" stroke-width="2"></path>
+                    </svg>
+                        </div>
+                    </a>
+                    <span class="text-2xl font-bold text-gradient">DataraAI</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/datacenter.html#solutions" class="nav-link text-gray-300 hover:text-primary transition-colors duration-300">Solutions</a>
+                    <a href="/datacenter.html#features" class="nav-link text-gray-300 hover:text-primary transition-colors duration-300">Features</a>
+                    <a href="about_us.html" class="nav-link text-gray-300 hover:text-primary transition-colors duration-300">About Us</a>
+                    <a href="/datacenter.html#contact" class="nav-link text-gray-300 hover:text-primary transition-colors duration-300">Contact</a>
+                    <a href="/datacenter.html" class="nav-link text-gray-300 hover:text-primary transition-colors duration-300">AI Datacenter Solutions</a>
+                    
+                </div>
+                
+                <a href="mailto:durgesh@dataraai.ai" class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 transform hover:scale-105">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center animated-gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 animate-slide-up">
+                Meet Our 
+                <span class="text-gradient">Team</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 animate-slide-up" style="animation-delay: 0.2s;">
+                Built by Domain Experts – IIT Graduates with 40+ years of combined expertise in AI, CUDA, and software frameworks
+            </p>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-4 h-4 bg-primary rounded-full animate-float opacity-60"></div>
+        <div class="absolute top-40 right-20 w-6 h-6 bg-accent rounded-full animate-float opacity-40" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-40 left-20 w-3 h-3 bg-secondary rounded-full animate-float opacity-50" style="animation-delay: 2s;"></div>
+    </section>
+<svg class="section-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#181f2a"/></svg>
+<!-- Team Section -->
+    <section class="py-20 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gradient">
+                    Our Leadership Team
+                </h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    Uniquely positioned to solve the industrial robotics data challenge with deep expertise in AI, data centers, and robotics
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="modern-card rounded-3xl p-8 card-hover animate-slide-in-left">
+                    <div class="text-center">
+                        <div class="member-photo w-48 h-48 rounded-full mx-auto mb-8 overflow-hidden border-4 border-primary/20">
+                            <img src="robotics_data_engine_presentation/ppt/media/image3.png" alt="Durgesh Srivastava" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-3xl font-bold mb-3 text-white">Durgesh Srivastava</h3>
+                        <p class="text-xl text-primary font-semibold mb-6">Co-Founder & CEO</p>
+                        <p class="text-gray-400 mb-8 leading-relaxed">
+                            A serial entrepreneur and technology leader with extensive experience in AI, data centers, and robotics. 
+                            Formerly at NVIDIA as Senior Director of AI, Durgesh brings deep expertise in CUDA, AI frameworks, and 
+                            large language models for robotics applications.
+                        </p>
+                        <div class="bg-dark rounded-2xl p-6">
+                            <h4 class="text-lg font-semibold text-white mb-4">Key Achievements</h4>
+                            <ul class="space-y-2 text-left">
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    Serial entrepreneur (exited MIPS)
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    Ex-NVIDIA Sr. Director, AI
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    Data Center, AI, and Robotics LLM expert
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    IIT Graduate
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modern-card rounded-3xl p-8 card-hover animate-slide-in-right">
+                    <div class="text-center">
+                        <div class="member-photo w-48 h-48 rounded-full mx-auto mb-8 overflow-hidden border-4 border-accent/20">
+                            <img src="robotics_data_engine_presentation/ppt/media/image4.jpg" alt="Niraj Rai" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-3xl font-bold mb-3 text-white">Niraj Rai</h3>
+                        <p class="text-xl text-accent font-semibold mb-6">Co-Founder & CTO</p>
+                        <p class="text-gray-400 mb-8 leading-relaxed">
+                            A seasoned entrepreneur and technology expert with a proven track record in AI and robotics startups. 
+                            As the founder of SproutsAi and former CTO of AI/Robotics companies, Niraj brings comprehensive 
+                            knowledge in software development and AI implementation.
+                        </p>
+                        <div class="bg-dark rounded-2xl p-6">
+                            <h4 class="text-lg font-semibold text-white mb-4">Key Achievements</h4>
+                            <ul class="space-y-2 text-left">
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    Serial entrepreneur
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    Founder, SproutsAi
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    Ex-CTO of AI/Robotics startup
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    Software & AI expert
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <div class="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                                    IIT Graduate
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<svg class="section-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#181f2a"/></svg>
+<!-- Company Overview Section -->
+    <section class="py-20 bg-darker">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="animate-slide-in-left">
+                    <h3 class="text-4xl font-bold mb-8 text-gradient">Why Choose DataraAI?</h3>
+                    <div class="space-y-6 text-gray-400 text-lg leading-relaxed">
+                        <p>
+                            Our founders bring together decades of experience in the most critical areas of AI and robotics technology. 
+                            With backgrounds spanning from NVIDIA's AI leadership to successful startup exits, we understand both the 
+                            technical challenges and business realities of implementing AI solutions.
+                        </p>
+                        <p>
+                            As IIT graduates, we combine academic excellence with practical industry experience, uniquely positioning 
+                            DataraAI to deliver enterprise-grade AI solutions that are accessible and effective for small businesses.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="animate-slide-in-right">
+                    <div class="modern-card bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl p-12 text-center border border-primary/20">
+                        <div class="mb-12">
+                            <div class="text-6xl font-bold text-gradient mb-4 animate-pulse-slow">40+</div>
+                            <div class="text-xl text-gray-300">Years Combined Expertise</div>
+                        </div>
+                        <div class="border-t border-primary/20 pt-12">
+                            <div class="text-6xl font-bold text-gradient mb-4 animate-pulse-slow" style="animation-delay: 1s;">2</div>
+                            <div class="text-xl text-gray-300">Successful Exits</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<svg class="section-divider" viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#181f2a"/></svg>
+<!-- CTA Section -->
+    <section class="py-20 gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white animate-slide-up">
+                Ready to Work with Our Expert Team?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 animate-slide-up" style="animation-delay: 0.2s;">
+                Get in touch with our founders to discuss how our combined expertise can transform your business with AI solutions.
+            </p>
+            <a href="mailto:durgesh@dataraai.ai" class="inline-flex items-center bg-white text-dark px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 animate-slide-up" style="animation-delay: 0.4s;">
+                Contact Our Team
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker py-16 relative overflow-hidden">
+        <div class="footer-ambience">
+            <svg viewBox="0 0 1440 320"><circle cx="200" cy="200" r="120" fill="#1de9b6"/><circle cx="1240" cy="120" r="80" fill="#1e88e5"/><circle cx="800" cy="300" r="60" fill="#1de9b6"/></svg>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Solutions</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">AI Infrastructure</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">Software Platform</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">Ready-to-Use Applications</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">Custom Development</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">Knowledge Base</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">Case Studies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors duration-300">Blog</a></li>
+                    </ul>
+                </div> -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about_us.html" class="text-gray-400 hover:text-primary transition-colors duration-300">About Us</a></li>
+                        <li><a href="mailto:durgesh@dataraai.ai" class="text-gray-400 hover:text-primary transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Connect</h3>
+                    <ul class="space-y-2">
+                        <li><a href="https://www.linkedin.com/company/dataraai/" class="text-gray-400 hover:text-primary transition-colors duration-300">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 DataraAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script defer>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.animate-slide-up, .animate-slide-in-left, .animate-slide-in-right');
+            animatedElements.forEach((el, i) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1)';
+                observer.observe(el);
+            });
+        });
+        // Inertial scrolling
+        if ('scrollBehavior' in document.documentElement.style) {
+            document.documentElement.style.scrollBehavior = 'smooth';
+        }
+        document.body.style.overscrollBehaviorY = 'contain';
+    </script>
+</body>
+</html> 
