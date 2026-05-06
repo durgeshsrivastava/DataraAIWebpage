@@ -1,221 +1,296 @@
 # Product Requirements Document (PRD)
 ## DataraAI Website
 
-**Version:** 1.0
-**Date:** April 18, 2026
+**Version:** 2.0
+**Date:** April 19, 2026
 **Live URL:** https://dataraai.ai
+**Source:** Website codebase + investor deck (PhysicalAI RobotEyeview DataEngine 2.pdf)
 
 ---
 
-## 1. Product Overview
+## 1. Company Overview
 
-DataraAI is an AI technology company founded by two IIT graduates with 40+ years of combined expertise in AI, CUDA, robotics, and data centers. The website serves as the primary marketing and lead-generation surface for two distinct product lines:
+DataraAI is a **PhysicalAI company** and **member of the NVIDIA Inception program**. Founded by two IIT graduates with 40+ years of combined expertise, DataraAI provides the foundational real-world data infrastructure that makes industrial robots work outside simulation.
 
-1. **Industrial Robotics Data Engine** — solving the real-world training data bottleneck for industrial robots
-2. **AI Datacenter Solutions** — full-stack AI infrastructure for small businesses and enterprises
+**Core thesis:** Robotics and industrial automation works in simulation — it breaks in the real world. DataraAI fixes that.
 
----
-
-## 2. Business Goals
-
-- Establish credibility and authority in industrial robotics AI and datacenter AI solutions
-- Generate inbound leads via email (durgesh@dataraai.ai)
-- Communicate the technical vision and market opportunity to potential investors and customers
-- Showcase founding team's domain expertise (NVIDIA, SproutsAi, MIPS exits)
+**One-line:** "We fix what breaks Robotics — Foundation Real-world data and Tools that make robots work."
 
 ---
 
-## 3. Target Audiences
+## 2. The Problem
 
-| Segment | Description |
+### The Sim-to-Real Gap
+Physical AI (robots, automation) is stuck in the lab:
+- Works in simulation, fails in the real world
+- Root cause: **Scarcity of real-world egocentric training data**
+- The AI brain can Perceive (solved) and Act (solved) — but **Predict (Behavior & Intent) is the unsolved gap**
+
+### Why Industrial Robots Fail in the Wild
+| Failure Mode | Description |
 |---|---|
-| Robot OEMs / Manufacturers | Companies building industrial robots who need better training data |
-| Enterprise Buyers | Manufacturing, semiconductor, logistics verticals seeking AI automation |
-| Small Businesses | Companies seeking full-stack AI without enterprise budgets |
-| Investors | VCs / angels evaluating the robotics data market opportunity |
+| Missing Global Data | Limited diverse training scenarios prevent real-world adaptation |
+| Failure Intelligence Gap | Companies build robots but can't anticipate real-world failures |
+
+### Real Customer Pain Examples
+- **Peer Robotics (Warehouse AMRs):** Struggled with glare, wet patches, mixed box sizes, load imbalance → pallet pickup failures, lift stability issues, path execution failures
+- **Automotive Manufacturing (BMW):** Intensive labor cost, missing ego-centric data, failure rates costing the business
+- **Data Center Rack/Server Manufacturing (Pegatron/SuperMicro):** Not able to scale with demand, intensive labor cost, automation not working
 
 ---
 
-## 4. Site Architecture
+## 3. The Solution
 
+**DataraAI provides Foundation Real-world data and Tools that make robots work.**
+
+### How It Works
+Simulation-only training → lower accuracy (~85%), larger inference models
+DataraAI PhysicalAI real data → higher accuracy (>95%), smaller inference models
+
+Key benefits of DataraAI data:
+- Enhances training with real-world data
+- Reduces inference size for efficient deployment
+- Accelerates Sim-to-Real transfer
+
+---
+
+## 4. Product Suite
+
+### 4.1 RoboDataHub — Data at Scale
+- Large industrial datasets: automotive, warehouse, data center assembly
+- 100+ team with infrastructure to generate data on demand
+
+### 4.2 RoboEyeView — Exo → Ego Conversion *(Patented IP)*
+- Converts existing factory video (exocentric) into robot-eye-view (egocentric) datasets
+- Pipeline: Exocentric video → Remove Technician → 3D Rendering → RoboEyeView
+- Physics-aware: handles slip, glare, load shifts, real conditions
+- Proven on BMW automotive assembly line data
+
+### 4.3 RoboHandMotion — Dexterity Data
+- Detailed hand, tool, and object interaction data for fine manipulation tasks
+
+### 4.4 RoboTaskManipulator — Task Intelligence *(Patented IP)*
+- Multi-step structured workflows: assembly, pick-place, cabling
+- Task-aware manipulation intelligence
+- Adaptive lift + motion planning under real load conditions
+- Deployed at Peer Robotics → **95% precision in warehouse operations**
+
+### 4.5 PhysicalAI Data Platform (Universal ETL)
+Full pipeline:
 ```
-/ (root)
-├── robotics.html      ← Default homepage (Industrial Robotics Data Engine)
-├── datacenter.html    ← AI Datacenter Solutions page
-├── about_us.html      ← Team / Company page
-└── error.html         ← 404 fallback
+Raw Data Sources
+  ├── Existing EXO-centric data (customers + web)
+  ├── Existing EGO-centric data (customers + web)
+  └── Ego-centric data generation (partners)
+           ↓
+    [Exo → Ego Conversion]
+           ↓
+    [Task Scoring + Task Planning]
+           ↓
+    Training Data
+  ├── Perception Data (for model training)
+  └── Task Manipulation Data (for model training)
+           ↓
+    Customers (Robot OEMs, Model Companies, Humanoids)
 ```
 
-**Tech Stack:**
-- Frontend: HTML5, Tailwind CSS (compiled to `css/output.css`), Vanilla JS
-- Backend: Node.js + Express (static file server)
-- Deployment: Vercel
-
 ---
 
-## 5. Pages & Content Requirements
+## 5. Patented Technology
 
-### 5.1 Home Page — Industrial Robotics Data Engine (`robotics.html`)
+**RoboEyeView** is DataraAI's core patented IP:
+- Takes exocentric factory video
+- Removes human technician from frame
+- Generates 3D rendering
+- Outputs robot-eye-view egocentric dataset
+- Result: improves model accuracy from ~85% (synthetic) to >95% (real-world)
 
-**Purpose:** Primary landing page targeting robotics companies and investors.
-
-#### Sections:
-
-| Section | Content |
-|---|---|
-| Hero | "Industrial Robotics Data Engine" — tagline: "Corner Cases break robots – we fix that" |
-| What Robots Can Handle Today | 6 cards: Assembly & Inspection, Pick/Place/Inspect, Weld & Polish, Automated Welding, Precision Assembly, Robotic Painting |
-| Why Robots Fail in the Wild | 2 root causes: Missing Global Data, Failure Intelligence Gap |
-| Why Now | Tech catalysts (Meta Aria wearables, Multimodal AI, Edge Computing) + Market drivers (post-COVID automation, labor shortages, Industry 4.0) |
-| Market Size | SAM $3.26B (training data $1.86B + planning software $800M + consulting $600M); SOM $326M (10% in 5 years) |
-| Robotics Stuck in the Lab | Industrial Foundational Dataset & Failure Mode Intelligence visual |
-| Two Core Products | Egocentric Data Platform + Planning-as-a-Service (see §6) |
-| Simulators Miss These | 4 real-world failure categories captured by patent-protected IP |
-| CTA | "Ready to Transform Robotics?" → email contact |
-
----
-
-### 5.2 AI Datacenter Solutions (`datacenter.html`)
-
-**Purpose:** Secondary product page targeting small businesses needing full-stack AI.
-
-#### Sections:
-
-| Section | Content |
-|---|---|
-| Hero | "Where Datacenter Meets Direction" — full-stack AI for small businesses and enterprises |
-| Features (6) | Optimized Hardware, Integrated Software Stack, Seamless Integration, Enterprise-Grade Security, 99.9% Uptime Reliability, Dedicated Support |
-| Solutions (3) | AI Infrastructure, AI Software Platform, Ready-to-Use AI Applications |
-| CTA | "Ready to Transform Your Business with AI?" → Schedule a Consultation |
-
----
-
-### 5.3 About Us (`about_us.html`)
-
-**Purpose:** Build trust and credibility through founder profiles.
-
-#### Sections:
-
-| Section | Content |
-|---|---|
-| Hero | "Meet Our Team" — IIT Graduates, 40+ years combined expertise |
-| Leadership | Durgesh Srivastava (CEO) + Niraj Rai (CTO) — detailed bios and achievements |
-| Why Choose DataraAI | Narrative about combined expertise: NVIDIA → startup exits |
-| Stats | 40+ years combined expertise, 2 successful exits |
-| CTA | "Ready to Work with Our Expert Team?" → email contact |
-
-#### Founder Profiles:
-
-**Durgesh Srivastava — Co-Founder & CEO**
-- Serial entrepreneur (exited MIPS)
-- Ex-NVIDIA Sr. Director, AI
-- Expert in Data Center, AI, Robotics LLM
-- IIT Graduate
-
-**Niraj Rai — Co-Founder & CTO**
-- Serial entrepreneur
-- Founder, SproutsAi
-- Ex-CTO of AI/Robotics startup
-- Software & AI expert
-- IIT Graduate
-
----
-
-## 6. Core Products (Detailed)
-
-### 6.1 Egocentric Data Platform
-
-Captures real-world industrial robot failure data via wearable devices.
-
-| Component | Description |
-|---|---|
-| Wearable Capture Devices | Field-worn hardware to capture egocentric (first-person) POV data |
-| AI-Powered Annotation | Automated labeling of captured footage and sensor data |
-| Edge Processing | On-device processing to handle latency and bandwidth constraints |
-
-**What it captures that simulators miss:**
+**Industrial Hazard Annotation** — annotates what simulators miss:
 - Electrical system failures
 - Mechanical breakdowns
 - Safety barrier violations
 - Chemical contamination events
 
-**IP:** Patent-protected annotation methodology for real-world industrial data.
-
 ---
 
-### 6.2 Planning-as-a-Service (PaaS)
+## 6. Proven Customer Traction
 
-Cloud/edge service providing robot planning intelligence based on real-world failure data.
+### Paying Customers
+| Customer | Vertical | Status |
+|---|---|---|
+| Peer Robotics | Warehouse | Paying — 95% precision achieved |
+| Pegatron | Server/Rack Manufacturing | Engaged |
+| Ather Energy | India EV (NRE) | NRE contract |
 
-| Component | Description |
+### Pipeline Customers
+| Customer | Vertical |
 |---|---|
-| Execution Engine | Core planning inference layer for robot decision-making |
-| Real-Time APIs | Integration endpoints for robot OEMs and automation platforms |
-| Edge Case Handling | Specialized handling for corner cases that break conventional robots |
+| BMW | Automotive Manufacturing |
+| GM Ventures | Automotive Manufacturing |
+| SuperMicro | Data Center |
+| CAT | Construction/Farming |
+| John Deere | Construction/Farming |
+| Oshkosh | Construction/Farming |
+| Mahindra Auto | India Automotive |
+| Stealth Startup | Warehouse |
+
+### Model Company Targets
+Foundation model companies building humanoid/robotic AI systems
 
 ---
 
-## 7. Navigation
+## 7. Market Opportunity
 
-All three pages share the same navigation bar:
-
-| Link | Target |
+| Market | Size |
 |---|---|
-| Solutions | `/datacenter.html#solutions` |
-| Features | `/datacenter.html#features` |
-| About Us | `about_us.html` |
-| Contact | `/datacenter.html#contact` |
-| AI Datacenter Solutions | `/datacenter.html` |
-| Get Started (CTA button) | `mailto:durgesh@dataraai.ai` |
+| Total Opportunity | **$35 Billion annually** |
+| SAM | $3.26B (training data $1.86B + planning software $800M + consulting $600M) |
+| SOM | $326M (10% market share in 5 years) |
+
+**DataraAI is the essential utility layer required to unlock the promise of Physical AI fleet-wide.**
 
 ---
 
-## 8. Design System
+## 8. Go-To-Market Strategy: Land. Expand. Standardize.
 
-| Token | Value |
+### Phase 1 — The Beachhead (6–9 months, Now)
+- Deploy with Tier 1 lighthouse partners: Pegatron, Leadpoint, Peer Robotics
+- Perfect data interpretation to improve accuracy
+- Prove Zero-to-One viability
+
+### Phase 2 — Strategic Expansion (Q4 2026 / Q1 2027)
+- Move from single-cell pilots to full-factory floor automation: BMW, Ather Energy, Mahindra
+- Enterprise (OEM) expansion
+- Increase ACV by 5–10x per customer
+
+### Phase 3 — Market Leadership (Q3 2027)
+- New verticals: Automotive, Construction (Siemens, ABB, CAT)
+- Standardize the **"Datara Schema"** as industry standard
+- Position DataraAI as the "Operating System" for Physical AI
+
+---
+
+## 9. Business Model
+
+### Core Data Services (SaaS)
+| Tier | Price | Access |
+|---|---|---|
+| Starter | $15K/month | 500 hours access |
+| Professional | $50K/month | 2K hours + API |
+| Enterprise | $150K/month | Unlimited access |
+
+### Industrial Data Labeling
+- Multi-modal data: $5–50/hour
+- Edge case premium: 3x pricing
+- Hazard annotations: $100–500/incident
+
+### Egocentric Data API
+- Real-time annotation: $0.25–1.00/minute
+- Batch processing: $10–25/hour
+- Expert knowledge transfer: $2–5/decision
+
+### Enterprise & Licensing
+- Automotive manufacturing vertical: $500K–2M/year
+- Electronics assembly: $300K–1M/year
+- Custom robotics datasets: $1M–5M/deployment
+- On-site data collection: $100K–500K/facility
+- White-label licensing: $250K–1M/year
+- Implementation consulting: $2K–5K/day
+
+### Revenue Sharing
+- Robot OEM partnerships: 5–15% of deployment value
+- System integrator deals: 10–20% revenue share
+
+---
+
+## 10. Team
+
+### Founders
+| Name | Role | Background |
+|---|---|---|
+| Durgesh Srivastava | Co-Founder & CEO | Serial entrepreneur (exited MIPS), Ex-NVIDIA Sr. Director AI & Robotics, Omniverse/Systems/LLM expert, IIT Kanpur |
+| Niraj Rai | Co-Founder & CTO | Serial entrepreneur, Founder SproutsAi, Ex-CTO AI/Robotics startup (Vimaan), Software & AI expert, IIT Kharagpur |
+
+### Advisors
+| Name | Background |
 |---|---|
-| Primary color | `#1de9b6` (teal/green) |
-| Secondary color | `#1e88e5` (blue) |
-| Accent | Orange (`#FF6600`) — used in logo |
-| Background (dark) | `#0a192f` / `#1e293b` |
-| Background (darker) | `#181f2a` |
-| Font | Inter (400, 700, 900) via Google Fonts |
-| Card style | Glass morphism + rounded-3xl + hover lift |
-| Animations | Intersection Observer scroll-in, gradient animation, float, pulse, bounce |
+| Brian Kelleher | Sr. VP NVIDIA, Angel Investor |
+| Dr. Teck Joo Goh | Angel Investor, Corporate VP SkyeChip, ex-GM Intel |
+| Dr. Amit Roy-Chowdhury | Professor & UC Presidential Chair, CS & Engineering, Chair Robotics Program, UC Riverside |
+| Lomesh Agarwal | VP Software Apptronik, Ex-MagicLeap |
 
 ---
 
-## 9. Lead Generation
+## 11. Competitive Landscape
 
-**Primary CTA:** `mailto:durgesh@dataraai.ai`
-**Secondary:** LinkedIn — `https://www.linkedin.com/company/dataraai/`
+| Dimension | LightWheel.ai | **DataraAI** | WorldLabs.ai |
+|---|---|---|---|
+| Primary Focus | Realistic Digital Twin | **Data Infrastructure for Model Training** | 3D Environment Generation |
+| Technology | GPU-based Real→Physics→Digital Twin | **Egocentric Data Gen (Exo→Ego)** | Single photo/text→spatial 3D |
+| Product | EgoSuite: RealData2Sim | **RoboEyeView** | High Fidelity 3D spaces |
+| Strategy | Simulation platform | **Foundational Data for AI** | 3D Gaussian Splat scenes |
+| Task Manipulation | No | **Yes** | No |
+| Simulation Integration | Isaacsim | **Isaacsim + others** | Marble platform |
 
-All CTA buttons across every page route to email contact. No form or backend lead capture currently implemented.
+**Key differentiator:** DataraAI is the only player capturing real-world multi-modal industrial data with task manipulation intelligence. Competitors (Lightwheel, World Labs) use simulation — not real data.
+
+### Partner Ecosystem
+- **Encord** — IDE for physical AI toolchain, data curation and labeling
+- **Foxglove** — observability and visualization for physical AI
+- **Roboflow** — model deployment platform
 
 ---
 
-## 10. Current Gaps / Future Improvements
+## 12. Physical AI Ecosystem Position
+
+DataraAI sits at the **Data & Infrastructure** layer:
+- Real-world data capture (unique vs. competitors)
+- Task planning intelligence
+- Data annotation, curation, and evaluation
+
+Downstream customers include:
+- Foundation model companies (OpenAI, Anthropic, Google, Meta AI)
+- Robotic foundation model companies (Figure AI, Tesla, Agility Robotics)
+- Industrial robot platforms (ABB, KUKA, FANUC)
+- Advanced humanoid platforms (Boston Dynamics, Apptronik, Figure AI)
+
+---
+
+## 13. Website Pages & Content
+
+### Current Pages
+| Page | URL | Purpose |
+|---|---|---|
+| Industrial Robotics Data Engine | `/` (robotics.html) | Primary PhysicalAI pitch |
+| AI Datacenter Solutions | `/datacenter.html` | Secondary product — full-stack AI for SMBs |
+| About Us | `/about_us.html` | Team credibility |
+
+### Tech Stack
+- Frontend: HTML5, Tailwind CSS, Vanilla JS
+- Backend: Node.js + Express (static server)
+- Deployment: Vercel
+
+---
+
+## 14. Current Gaps / Recommended Website Updates
+
+Based on this deck vs. the current website, the following key content is **missing or outdated** on the website:
 
 | Gap | Priority |
 |---|---|
+| Website doesn't mention "PhysicalAI" company positioning or NVIDIA Inception membership | High |
+| No advisors section (Brian Kelleher, Dr. Goh, Dr. Roy-Chowdhury, Lomesh Agarwal) | High |
+| No customer traction section (Peer Robotics 95% result, BMW, GM, Pegatron pipeline) | High |
+| Products listed are outdated — website shows old "Egocentric Data Platform" vs. actual product names: RoboDataHub, RoboEyeView, RoboHandMotion, RoboTaskManipulator | High |
+| No business model / pricing page | Medium |
+| No competitive landscape section | Medium |
+| No GTM roadmap section | Medium |
+| Market size shown as $3.26B SAM vs. updated $35B annual opportunity | Medium |
+| No mobile hamburger menu | High |
 | No contact form — all CTAs open email client | High |
-| Navigation footer links for Solutions/Resources/Documentation are commented out | Medium |
-| No mobile hamburger menu for small screens | High |
-| No analytics / tracking integration | Medium |
-| Images are loaded from local `robotics_data_engine_presentation/ppt/media/` — no CDN | Medium |
-| Server route order bug: wildcard `app.get('*')` is registered before named routes, so `/about_us` and `/datacenter` routes are unreachable | High |
+| Server route order bug: wildcard registered before named routes | High |
 | No SEO meta tags (og:title, description, canonical) | Medium |
-| No sitemap.xml or robots.txt | Low |
-
----
-
-## 11. Market Context
-
-- **SAM:** $3.26B (industrial robotics training data + planning software + consulting)
-- **SOM:** $326M (10% of SAM over 5 years)
-- **Target verticals:** Manufacturing, semiconductor fabrication, logistics
-- **Key differentiator:** Real-world egocentric data + patent-protected IP vs. simulator-only approaches
-- **Competitive moat:** IIT-trained founders with NVIDIA AI and robotics startup backgrounds
+| Founder bios missing IIT campus specifics (IITK vs IIT KGP) | Low |
 
 ---
 

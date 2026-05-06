@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoboDataHub — 3 Page Options</title>
+<link rel="stylesheet" href="css/output.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { background: #060b08; font-family: 'Inter', sans-serif; color: #fff; margin: 0; }
+
+  /* ── Option labels ── */
+  .opt-sep { border: none; border-top: 2px solid rgba(255,255,255,0.04); margin: 0; }
+  .opt-banner { background: #0a0f0d; padding: 32px 40px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .opt-badge { display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#374151;background:#111;border:1px solid #1f2937;padding:5px 12px;border-radius:4px;margin-bottom:10px; }
+  .opt-name { font-size:22px;font-weight:800;color:#f9fafb;margin:0 0 4px; }
+  .opt-desc { font-size:13px;color:#4b5563;margin:0; }
+
+  /* ── Shared tokens ── */
+  :root {
+    --teal: #1de9b6;
+    --blue: #1e88e5;
+    --bg-dark: #0e1512;
+    --bg-darker: #080d0a;
+    --border: rgba(29,233,182,0.12);
+  }
+
+  /* ── Reusable pill ── */
+  .pill-teal { display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1de9b6;background:linear-gradient(135deg,rgba(29,233,182,0.12),rgba(29,233,182,0.04));border:1px solid rgba(29,233,182,0.22);padding:6px 14px;border-radius:6px; }
+  .dot-teal { width:5px;height:5px;border-radius:50%;background:#1de9b6;box-shadow:0 0 6px rgba(29,233,182,0.9);flex-shrink:0; }
+
+  /* ── EXO / EGO badge ── */
+  .badge-exo { font-size:9px;font-weight:800;letter-spacing:.1em;color:#1e88e5;background:rgba(0,0,0,0.65);border:1px solid rgba(30,136,229,0.45);padding:3px 7px;border-radius:4px; }
+  .badge-ego { font-size:9px;font-weight:800;letter-spacing:.1em;color:#1de9b6;background:rgba(0,0,0,0.65);border:1px solid rgba(29,233,182,0.45);padding:3px 7px;border-radius:4px; }
+
+  /* ── Search input ── */
+  .search-wrap { position:relative; }
+  .search-wrap svg.icon { position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none; }
+  .search-input { width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 14px 12px 42px;font-size:14px;color:#fff;outline:none;transition:border-color .2s; }
+  .search-input::placeholder { color:#4b5563; }
+  .search-input:focus { border-color:rgba(29,233,182,0.4);background:rgba(29,233,182,0.03); }
+
+  /* ── Filter chip ── */
+  .chip { display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.1);color:#9ca3af;background:rgba(255,255,255,0.03);cursor:pointer;transition:all .15s;white-space:nowrap; }
+  .chip:hover,.chip.active { border-color:rgba(29,233,182,0.4);color:#1de9b6;background:rgba(29,233,182,0.07); }
+  .chip-dot { width:6px;height:6px;border-radius:50%;background:currentColor; }
+
+  /* ── Image tile ── */
+  .img-tile { position:relative;border-radius:12px;overflow:hidden; }
+  .img-tile img { width:100%;height:100%;object-fit:cover;display:block; }
+  .img-tile .overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.78) 0%,transparent 55%); }
+  .img-tile .badge-pos { position:absolute;top:10px;right:10px; }
+  .img-tile .caption { position:absolute;bottom:12px;left:12px; }
+  .img-tile .caption p { margin:0; }
+
+  /* ── Stat box ── */
+  .stat-box { padding:20px 24px;background:rgba(29,233,182,0.04);border:1px solid rgba(29,233,182,0.1);border-radius:12px; }
+  .stat-box .num { font-size:28px;font-weight:800;color:#1de9b6;line-height:1; }
+  .stat-box .lbl { font-size:11px;color:#6b7280;margin-top:4px; }
+
+  /* ── Dataset card (Option B) ── */
+  .ds-card { background:#0d1610;border:1px solid rgba(29,233,182,0.1);border-radius:14px;overflow:hidden;transition:border-color .2s,transform .2s; }
+  .ds-card:hover { border-color:rgba(29,233,182,0.3);transform:translateY(-2px); }
+
+  /* ── Tag ── */
+  .tag { display:inline-block;font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;letter-spacing:.04em; }
+  .tag-teal { background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.2); }
+  .tag-blue { background:rgba(30,136,229,0.1);color:#60a5fa;border:1px solid rgba(30,136,229,0.2); }
+  .tag-orange { background:rgba(251,146,60,0.1);color:#fb923c;border:1px solid rgba(251,146,60,0.2); }
+  .tag-purple { background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2); }
+
+  /* ── Progress bar ── */
+  .pbar { height:3px;border-radius:2px;background:rgba(255,255,255,0.06);overflow:hidden; }
+  .pbar-fill { height:100%;border-radius:2px; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width:5px;height:5px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:#1f2d24;border-radius:4px; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     OPTION A  —  Command Center
+     Full-width hero search · left sidebar filters · image grid
+     ════════════════════════════════════════════════════ -->
+
+<div class="opt-banner">
+  <div class="opt-badge">Option A</div>
+  <p class="opt-name">Command Center — Sidebar + Masonry Grid</p>
+  <p class="opt-desc">Sidebar navigation with category tree. Hero search. Rich image grid with dataset cards. Feels like a professional data catalog.</p>
+</div>
+
+<div style="background:#0a0f0d;min-height:100vh;">
+
+  <!-- nav -->
+  <nav style="background:rgba(8,13,10,0.95);border-bottom:1px solid rgba(29,233,182,0.08);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);">
+    <div style="display:flex;align-items:center;gap:24px;">
+      <a href="robotics.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <span style="font-size:13px;color:#6b7280;">Back to Home</span>
+      </a>
+      <div style="width:1px;height:20px;background:rgba(255,255,255,0.08);"></div>
+      <span style="font-size:14px;font-weight:700;color:#fff;">RoboDataHub</span>
+      <span style="font-size:12px;color:#6b7280;">/ Browse Datasets</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="font-size:11px;color:#6b7280;background:rgba(29,233,182,0.06);border:1px solid rgba(29,233,182,0.15);padding:4px 12px;border-radius:20px;">NVIDIA Inception Member</div>
+      <button style="font-size:12px;font-weight:600;color:#0a0f0d;background:#1de9b6;border:none;padding:7px 18px;border-radius:8px;cursor:pointer;">Request Access</button>
+    </div>
+  </nav>
+
+  <!-- hero search banner -->
+  <div style="background:linear-gradient(135deg,#0e1a12 0%,#091410 50%,#0a1219 100%);border-bottom:1px solid rgba(29,233,182,0.08);padding:40px 32px 32px;">
+    <div style="max-width:900px;margin:0 auto;text-align:center;">
+      <div class="pill-teal" style="margin:0 auto 16px;width:fit-content;"><span class="dot-teal"></span>Physical AI Training Data</div>
+      <h1 style="font-size:36px;font-weight:800;color:#fff;margin:0 0 8px;line-height:1.15;">Find the exact data your robot needs</h1>
+      <p style="font-size:15px;color:#6b7280;margin:0 0 28px;">17,400+ hours of labeled industrial footage across 4 verticals. Existing library + on-demand generation.</p>
+      <!-- main search -->
+      <div class="search-wrap" style="max-width:680px;margin:0 auto 16px;">
+        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="search-input" style="font-size:15px;padding:14px 14px 14px 44px;border-radius:12px;" type="text" placeholder="Search datasets — e.g. &quot;BMW grille assembly&quot; or &quot;warehouse pallet EGO&quot;">
+        <button style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:#1de9b6;color:#080d0a;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;">Search</button>
+      </div>
+      <!-- quick filters -->
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+        <span class="chip active"><span class="chip-dot"></span>All Industries</span>
+        <span class="chip"><span class="chip-dot" style="background:#1e88e5;"></span>Data Center</span>
+        <span class="chip"><span class="chip-dot" style="background:#fb923c;"></span>Warehouse</span>
+        <span class="chip"><span class="chip-dot" style="background:#a78bfa;"></span>Automotive</span>
+        <span class="chip"><span class="chip-dot" style="background:#34d399;"></span>Dexterity</span>
+        <span class="chip">EGO only</span>
+        <span class="chip">EXO only</span>
+        <span class="chip">On-demand</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- body: sidebar + grid -->
+  <div style="max-width:1320px;margin:0 auto;padding:32px 32px;display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:start;">
+
+    <!-- LEFT SIDEBAR -->
+    <aside style="position:sticky;top:72px;">
+
+      <!-- stats -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;">
+        <div class="stat-box"><div class="num">17.4K</div><div class="lbl">Hours labeled</div></div>
+        <div class="stat-box"><div class="num">100+</div><div class="lbl">Person team</div></div>
+        <div class="stat-box"><div class="num">4</div><div class="lbl">Verticals</div></div>
+        <div class="stat-box"><div class="num">∞</div><div class="lbl">On-demand</div></div>
+      </div>
+
+      <!-- filter sections -->
+      <div style="background:#0d1610;border:1px solid rgba(29,233,182,0.1);border-radius:14px;overflow:hidden;">
+
+        <div style="padding:14px 18px;border-bottom:1px solid rgba(29,233,182,0.07);">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4b5563;margin:0 0 12px;">Industry</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;background:rgba(30,136,229,0.2);border:1px solid rgba(30,136,229,0.5);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1e88e5" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+              <span style="font-size:13px;color:#d1d5db;">Data Center</span>
+              <span style="margin-left:auto;font-size:11px;color:#4b5563;">4 sets</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;background:rgba(251,146,60,0.15);border:1px solid rgba(251,146,60,0.4);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#fb923c" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+              <span style="font-size:13px;color:#d1d5db;">Warehouse</span>
+              <span style="margin-left:auto;font-size:11px;color:#4b5563;">4 sets</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.4);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#a78bfa" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+              <span style="font-size:13px;color:#d1d5db;">Automotive</span>
+              <span style="margin-left:auto;font-size:11px;color:#4b5563;">4 sets</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.4);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#34d399" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+              <span style="font-size:13px;color:#d1d5db;">Dexterity</span>
+              <span style="margin-left:auto;font-size:11px;color:#4b5563;">5 sets</span>
+            </label>
+          </div>
+        </div>
+
+        <div style="padding:14px 18px;border-bottom:1px solid rgba(29,233,182,0.07);">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4b5563;margin:0 0 12px;">Camera View</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:50%;border:1.5px solid #1de9b6;background:rgba(29,233,182,0.15);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="width:5px;height:5px;border-radius:50%;background:#1de9b6;"></span></span>
+              <span style="font-size:13px;color:#d1d5db;">EGO-Centric</span>
+              <span style="margin-left:auto;font-size:11px;color:#4b5563;">Robot POV</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.2);display:inline-flex;flex-shrink:0;"></span>
+              <span style="font-size:13px;color:#9ca3af;">EXO-Centric</span>
+              <span style="margin-left:auto;font-size:11px;color:#4b5563;">Overhead</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.2);display:inline-flex;flex-shrink:0;"></span>
+              <span style="font-size:13px;color:#9ca3af;">Both</span>
+            </label>
+          </div>
+        </div>
+
+        <div style="padding:14px 18px;border-bottom:1px solid rgba(29,233,182,0.07);">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4b5563;margin:0 0 12px;">Availability</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;background:rgba(29,233,182,0.15);border:1px solid rgba(29,233,182,0.4);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1de9b6" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+              <span style="font-size:13px;color:#d1d5db;">Existing Library</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;background:rgba(29,233,182,0.15);border:1px solid rgba(29,233,182,0.4);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="8" height="8" viewBox="0 0 10 10"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1de9b6" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span>
+              <span style="font-size:13px;color:#d1d5db;">On-demand</span>
+            </label>
+          </div>
+        </div>
+
+        <div style="padding:14px 18px;">
+          <p style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4b5563;margin:0 0 12px;">Annotation Type</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(255,255,255,0.15);flex-shrink:0;"></span>
+              <span style="font-size:13px;color:#9ca3af;">Task Labels</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(255,255,255,0.15);flex-shrink:0;"></span>
+              <span style="font-size:13px;color:#9ca3af;">Bounding Box</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(255,255,255,0.15);flex-shrink:0;"></span>
+              <span style="font-size:13px;color:#9ca3af;">Segmentation</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+              <span style="width:14px;height:14px;border-radius:4px;border:1.5px solid rgba(255,255,255,0.15);flex-shrink:0;"></span>
+              <span style="font-size:13px;color:#9ca3af;">Hazard Events</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CTA -->
+      <div style="margin-top:16px;padding:16px;background:rgba(29,233,182,0.06);border:1px solid rgba(29,233,182,0.15);border-radius:12px;">
+        <p style="font-size:12px;font-weight:700;color:#fff;margin:0 0 4px;">Need custom data?</p>
+        <p style="font-size:11px;color:#6b7280;margin:0 0 12px;line-height:1.6;">Our 100+ person team captures any scenario, any environment.</p>
+        <button style="width:100%;background:rgba(29,233,182,0.1);border:1px solid rgba(29,233,182,0.3);color:#1de9b6;font-size:12px;font-weight:600;padding:8px;border-radius:8px;cursor:pointer;">Request Custom Dataset</button>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT: results grid -->
+    <div>
+
+      <!-- toolbar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+        <div>
+          <p style="font-size:14px;font-weight:700;color:#fff;margin:0;">17 datasets found</p>
+          <p style="font-size:12px;color:#4b5563;margin:0;">All industries · All views · Showing in-stock + on-demand</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span style="font-size:12px;color:#6b7280;">Sort:</span>
+          <select style="background:#0d1610;border:1px solid rgba(29,233,182,0.15);color:#d1d5db;font-size:12px;padding:6px 10px;border-radius:8px;outline:none;">
+            <option>Most Relevant</option>
+            <option>Largest Volume</option>
+            <option>Newest</option>
+            <option>EGO First</option>
+          </select>
+          <div style="display:flex;gap:4px;">
+            <button style="width:30px;height:30px;border-radius:6px;border:1px solid rgba(29,233,182,0.3);background:rgba(29,233,182,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </button>
+            <button style="width:30px;height:30px;border-radius:6px;border:1px solid rgba(255,255,255,0.08);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INDUSTRY SECTION: Data Center ── -->
+      <div style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="width:8px;height:8px;border-radius:2px;background:#1e88e5;flex-shrink:0;"></span>
+          <p style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1e88e5;margin:0;">Data Center</p>
+          <div style="flex:1;height:1px;background:rgba(30,136,229,0.15);"></div>
+          <span style="font-size:11px;color:#4b5563;">4 datasets · 3,200 hrs</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+          <div class="img-tile" style="height:175px;">
+            <img src="images/dc_Screenshot_2026-01-13_at_2.06.33_PM.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Rack cabling</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">1,200 hrs · Task labeled</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/dc_Screenshot_2026-01-13_at_4.38.12_PM.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Cable management</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">800 hrs · Seg + bbox</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/dc_Screenshot_2026-01-13_at_4.38.43_PM.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Patch routing</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">600 hrs · Task labeled</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/dc_Screenshot_2026-01-13_at_4.38.50_PM.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Loop install</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">600 hrs · On-demand ✦</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INDUSTRY SECTION: Warehouse ── -->
+      <div style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="width:8px;height:8px;border-radius:2px;background:#fb923c;flex-shrink:0;"></span>
+          <p style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fb923c;margin:0;">Warehouse</p>
+          <div style="flex:1;height:1px;background:rgba(251,146,60,0.15);"></div>
+          <span style="font-size:11px;color:#4b5563;">4 datasets · 4,800 hrs</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+          <div class="img-tile" style="height:175px;">
+            <img src="images/wh_pexels-endura-tiles-370085044-14554082.jpg">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Aisle navigation</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">2,000 hrs · Seg + Track</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/wh_pexels-goldcircuits-8377802.jpg">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-ego">EGO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Pick & place</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">1,200 hrs · Task labeled</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/wh_pexels-ihsanaditya-10834810.jpg">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Logistics ops</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">900 hrs · Multi-robot</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/wh_pexels-tiger-lily-4483772.jpg">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-ego">EGO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Pallet handling</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">700 hrs · Load cycles</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INDUSTRY SECTION: Dexterity ── -->
+      <div style="margin-bottom:28px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="width:8px;height:8px;border-radius:2px;background:#34d399;flex-shrink:0;"></span>
+          <p style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#34d399;margin:0;">Dexterity</p>
+          <div style="flex:1;height:1px;background:rgba(52,211,153,0.15);"></div>
+          <span style="font-size:11px;color:#4b5563;">5 datasets · 2,900 hrs</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;">
+          <div class="img-tile" style="height:160px;">
+            <img src="images/WebDishWashing.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:11px;font-weight:600;color:#fff;">Dish washing</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">600 hrs</p></div>
+          </div>
+          <div class="img-tile" style="height:160px;">
+            <img src="images/WebWasher.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:11px;font-weight:600;color:#fff;">Laundry loading</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">500 hrs</p></div>
+          </div>
+          <div class="img-tile" style="height:160px;">
+            <img src="images/WebDishWasher.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:11px;font-weight:600;color:#fff;">Dishwasher load</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">700 hrs</p></div>
+          </div>
+          <div class="img-tile" style="height:160px;">
+            <img src="images/WebTrashCollection.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:11px;font-weight:600;color:#fff;">Trash collection</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">600 hrs</p></div>
+          </div>
+          <div class="img-tile" style="height:160px;">
+            <img src="images/WebCleaning.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:11px;font-weight:600;color:#fff;">Surface cleaning</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">500 hrs</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INDUSTRY SECTION: Automotive ── -->
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span style="width:8px;height:8px;border-radius:2px;background:#a78bfa;flex-shrink:0;"></span>
+          <p style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a78bfa;margin:0;">Automotive</p>
+          <div style="flex:1;height:1px;background:rgba(167,139,250,0.15);"></div>
+          <span style="font-size:11px;color:#4b5563;">4 datasets · 6,500 hrs</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+          <div class="img-tile" style="height:175px;">
+            <img src="images/frontGrille_012.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Front grille asm.</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">2,100 hrs · BMW line</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/rearBumper_021.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Rear bumper</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">1,800 hrs · Body asm.</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/frontSeat_007.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Seat installation</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">1,400 hrs · Interior</p></div>
+          </div>
+          <div class="img-tile" style="height:175px;">
+            <img src="images/passengerSeat_0100_Rotate_left_45_degrees.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption"><p style="font-size:12px;font-weight:600;color:#fff;">Cabin assembly</p><p style="font-size:10px;color:rgba(255,255,255,0.5);">1,200 hrs · On-demand ✦</p></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end right -->
+  </div><!-- end grid -->
+</div><!-- end Option A -->
+
+<hr class="opt-sep">
+
+<!-- ════════════════════════════════════════════════════
+     OPTION B  —  Dataset Catalog Cards
+     Horizontal search + tag filters · dataset cards with metadata
+     ════════════════════════════════════════════════════ -->
+
+<div class="opt-banner">
+  <div class="opt-badge">Option B</div>
+  <p class="opt-name">Dataset Catalog — Card-based browse with rich metadata</p>
+  <p class="opt-desc">Horizontal filter bar. Each dataset shown as a card with volume, type, annotation info. More structured — feels like AWS Marketplace or Hugging Face.</p>
+</div>
+
+<div style="background:#080d0a;min-height:100vh;padding-bottom:64px;">
+
+  <!-- top bar -->
+  <div style="background:rgba(6,11,8,0.98);border-bottom:1px solid rgba(29,233,182,0.08);padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="robotics.html" style="display:flex;align-items:center;gap:7px;text-decoration:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span style="font-size:13px;color:#6b7280;">Home</span></a>
+      <span style="font-size:13px;color:#374151;">/</span>
+      <span style="font-size:13px;font-weight:700;color:#1de9b6;">RoboDataHub</span>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <div style="font-size:11px;font-weight:600;color:#1de9b6;border:1px solid rgba(29,233,182,0.25);padding:4px 12px;border-radius:20px;">NVIDIA Inception</div>
+      <button style="font-size:12px;font-weight:700;color:#080d0a;background:#1de9b6;border:none;padding:7px 18px;border-radius:8px;cursor:pointer;">Get Access</button>
+    </div>
+  </div>
+
+  <!-- page hero -->
+  <div style="max-width:1200px;margin:0 auto;padding:48px 40px 0;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:36px;">
+      <div>
+        <div class="pill-teal" style="margin-bottom:14px;"><span class="dot-teal"></span>Solution 1 · Physical AI Data</div>
+        <h1 style="font-size:40px;font-weight:800;color:#fff;margin:0 0 10px;line-height:1.1;">RoboDataHub</h1>
+        <p style="font-size:16px;color:#6b7280;margin:0;max-width:520px;line-height:1.7;">Real-world industrial training data for Physical AI. No simulation. No synthetic shortcuts. Massive existing library — any new scenario generated on demand.</p>
+      </div>
+      <div style="display:flex;gap:12px;">
+        <div class="stat-box" style="text-align:center;padding:16px 20px;"><div class="num">17.4K</div><div class="lbl">Hours available</div></div>
+        <div class="stat-box" style="text-align:center;padding:16px 20px;"><div class="num">100+</div><div class="lbl">Data collectors</div></div>
+        <div class="stat-box" style="text-align:center;padding:16px 20px;"><div class="num">4</div><div class="lbl">Verticals</div></div>
+      </div>
+    </div>
+
+    <!-- search + filter bar -->
+    <div style="background:#0d1610;border:1px solid rgba(29,233,182,0.1);border-radius:14px;padding:16px 20px;margin-bottom:32px;">
+      <div style="display:flex;gap:12px;margin-bottom:14px;">
+        <div class="search-wrap" style="flex:1;">
+          <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="search-input" type="text" placeholder="Search by task, environment, robot type, customer...">
+        </div>
+        <button style="display:flex;align-items:center;gap:8px;background:rgba(29,233,182,0.08);border:1px solid rgba(29,233,182,0.2);color:#1de9b6;padding:0 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+          Advanced Filters
+        </button>
+        <button style="background:#1de9b6;color:#080d0a;border:none;padding:0 24px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;">Search</button>
+      </div>
+      <!-- quick filter chips -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <span style="font-size:11px;color:#4b5563;margin-right:4px;">Quick filters:</span>
+        <span class="chip active">All</span>
+        <span class="chip"><span style="width:7px;height:7px;border-radius:2px;background:#1e88e5;display:inline-block;"></span> Data Center</span>
+        <span class="chip"><span style="width:7px;height:7px;border-radius:2px;background:#fb923c;display:inline-block;"></span> Warehouse</span>
+        <span class="chip"><span style="width:7px;height:7px;border-radius:2px;background:#a78bfa;display:inline-block;"></span> Automotive</span>
+        <span class="chip"><span style="width:7px;height:7px;border-radius:2px;background:#34d399;display:inline-block;"></span> Dexterity</span>
+        <span style="width:1px;height:16px;background:rgba(255,255,255,0.08);margin:0 4px;"></span>
+        <span class="chip">EGO only</span>
+        <span class="chip">EXO only</span>
+        <span class="chip">✦ On-demand</span>
+        <span class="chip">Task labeled</span>
+      </div>
+    </div>
+
+    <!-- results count -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <p style="font-size:14px;color:#9ca3af;margin:0;"><span style="color:#fff;font-weight:700;">17 datasets</span> match your query</p>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <span style="font-size:12px;color:#6b7280;">Sort by:</span>
+        <select style="background:#0d1610;border:1px solid rgba(255,255,255,0.08);color:#d1d5db;font-size:12px;padding:5px 10px;border-radius:7px;outline:none;">
+          <option>Most Relevant</option><option>Volume ↓</option><option>Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- dataset cards grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+      <!-- Card 1 -->
+      <div class="ds-card">
+        <div style="height:150px;position:relative;overflow:hidden;">
+          <img src="images/dc_Screenshot_2026-01-13_at_2.06.33_PM.png" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,22,16,1) 0%,transparent 60%);"></div>
+          <span style="position:absolute;top:10px;right:10px;" class="badge-exo">EXO</span>
+          <span style="position:absolute;top:10px;left:10px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1e88e5;background:rgba(0,0,0,0.6);border:1px solid rgba(30,136,229,0.3);padding:3px 8px;border-radius:4px;">Data Center</span>
+        </div>
+        <div style="padding:16px;">
+          <h3 style="font-size:14px;font-weight:700;color:#fff;margin:0 0 6px;">Rack Cabling &amp; Patch Panel</h3>
+          <p style="font-size:12px;color:#6b7280;margin:0 0 12px;line-height:1.6;">Full patch panel workflow — cable insertion, loop management, labeling. Captured on live data center floor.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="tag tag-blue">EXO-Centric</span>
+            <span class="tag tag-teal">Task Labels</span>
+            <span class="tag tag-teal">Bbox</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);">
+            <div><p style="font-size:11px;color:#4b5563;margin:0;">Volume</p><p style="font-size:14px;font-weight:700;color:#1de9b6;margin:0;">1,200 hrs</p></div>
+            <div style="text-align:right;"><p style="font-size:11px;color:#4b5563;margin:0;">Availability</p><p style="font-size:12px;font-weight:600;color:#fff;margin:0;">In Library</p></div>
+          </div>
+          <div class="pbar" style="margin-top:10px;"><div class="pbar-fill" style="width:75%;background:linear-gradient(90deg,#1de9b6,#1e88e5);"></div></div>
+          <p style="font-size:10px;color:#4b5563;margin:4px 0 0;">75% of benchmark coverage</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="ds-card">
+        <div style="height:150px;position:relative;overflow:hidden;">
+          <img src="images/wh_pexels-goldcircuits-8377802.jpg" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,22,16,1) 0%,transparent 60%);"></div>
+          <span style="position:absolute;top:10px;right:10px;" class="badge-ego">EGO</span>
+          <span style="position:absolute;top:10px;left:10px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fb923c;background:rgba(0,0,0,0.6);border:1px solid rgba(251,146,60,0.3);padding:3px 8px;border-radius:4px;">Warehouse</span>
+        </div>
+        <div style="padding:16px;">
+          <h3 style="font-size:14px;font-weight:700;color:#fff;margin:0 0 6px;">Pick &amp; Place — Shelf Interaction</h3>
+          <p style="font-size:12px;color:#6b7280;margin:0 0 12px;line-height:1.6;">Robot-eye-view (EGO) of shelf pick operations. Mixed SKUs, glare conditions, and dynamic obstacles included.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="tag tag-teal">EGO-Centric</span>
+            <span class="tag tag-teal">Task Labels</span>
+            <span class="tag tag-orange">Edge Cases</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);">
+            <div><p style="font-size:11px;color:#4b5563;margin:0;">Volume</p><p style="font-size:14px;font-weight:700;color:#1de9b6;margin:0;">1,200 hrs</p></div>
+            <div style="text-align:right;"><p style="font-size:11px;color:#4b5563;margin:0;">Availability</p><p style="font-size:12px;font-weight:600;color:#fff;margin:0;">In Library</p></div>
+          </div>
+          <div class="pbar" style="margin-top:10px;"><div class="pbar-fill" style="width:88%;background:linear-gradient(90deg,#1de9b6,#1e88e5);"></div></div>
+          <p style="font-size:10px;color:#4b5563;margin:4px 0 0;">88% of benchmark coverage</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="ds-card">
+        <div style="height:150px;position:relative;overflow:hidden;">
+          <img src="images/frontGrille_012.png" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,22,16,1) 0%,transparent 60%);"></div>
+          <span style="position:absolute;top:10px;right:10px;" class="badge-exo">EXO</span>
+          <span style="position:absolute;top:10px;left:10px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a78bfa;background:rgba(0,0,0,0.6);border:1px solid rgba(167,139,250,0.3);padding:3px 8px;border-radius:4px;">Automotive</span>
+        </div>
+        <div style="padding:16px;">
+          <h3 style="font-size:14px;font-weight:700;color:#fff;margin:0 0 6px;">BMW Front Grille Assembly</h3>
+          <p style="font-size:12px;color:#6b7280;margin:0 0 12px;line-height:1.6;">Production-line assembly footage from BMW facility. Multi-step grille fitting, fastening and QC inspection workflow.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="tag tag-blue">EXO-Centric</span>
+            <span class="tag tag-teal">Task Labels</span>
+            <span class="tag tag-purple">Seg</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);">
+            <div><p style="font-size:11px;color:#4b5563;margin:0;">Volume</p><p style="font-size:14px;font-weight:700;color:#1de9b6;margin:0;">2,100 hrs</p></div>
+            <div style="text-align:right;"><p style="font-size:11px;color:#4b5563;margin:0;">Availability</p><p style="font-size:12px;font-weight:600;color:#fff;margin:0;">In Library</p></div>
+          </div>
+          <div class="pbar" style="margin-top:10px;"><div class="pbar-fill" style="width:92%;background:linear-gradient(90deg,#1de9b6,#1e88e5);"></div></div>
+          <p style="font-size:10px;color:#4b5563;margin:4px 0 0;">92% of benchmark coverage</p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="ds-card">
+        <div style="height:150px;position:relative;overflow:hidden;">
+          <img src="images/WebDishWashing.png" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,22,16,1) 0%,transparent 60%);"></div>
+          <span style="position:absolute;top:10px;right:10px;" class="badge-exo">EXO</span>
+          <span style="position:absolute;top:10px;left:10px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#34d399;background:rgba(0,0,0,0.6);border:1px solid rgba(52,211,153,0.3);padding:3px 8px;border-radius:4px;">Dexterity</span>
+        </div>
+        <div style="padding:16px;">
+          <h3 style="font-size:14px;font-weight:700;color:#fff;margin:0 0 6px;">Dishwashing — Hand Manipulation</h3>
+          <p style="font-size:12px;color:#6b7280;margin:0 0 12px;line-height:1.6;">Fine-grained hand and object manipulation in wet, soapy conditions. Ideal for humanoid dexterity training.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="tag tag-blue">EXO-Centric</span>
+            <span class="tag tag-teal">Hand Pose</span>
+            <span class="tag tag-orange">Wet Conditions</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);">
+            <div><p style="font-size:11px;color:#4b5563;margin:0;">Volume</p><p style="font-size:14px;font-weight:700;color:#1de9b6;margin:0;">600 hrs</p></div>
+            <div style="text-align:right;"><p style="font-size:11px;color:#4b5563;margin:0;">Availability</p><p style="font-size:12px;font-weight:600;color:#fff;margin:0;">✦ On-demand</p></div>
+          </div>
+          <div class="pbar" style="margin-top:10px;"><div class="pbar-fill" style="width:60%;background:linear-gradient(90deg,#34d399,#1de9b6);"></div></div>
+          <p style="font-size:10px;color:#4b5563;margin:4px 0 0;">60% of benchmark coverage</p>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="ds-card">
+        <div style="height:150px;position:relative;overflow:hidden;">
+          <img src="images/dc_Screenshot_2026-01-13_at_4.38.50_PM.png" style="width:100%;height:100%;object-fit:cover;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,22,16,1) 0%,transparent 60%);"></div>
+          <span style="position:absolute;top:10px;right:10px;" class="badge-exo">EXO</span>
+          <span style="position:absolute;top:10px;left:10px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1e88e5;background:rgba(0,0,0,0.6);border:1px solid rgba(30,136,229,0.3);padding:3px 8px;border-radius:4px;">Data Center</span>
+        </div>
+        <div style="padding:16px;">
+          <h3 style="font-size:14px;font-weight:700;color:#fff;margin:0 0 6px;">Loop Cable Installation</h3>
+          <p style="font-size:12px;color:#6b7280;margin:0 0 12px;line-height:1.6;">Hands-on cable loop management — routing, fastening, and dress-out in live server room environment.</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+            <span class="tag tag-blue">EXO-Centric</span>
+            <span class="tag tag-teal">Task Labels</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);">
+            <div><p style="font-size:11px;color:#4b5563;margin:0;">Volume</p><p style="font-size:14px;font-weight:700;color:#1de9b6;margin:0;">600 hrs</p></div>
+            <div style="text-align:right;"><p style="font-size:11px;color:#4b5563;margin:0;">Availability</p><p style="font-size:12px;font-weight:600;color:#fff;margin:0;">✦ On-demand</p></div>
+          </div>
+          <div class="pbar" style="margin-top:10px;"><div class="pbar-fill" style="width:55%;background:linear-gradient(90deg,#1de9b6,#1e88e5);"></div></div>
+          <p style="font-size:10px;color:#4b5563;margin:4px 0 0;">55% of benchmark coverage</p>
+        </div>
+      </div>
+
+      <!-- Card 6 — on-demand placeholder -->
+      <div class="ds-card" style="border-style:dashed;border-color:rgba(29,233,182,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:280px;text-align:center;padding:32px 24px;">
+        <div style="width:48px;height:48px;border-radius:12px;background:rgba(29,233,182,0.08);border:1px solid rgba(29,233,182,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 6px;">Request Custom Dataset</p>
+        <p style="font-size:12px;color:#6b7280;margin:0 0 16px;line-height:1.6;">Don't see what you need? Our 100+ person team generates any scenario, environment, or robot workflow on demand.</p>
+        <button style="background:rgba(29,233,182,0.1);border:1px solid rgba(29,233,182,0.3);color:#1de9b6;font-size:12px;font-weight:600;padding:9px 20px;border-radius:8px;cursor:pointer;">Submit Request</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="opt-sep">
+
+<!-- ════════════════════════════════════════════════════
+     OPTION C  —  Data Intelligence Dashboard
+     Split hero + advanced search · metrics strip · tabbed industry view
+     ════════════════════════════════════════════════════ -->
+
+<div class="opt-banner">
+  <div class="opt-badge">Option C</div>
+  <p class="opt-name">Data Intelligence Dashboard — Metrics + Tabbed industry view</p>
+  <p class="opt-desc">Split hero with live stats. Advanced search with filters inline. Tabbed category switcher. Shows scale, depth and professionalism — most impressive for enterprise buyers.</p>
+</div>
+
+<div style="background:#060b08;min-height:100vh;padding-bottom:80px;">
+
+  <!-- sticky nav -->
+  <nav style="background:rgba(6,11,8,0.97);border-bottom:1px solid rgba(29,233,182,0.07);padding:0 40px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="robotics.html" style="display:flex;align-items:center;gap:6px;text-decoration:none;opacity:.7;transition:opacity .2s;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg><span style="font-size:12px;color:#9ca3af;">Home</span></a>
+      <span style="color:#374151;font-size:12px;">/</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="width:20px;height:20px;border-radius:5px;background:rgba(29,233,182,0.15);border:1px solid rgba(29,233,182,0.3);display:flex;align-items:center;justify-content:center;">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="2.5"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+        </div>
+        <span style="font-size:13px;font-weight:700;color:#fff;">RoboDataHub</span>
+      </div>
+      <div style="display:flex;gap:0;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:8px;overflow:hidden;margin-left:8px;">
+        <button style="font-size:11px;font-weight:600;color:#1de9b6;background:rgba(29,233,182,0.1);border:none;padding:5px 14px;cursor:pointer;">Browse</button>
+        <button style="font-size:11px;font-weight:600;color:#6b7280;background:transparent;border:none;padding:5px 14px;cursor:pointer;">My Requests</button>
+        <button style="font-size:11px;font-weight:600;color:#6b7280;background:transparent;border:none;padding:5px 14px;cursor:pointer;">API Docs</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <span style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1de9b6;background:rgba(29,233,182,0.06);border:1px solid rgba(29,233,182,0.18);padding:4px 10px;border-radius:4px;">NVIDIA Inception</span>
+      <button style="font-size:12px;font-weight:700;color:#060b08;background:#1de9b6;border:none;padding:7px 20px;border-radius:8px;cursor:pointer;">Request Access</button>
+    </div>
+  </nav>
+
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+
+    <!-- ── HERO SPLIT ── -->
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:0;min-height:280px;margin-bottom:0;border-bottom:1px solid rgba(29,233,182,0.07);">
+      <!-- left: headline + search -->
+      <div style="padding:48px 48px 40px 0;border-right:1px solid rgba(29,233,182,0.07);">
+        <div class="pill-teal" style="margin-bottom:16px;"><span class="dot-teal"></span>Physical AI · Foundation Data</div>
+        <h1 style="font-size:42px;font-weight:900;color:#fff;margin:0 0 10px;line-height:1.05;letter-spacing:-.02em;">The Real-World Data<br>Engine for Robotics</h1>
+        <p style="font-size:15px;color:#6b7280;margin:0 0 28px;max-width:460px;line-height:1.75;">17,400+ hours of labeled industrial footage. No simulation. Massive existing library — any new scenario generated on demand by our 100+ person team.</p>
+
+        <!-- advanced search box -->
+        <div style="background:#0d1610;border:1px solid rgba(29,233,182,0.14);border-radius:14px;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:0;">
+            <div style="flex:1;position:relative;">
+              <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input style="width:100%;background:transparent;border:none;padding:14px 14px 14px 40px;font-size:14px;color:#fff;outline:none;" type="text" placeholder='Search datasets — "grille assembly", "pallet EGO", "cable routing"'>
+            </div>
+            <div style="width:1px;height:40px;background:rgba(255,255,255,0.06);"></div>
+            <select style="background:transparent;border:none;color:#9ca3af;font-size:13px;padding:0 16px;outline:none;height:50px;cursor:pointer;">
+              <option>All Industries</option>
+              <option>Data Center</option>
+              <option>Warehouse</option>
+              <option>Automotive</option>
+              <option>Dexterity</option>
+            </select>
+            <div style="width:1px;height:40px;background:rgba(255,255,255,0.06);"></div>
+            <select style="background:transparent;border:none;color:#9ca3af;font-size:13px;padding:0 16px;outline:none;height:50px;cursor:pointer;">
+              <option>EGO + EXO</option>
+              <option>EGO only</option>
+              <option>EXO only</option>
+            </select>
+            <button style="background:#1de9b6;color:#060b08;border:none;padding:0 24px;height:50px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Search</button>
+          </div>
+          <!-- advanced filters row -->
+          <div style="display:flex;align-items:center;gap:0;border-top:1px solid rgba(29,233,182,0.08);padding:10px 14px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+            <span style="font-size:11px;color:#4b5563;margin:0 12px 0 6px;">Filters:</span>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <span class="chip" style="font-size:10px;padding:4px 10px;">Task labeled</span>
+              <span class="chip" style="font-size:10px;padding:4px 10px;">Bounding box</span>
+              <span class="chip" style="font-size:10px;padding:4px 10px;">Segmentation</span>
+              <span class="chip" style="font-size:10px;padding:4px 10px;">Hazard events</span>
+              <span class="chip" style="font-size:10px;padding:4px 10px;">✦ On-demand</span>
+              <span class="chip active" style="font-size:10px;padding:4px 10px;">In Library ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right: live metrics panel -->
+      <div style="padding:48px 0 40px 40px;">
+        <p style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4b5563;margin:0 0 20px;">Platform Overview</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+          <div style="background:#0d1610;border:1px solid rgba(29,233,182,0.1);border-radius:10px;padding:16px;">
+            <p style="font-size:26px;font-weight:800;color:#1de9b6;margin:0;line-height:1;">17.4K</p>
+            <p style="font-size:11px;color:#6b7280;margin:4px 0 0;">Hours labeled</p>
+          </div>
+          <div style="background:#0d1610;border:1px solid rgba(29,233,182,0.1);border-radius:10px;padding:16px;">
+            <p style="font-size:26px;font-weight:800;color:#1de9b6;margin:0;line-height:1;">100+</p>
+            <p style="font-size:11px;color:#6b7280;margin:4px 0 0;">Data collectors</p>
+          </div>
+          <div style="background:#0d1610;border:1px solid rgba(29,233,182,0.1);border-radius:10px;padding:16px;">
+            <p style="font-size:26px;font-weight:800;color:#fff;margin:0;line-height:1;">4</p>
+            <p style="font-size:11px;color:#6b7280;margin:4px 0 0;">Industry verticals</p>
+          </div>
+          <div style="background:#0d1610;border:1px solid rgba(29,233,182,0.1);border-radius:10px;padding:16px;">
+            <p style="font-size:26px;font-weight:800;color:#fff;margin:0;line-height:1;">∞</p>
+            <p style="font-size:11px;color:#6b7280;margin:4px 0 0;">On-demand scenarios</p>
+          </div>
+        </div>
+        <!-- vertical breakdown -->
+        <p style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#4b5563;margin:0 0 12px;">Coverage by vertical</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:12px;color:#9ca3af;">Automotive</span>
+              <span style="font-size:12px;font-weight:600;color:#a78bfa;">6,500 hrs</span>
+            </div>
+            <div class="pbar"><div class="pbar-fill" style="width:90%;background:#a78bfa;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:12px;color:#9ca3af;">Warehouse</span>
+              <span style="font-size:12px;font-weight:600;color:#fb923c;">4,800 hrs</span>
+            </div>
+            <div class="pbar"><div class="pbar-fill" style="width:66%;background:#fb923c;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:12px;color:#9ca3af;">Data Center</span>
+              <span style="font-size:12px;font-weight:600;color:#1e88e5;">3,200 hrs</span>
+            </div>
+            <div class="pbar"><div class="pbar-fill" style="width:44%;background:#1e88e5;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+              <span style="font-size:12px;color:#9ca3af;">Dexterity</span>
+              <span style="font-size:12px;font-weight:600;color:#34d399;">2,900 hrs</span>
+            </div>
+            <div class="pbar"><div class="pbar-fill" style="width:40%;background:#34d399;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TABBED INDUSTRY VIEW ── -->
+    <div style="margin-top:36px;">
+
+      <!-- tab bar -->
+      <div style="display:flex;gap:0;border-bottom:1px solid rgba(29,233,182,0.08);margin-bottom:28px;">
+        <button style="font-size:13px;font-weight:700;color:#1de9b6;border:none;background:transparent;padding:10px 24px;border-bottom:2px solid #1de9b6;cursor:pointer;">All</button>
+        <button style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#6b7280;border:none;background:transparent;padding:10px 24px;border-bottom:2px solid transparent;cursor:pointer;"><span style="width:7px;height:7px;border-radius:2px;background:#1e88e5;display:inline-block;"></span>Data Center</button>
+        <button style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#6b7280;border:none;background:transparent;padding:10px 24px;border-bottom:2px solid transparent;cursor:pointer;"><span style="width:7px;height:7px;border-radius:2px;background:#fb923c;display:inline-block;"></span>Warehouse</button>
+        <button style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#6b7280;border:none;background:transparent;padding:10px 24px;border-bottom:2px solid transparent;cursor:pointer;"><span style="width:7px;height:7px;border-radius:2px;background:#a78bfa;display:inline-block;"></span>Automotive</button>
+        <button style="display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#6b7280;border:none;background:transparent;padding:10px 24px;border-bottom:2px solid transparent;cursor:pointer;"><span style="width:7px;height:7px;border-radius:2px;background:#34d399;display:inline-block;"></span>Dexterity</button>
+        <div style="flex:1;"></div>
+        <div style="display:flex;align-items:center;gap:8px;padding-bottom:10px;">
+          <span style="font-size:11px;color:#4b5563;">View:</span>
+          <button style="width:28px;height:28px;border-radius:6px;border:1px solid rgba(29,233,182,0.3);background:rgba(29,233,182,0.08);display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button>
+          <button style="width:28px;height:28px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        </div>
+      </div>
+
+      <!-- ── DATA CENTER ── -->
+      <div style="margin-bottom:32px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:3px;height:20px;background:#1e88e5;border-radius:2px;"></div>
+          <p style="font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#1e88e5;margin:0;">Data Center</p>
+          <div style="flex:1;height:1px;background:rgba(30,136,229,0.12);"></div>
+          <span style="font-size:11px;color:#4b5563;background:rgba(30,136,229,0.06);border:1px solid rgba(30,136,229,0.15);padding:3px 10px;border-radius:20px;">4 datasets · 3,200 hrs · All EXO</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/dc_Screenshot_2026-01-13_at_2.06.33_PM.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Rack Cabling</p>
+              <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;">
+                <span class="tag tag-teal" style="font-size:9px;padding:2px 6px;">Task Labels</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">1,200 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/dc_Screenshot_2026-01-13_at_4.38.12_PM.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Cable Management</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-blue" style="font-size:9px;padding:2px 6px;">Seg + BBox</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">800 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/dc_Screenshot_2026-01-13_at_4.38.43_PM.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Patch Routing</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-teal" style="font-size:9px;padding:2px 6px;">Task Labels</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">600 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/dc_Screenshot_2026-01-13_at_4.38.50_PM.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Loop Installation</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-orange" style="font-size:9px;padding:2px 6px;">On-demand ✦</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">600 hrs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── WAREHOUSE ── -->
+      <div style="margin-bottom:32px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:3px;height:20px;background:#fb923c;border-radius:2px;"></div>
+          <p style="font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fb923c;margin:0;">Warehouse</p>
+          <div style="flex:1;height:1px;background:rgba(251,146,60,0.12);"></div>
+          <span style="font-size:11px;color:#4b5563;background:rgba(251,146,60,0.06);border:1px solid rgba(251,146,60,0.15);padding:3px 10px;border-radius:20px;">4 datasets · 4,800 hrs · EGO + EXO</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/wh_pexels-endura-tiles-370085044-14554082.jpg">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Aisle Navigation</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-teal" style="font-size:9px;padding:2px 6px;">Seg+Track</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">2,000 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/wh_pexels-goldcircuits-8377802.jpg">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-ego">EGO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Pick &amp; Place</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-orange" style="font-size:9px;padding:2px 6px;">Edge Cases</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">1,200 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/wh_pexels-ihsanaditya-10834810.jpg">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Logistics Ops</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-blue" style="font-size:9px;padding:2px 6px;">Multi-robot</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">900 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/wh_pexels-tiger-lily-4483772.jpg">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-ego">EGO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Pallet Handling</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-teal" style="font-size:9px;padding:2px 6px;">Load Cycles</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">700 hrs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── DEXTERITY ── -->
+      <div style="margin-bottom:32px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:3px;height:20px;background:#34d399;border-radius:2px;"></div>
+          <p style="font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#34d399;margin:0;">Dexterity</p>
+          <div style="flex:1;height:1px;background:rgba(52,211,153,0.12);"></div>
+          <span style="font-size:11px;color:#4b5563;background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.15);padding:3px 10px;border-radius:20px;">5 datasets · 2,900 hrs · All EXO</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
+          <div class="img-tile" style="height:170px;cursor:pointer;">
+            <img src="images/WebDishWashing.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:11px;font-weight:600;color:#fff;margin:0 0 2px;">Dish Washing</p>
+              <span style="font-size:10px;color:rgba(255,255,255,0.4);">600 hrs</span>
+            </div>
+          </div>
+          <div class="img-tile" style="height:170px;cursor:pointer;">
+            <img src="images/WebWasher.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:11px;font-weight:600;color:#fff;margin:0 0 2px;">Laundry Loading</p>
+              <span style="font-size:10px;color:rgba(255,255,255,0.4);">500 hrs</span>
+            </div>
+          </div>
+          <div class="img-tile" style="height:170px;cursor:pointer;">
+            <img src="images/WebDishWasher.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:11px;font-weight:600;color:#fff;margin:0 0 2px;">Dishwasher Load</p>
+              <span style="font-size:10px;color:rgba(255,255,255,0.4);">700 hrs</span>
+            </div>
+          </div>
+          <div class="img-tile" style="height:170px;cursor:pointer;">
+            <img src="images/WebTrashCollection.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:11px;font-weight:600;color:#fff;margin:0 0 2px;">Trash Collection</p>
+              <span style="font-size:10px;color:rgba(255,255,255,0.4);">600 hrs</span>
+            </div>
+          </div>
+          <div class="img-tile" style="height:170px;cursor:pointer;">
+            <img src="images/WebCleaning.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:11px;font-weight:600;color:#fff;margin:0 0 2px;">Surface Cleaning</p>
+              <span style="font-size:10px;color:rgba(255,255,255,0.4);">500 hrs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── AUTOMOTIVE ── -->
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:3px;height:20px;background:#a78bfa;border-radius:2px;"></div>
+          <p style="font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#a78bfa;margin:0;">Automotive</p>
+          <div style="flex:1;height:1px;background:rgba(167,139,250,0.12);"></div>
+          <span style="font-size:11px;color:#4b5563;background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.15);padding:3px 10px;border-radius:20px;">4 datasets · 6,500 hrs · All EXO · BMW verified</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/frontGrille_012.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Front Grille Asm.</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-purple" style="font-size:9px;padding:2px 6px;">BMW Line</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">2,100 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/rearBumper_021.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Rear Bumper</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-teal" style="font-size:9px;padding:2px 6px;">Task Labels</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">1,800 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/frontSeat_007.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Seat Installation</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-blue" style="font-size:9px;padding:2px 6px;">Seg + BBox</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">1,400 hrs</span>
+              </div>
+            </div>
+          </div>
+          <div class="img-tile" style="height:185px;cursor:pointer;">
+            <img src="images/passengerSeat_0100_Rotate_left_45_degrees.png">
+            <div class="overlay"></div>
+            <span class="badge-pos badge-exo">EXO</span>
+            <div class="caption">
+              <p style="font-size:12px;font-weight:600;color:#fff;margin:0 0 2px;">Cabin Assembly</p>
+              <div style="display:flex;gap:5px;align-items:center;">
+                <span class="tag tag-orange" style="font-size:9px;padding:2px 6px;">On-demand ✦</span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.4);">1,200 hrs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom CTA strip -->
+      <div style="margin-top:40px;padding:32px 40px;background:linear-gradient(135deg,rgba(29,233,182,0.06) 0%,rgba(30,136,229,0.04) 100%);border:1px solid rgba(29,233,182,0.12);border-radius:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;">
+        <div>
+          <p style="font-size:18px;font-weight:800;color:#fff;margin:0 0 6px;">Don't see your scenario?</p>
+          <p style="font-size:14px;color:#6b7280;margin:0;max-width:480px;">Our 100+ person team captures any workflow, any environment, at any volume. On-demand data generation with 2–4 week turnaround.</p>
+        </div>
+        <div style="display:flex;gap:12px;flex-shrink:0;">
+          <button style="font-size:13px;font-weight:600;color:#1de9b6;background:rgba(29,233,182,0.08);border:1px solid rgba(29,233,182,0.3);padding:12px 24px;border-radius:10px;cursor:pointer;">View Pricing</button>
+          <button style="font-size:13px;font-weight:700;color:#060b08;background:#1de9b6;border:none;padding:12px 28px;border-radius:10px;cursor:pointer;">Request Custom Data →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div style="height:40px;background:#060b08;"></div>
+</body>
+</html>
