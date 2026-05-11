@@ -127,6 +127,17 @@
   .how-title-d { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 10px; }
   .how-desc-d { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
+  /* EXO / EGO DEFINITIONS */
+  .how-defs { display: flex; align-items: stretch; gap: 0; margin-bottom: 32px; border: 1px solid rgba(29,233,182,0.12); border-radius: 14px; overflow: hidden; }
+  .how-def-card { flex: 1; padding: 22px 24px; background: rgba(29,233,182,0.03); }
+  .how-def-card:first-child { border-right: 1px solid rgba(29,233,182,0.1); }
+  .how-def-divider { display: flex; align-items: center; justify-content: center; padding: 0 20px; background: rgba(29,233,182,0.02); font-size: 20px; color: rgba(29,233,182,0.4); font-weight: 300; flex-shrink: 0; }
+  .hdc-pill { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .14em; padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; }
+  .hdc-exo { background: rgba(30,136,229,0.12); color: #60a5fa; border: 1px solid rgba(30,136,229,0.25); }
+  .hdc-ego { background: rgba(29,233,182,0.1); color: var(--teal); border: 1px solid rgba(29,233,182,0.25); }
+  .hdc-term { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; letter-spacing: -.2px; }
+  .hdc-explain { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
   /* PRODUCTS */
   .products-d { padding: 64px 56px; max-width: 1300px; margin: 0 auto; }
   .pd-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
@@ -239,19 +250,33 @@
       <div class="sq" style="background:#1de9b6;box-shadow:0 0 10px rgba(29,233,182,0.5);"></div>
       <div class="sec-d-title">How It Works</div>
     </div>
-    <p class="sec-d-sub">Factory footage → robot training data. Three steps.</p>
+    <!-- EXO / EGO definitions -->
+    <div class="how-defs">
+      <div class="how-def-card">
+        <span class="hdc-pill hdc-exo">EXO — Exocentric</span>
+        <div class="hdc-term">External Camera View</div>
+        <div class="hdc-explain">Third-person footage from fixed factory cameras — overhead or wall-mounted — observing the robot and workspace from outside.</div>
+      </div>
+      <div class="how-def-divider">→</div>
+      <div class="how-def-card">
+        <span class="hdc-pill hdc-ego">EGO — Egocentric</span>
+        <div class="hdc-term">Robot's-Eye View</div>
+        <div class="hdc-explain">First-person perspective the robot sees. The viewpoint required for training accurate robot policies — costly and hard to capture at scale directly.</div>
+      </div>
+    </div>
+
     <div class="how-grid-d">
       <div class="how-card-d">
         <div class="how-num-d">Step 01</div>
         <div class="how-icon-d">🎥</div>
         <div class="how-title-d">EXO Capture</div>
-        <div class="how-desc-d">Use existing factory cameras. No new hardware required.</div>
+        <div class="how-desc-d">Use your existing factory cameras. No new hardware or facility changes needed.</div>
       </div>
       <div class="how-card-d">
         <div class="how-num-d">Step 02</div>
         <div class="how-icon-d">⚙️</div>
         <div class="how-title-d">RoboEyeView Conversion</div>
-        <div class="how-desc-d">Patented EXO→EGO synthesis. Robot-perspective datasets with physics-aware rendering.</div>
+        <div class="how-desc-d">Our patented pipeline converts EXO footage into EGO datasets using physics-aware rendering — robot-viewpoint data at scale, no onboard cameras required.</div>
       </div>
       <div class="how-card-d">
         <div class="how-num-d">Step 03</div>
