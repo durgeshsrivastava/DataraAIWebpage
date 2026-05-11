@@ -40,7 +40,7 @@
   .ego-label { position:absolute;top:6px;left:6px;font-size:8px;font-weight:800;letter-spacing:.08em;color:#040608;background:#1de9b6;padding:2px 6px;border-radius:3px; }
 
   /* ── Arrow pipe ── */
-  .pipe { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 16px;flex-shrink:0;align-self:flex-start;margin-top:22px;height:160px; }
+  .pipe { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 16px;flex-shrink:0; }
   .pipe-line { width:2px;flex:1;background:linear-gradient(to bottom,rgba(29,233,182,0.1),rgba(29,233,182,0.5),rgba(29,233,182,0.1)); }
   .pipe-badge { background:linear-gradient(135deg,rgba(29,233,182,0.18),rgba(29,233,182,0.06));border:2px solid rgba(29,233,182,0.55);border-radius:16px;padding:16px 14px;text-align:center;white-space:nowrap;box-shadow:0 0 32px rgba(29,233,182,0.15),0 0 60px rgba(29,233,182,0.04); }
 
@@ -151,9 +151,11 @@
         </div>
 
         <!-- Arrow -->
-        <div style="padding:0 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;">
-          <div style="width:52px;height:3px;background:linear-gradient(to right,#1e88e5,#1de9b6);border-radius:2px;box-shadow:0 0 8px rgba(29,233,182,0.4);"></div>
-          <svg width="13" height="18" viewBox="0 0 10 14" fill="none"><path d="M1 1l8 6-8 6" stroke="#1de9b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div style="padding:0 20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:56px;height:2px;background:linear-gradient(to right,#1e88e5,#1de9b6);border-radius:2px;box-shadow:0 0 8px rgba(29,233,182,0.4);"></div>
+            <div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:11px solid #1de9b6;filter:drop-shadow(0 0 4px rgba(29,233,182,0.7));"></div>
+          </div>
         </div>
 
         <!-- Engine block -->
@@ -167,9 +169,11 @@
         </div>
 
         <!-- Arrow -->
-        <div style="padding:0 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;">
-          <div style="width:52px;height:3px;background:linear-gradient(to right,#1de9b6,#f59e0b);border-radius:2px;box-shadow:0 0 8px rgba(245,158,11,0.4);"></div>
-          <svg width="13" height="18" viewBox="0 0 10 14" fill="none"><path d="M1 1l8 6-8 6" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div style="padding:0 20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <div style="display:flex;align-items:center;">
+            <div style="width:56px;height:2px;background:linear-gradient(to right,#1de9b6,#f59e0b);border-radius:2px;box-shadow:0 0 8px rgba(245,158,11,0.4);"></div>
+            <div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:11px solid #f59e0b;filter:drop-shadow(0 0 4px rgba(245,158,11,0.7));"></div>
+          </div>
         </div>
 
         <!-- EGO block -->
@@ -207,7 +211,7 @@
               <span class="avail-lib">In Library</span>
             </div>
             <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;">
+              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/data1_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -267,7 +271,7 @@
               <span class="avail-lib">In Library</span>
             </div>
             <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;">
+              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/data2_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -339,7 +343,7 @@
               <span class="avail-od">On-demand</span>
             </div>
             <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;">
+              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/human1_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -399,7 +403,7 @@
               <span class="avail-lib">In Library</span>
             </div>
             <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;">
+              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/human2_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -459,7 +463,7 @@
               <span class="avail-od">On-demand</span>
             </div>
             <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;">
+              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/human3_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -531,7 +535,7 @@
               <span class="avail-lib">In Library</span>
             </div>
             <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;">
+              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/auto1_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
