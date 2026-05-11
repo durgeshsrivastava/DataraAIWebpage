@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DataraAI — Modern Homepage Options</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; }
+
+  /* ── Switcher ── */
+  .switcher {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    background: #09090b; border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 8px; padding: 10px 24px; font-size: 13px;
+  }
+  .switcher span { color: #52525b; margin-right: 6px; font-weight: 600; }
+  .sw-btn { padding: 5px 16px; border-radius: 20px; border: 1px solid #27272a; background: transparent; color: #a1a1aa; cursor: pointer; font-size: 12px; font-family: inherit; font-weight: 600; transition: all .2s; }
+  .sw-btn:hover, .sw-btn.active { background: #fff; color: #09090b; border-color: #fff; }
+  .sw-sep { color: #27272a; }
+  .option-frame { display: none; padding-top: 46px; }
+  .option-frame.active { display: block; }
+
+
+  /* ══════════════════════════════════════════════════
+     OPTION A — BENTO SPATIAL
+     Asymmetric bento grid, large metrics, dark premium
+  ══════════════════════════════════════════════════ */
+
+  #optA {
+    --bg: #050508;
+    --bg2: #0a0a0f;
+    --card: #0f0f17;
+    --border: rgba(255,255,255,0.06);
+    --teal: #00f5c4;
+    --violet: #7c3aed;
+    --blue: #3b82f6;
+    --text: #f4f4f5;
+    --muted: #71717a;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* NAV A */
+  .nav-a {
+    position: sticky; top: 46px; z-index: 100;
+    background: rgba(5,5,8,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+  }
+  .nav-a-logo { font-size: 17px; font-weight: 800; color: var(--teal); letter-spacing: .06em; text-decoration: none; }
+  .nav-a-links { display: flex; gap: 2px; }
+  .nav-a-link { padding: 6px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--muted); transition: color .2s, background .15s; }
+  .nav-a-link:hover, .nav-a-link.active { color: var(--text); background: rgba(255,255,255,0.04); }
+  .nav-a-actions { display: flex; gap: 8px; }
+  .btn-a-ghost { padding: 7px 16px; background: transparent; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; font-family: inherit; }
+  .btn-a-solid { padding: 7px 18px; background: var(--teal); border: none; border-radius: 8px; font-size: 13px; font-weight: 700; color: #030a07; cursor: pointer; font-family: inherit; }
+
+  /* HERO A */
+  .hero-a {
+    padding: 96px 48px 80px;
+    max-width: 1300px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-a-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 28px; }
+  .hero-a-eyebrow::before { content:''; width: 24px; height: 1px; background: var(--teal); }
+  .hero-a h1 { font-size: clamp(48px, 6vw, 80px); font-weight: 900; line-height: 1.0; letter-spacing: -3px; color: #fff; margin-bottom: 28px; }
+  .hero-a h1 .outline { -webkit-text-stroke: 1.5px rgba(255,255,255,0.3); color: transparent; }
+  .hero-a h1 .teal { color: var(--teal); }
+  .hero-a-sub { font-size: 17px; color: var(--muted); line-height: 1.75; max-width: 580px; margin-bottom: 48px; }
+  .hero-a-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .chip-a { padding: 8px 18px; border-radius: 100px; font-size: 12px; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); color: var(--muted); background: rgba(255,255,255,0.02); }
+  .chip-a.lit { border-color: rgba(0,245,196,0.3); color: var(--teal); background: rgba(0,245,196,0.06); }
+
+  /* BENTO GRID A — How It Works */
+  .bento-how { max-width: 1300px; margin: 0 auto; padding: 0 48px 80px; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .bento-step { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px; position: relative; overflow: hidden; transition: border-color .2s; }
+  .bento-step:hover { border-color: rgba(0,245,196,0.15); }
+  .bento-step-num { font-size: 72px; font-weight: 900; color: rgba(255,255,255,0.03); position: absolute; top: 16px; right: 24px; line-height: 1; letter-spacing: -4px; }
+  .bento-step-label { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; }
+  .bento-step-icon { font-size: 32px; margin-bottom: 16px; }
+  .bento-step-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .bento-step-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* PRODUCTS BENTO */
+  .bento-products { max-width: 1300px; margin: 0 auto; padding: 0 48px 80px; }
+  .bento-products-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; }
+  .bento-products-title { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1px; }
+  .bento-products-sub { font-size: 13px; color: var(--muted); }
+  .bento-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: auto auto; gap: 12px; }
+  .bento-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px 24px; transition: border-color .2s, transform .2s; cursor: pointer; }
+  .bento-card:hover { border-color: rgba(0,245,196,0.2); transform: translateY(-2px); }
+  .bento-card.span2 { grid-column: span 2; }
+  .bc-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 14px; }
+  .bc-tag.core { background: rgba(0,245,196,0.08); color: var(--teal); border: 1px solid rgba(0,245,196,0.15); }
+  .bc-tag.pat { background: rgba(245,158,11,0.08); color: #fbbf24; border: 1px solid rgba(245,158,11,0.15); }
+  .bc-icon { font-size: 28px; margin-bottom: 14px; }
+  .bc-name { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .bc-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .bc-link { font-size: 11px; font-weight: 700; color: var(--teal); text-decoration: none; }
+
+  /* CUSTOMERS A */
+  .bento-customers { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 48px; }
+  .bento-customers-inner { max-width: 1300px; margin: 0 auto; }
+  .bc-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 32px; }
+  .bc-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .bcm-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 36px 28px; transition: border-color .2s; }
+  .bcm-card:hover { border-color: rgba(0,245,196,0.15); }
+  .bcm-num { font-size: 56px; font-weight: 900; letter-spacing: -3px; line-height: 1; margin-bottom: 4px; }
+  .bcm-num.teal { color: var(--teal); }
+  .bcm-num.violet { color: #a78bfa; }
+  .bcm-num.blue { color: #60a5fa; }
+  .bcm-company { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .bcm-detail { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .bcm-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; padding: 3px 10px; border-radius: 4px; }
+
+  /* LOGOS A */
+  .logos-a { padding: 32px 48px; display: flex; flex-direction: column; align-items: center; gap: 16px; border-bottom: 1px solid var(--border); }
+  .logos-a-label { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #3f3f46; }
+  .logos-a-list { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+  .logos-a-item { font-size: 13px; font-weight: 700; color: #3f3f46; }
+
+  /* TEAM A */
+  .team-a { max-width: 1300px; margin: 0 auto; padding: 80px 48px; }
+  .team-a-founders { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .taf-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; display: flex; gap: 20px; align-items: flex-start; transition: border-color .2s; }
+  .taf-card:hover { border-color: rgba(0,245,196,0.15); }
+  .taf-av { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; flex-shrink: 0; }
+  .taf-av.blue { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.25); color: #60a5fa; }
+  .taf-av.teal { background: rgba(0,245,196,0.12); border: 1px solid rgba(0,245,196,0.22); color: var(--teal); }
+  .taf-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .taf-role { font-size: 11px; font-weight: 600; color: var(--teal); margin-bottom: 8px; }
+  .taf-bio { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .team-a-adv-label { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #3f3f46; margin-bottom: 12px; }
+  .team-a-advisors { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .taa-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; transition: border-color .2s; }
+  .taa-card:hover { border-color: rgba(0,245,196,0.12); }
+  .taa-init { width: 34px; height: 34px; border-radius: 8px; background: rgba(0,245,196,0.06); border: 1px solid rgba(0,245,196,0.12); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--teal); margin-bottom: 10px; }
+  .taa-name { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .taa-role { font-size: 10px; color: var(--muted); line-height: 1.4; }
+
+  /* CTA A */
+  .cta-a { padding: 80px 48px; text-align: center; border-top: 1px solid var(--border); }
+  .cta-a h2 { font-size: clamp(28px,4vw,48px); font-weight: 900; color: #fff; letter-spacing: -2px; margin-bottom: 14px; }
+  .cta-a h2 .teal { color: var(--teal); }
+  .cta-a p { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
+  .cta-a-btns { display: flex; gap: 12px; justify-content: center; }
+  .btn-a-primary { padding: 13px 30px; background: var(--teal); color: #030a07; border-radius: 10px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; font-family: inherit; }
+  .btn-a-sec { padding: 13px 30px; background: transparent; color: #a1a1aa; border-radius: 10px; font-size: 14px; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; font-family: inherit; }
+
+  /* FOOTER A */
+  .footer-a { background: var(--bg2); border-top: 1px solid var(--border); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #3f3f46; }
+  .footer-a .flogo { font-size: 15px; font-weight: 800; color: var(--teal); }
+  .footer-a-links { display: flex; gap: 24px; }
+  .footer-a-links a { color: #52525b; text-decoration: none; }
+  .footer-a-links a:hover { color: #a1a1aa; }
+
+  /* section header shared */
+  .sec-hd-a { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .sec-title-a { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1px; margin-bottom: 6px; }
+  .sec-sub-a { font-size: 13px; color: var(--muted); }
+
+
+  /* ══════════════════════════════════════════════════
+     OPTION B — EDITORIAL MINIMAL
+     Big type, horizontal rules, near-zero decoration
+  ══════════════════════════════════════════════════ */
+
+  #optB {
+    --bg: #030303;
+    --teal: #1de9b6;
+    --text: #fafafa;
+    --muted: #737373;
+    --border: rgba(255,255,255,0.08);
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* NAV B */
+  .nav-b {
+    position: sticky; top: 46px; z-index: 100;
+    background: #030303;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; height: 56px;
+  }
+  .nav-b-logo { font-size: 14px; font-weight: 800; color: var(--teal); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; }
+  .nav-b-links { display: flex; gap: 36px; }
+  .nav-b-link { font-size: 12px; font-weight: 600; color: var(--muted); text-decoration: none; letter-spacing: .04em; transition: color .2s; }
+  .nav-b-link:hover, .nav-b-link.active { color: var(--text); }
+  .btn-b-cta { padding: 6px 18px; background: var(--teal); color: #030303; border: none; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; }
+
+  /* HERO B */
+  .hero-b { padding: 100px 60px 80px; max-width: 1300px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+  .hero-b-kicker { font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--teal); margin-bottom: 32px; }
+  .hero-b h1 {
+    font-size: clamp(56px, 8vw, 108px); font-weight: 900;
+    line-height: .96; letter-spacing: -5px; color: #fff;
+    margin-bottom: 40px;
+  }
+  .hero-b h1 .outline { -webkit-text-stroke: 1px rgba(255,255,255,0.2); color: transparent; }
+  .hero-b-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 540px; border-left: 2px solid var(--teal); padding-left: 20px; }
+
+  /* HOW IT WORKS B — numbered horizontal list */
+  .how-b { max-width: 1300px; margin: 0 auto; padding: 72px 60px; border-bottom: 1px solid var(--border); }
+  .how-b-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 48px; }
+  .how-b-title { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); }
+  .how-b-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+  .how-b-step { padding: 32px 36px 32px 0; border-right: 1px solid var(--border); }
+  .how-b-step:last-child { border-right: none; padding-right: 0; padding-left: 36px; }
+  .how-b-step:nth-child(2) { padding-left: 36px; }
+  .how-b-num { font-size: 48px; font-weight: 900; color: rgba(255,255,255,0.06); letter-spacing: -3px; line-height: 1; margin-bottom: 20px; }
+  .how-b-step-title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .how-b-step-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* PRODUCTS B — stacked rows */
+  .products-b { max-width: 1300px; margin: 0 auto; padding: 72px 60px; border-bottom: 1px solid var(--border); }
+  .pb-header { margin-bottom: 40px; }
+  .pb-title { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
+  .pb-row { display: grid; grid-template-columns: 200px 1fr auto; align-items: center; gap: 40px; padding: 28px 0; border-top: 1px solid var(--border); cursor: pointer; transition: opacity .15s; }
+  .pb-row:hover { opacity: .75; }
+  .pb-row-name { font-size: 20px; font-weight: 800; color: #fff; }
+  .pb-row-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-top: 4px; }
+  .pb-row-tag.core { color: var(--teal); border: 1px solid rgba(29,233,182,0.2); }
+  .pb-row-tag.pat { color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+  .pb-row-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .pb-row-arrow { font-size: 20px; color: rgba(255,255,255,0.15); }
+
+  /* CUSTOMERS B */
+  .customers-b { max-width: 1300px; margin: 0 auto; padding: 72px 60px; border-bottom: 1px solid var(--border); }
+  .cb-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 40px; }
+  .cb-cell { background: var(--bg); padding: 40px 32px; }
+  .cb-num { font-size: 64px; font-weight: 900; letter-spacing: -4px; line-height: 1; margin-bottom: 8px; }
+  .cb-company { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .cb-detail { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .cb-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+
+  /* LOGOS B */
+  .logos-b { padding: 28px 60px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .logos-b-label { font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #3f3f46; }
+  .logos-b-list { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+  .logos-b-item { font-size: 12px; font-weight: 700; color: #3f3f46; }
+
+  /* TEAM B */
+  .team-b { max-width: 1300px; margin: 0 auto; padding: 72px 60px; border-bottom: 1px solid var(--border); }
+  .team-b-founders { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin: 40px 0 24px; }
+  .tbf-cell { background: var(--bg); padding: 36px 32px; }
+  .tbf-name { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .tbf-role { font-size: 11px; font-weight: 600; color: var(--teal); margin-bottom: 12px; letter-spacing: .04em; }
+  .tbf-bio { font-size: 12px; color: var(--muted); line-height: 1.65; }
+  .team-b-adv-label { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #3f3f46; margin-bottom: 16px; }
+  .team-b-advisors { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); }
+  .tba-cell { background: var(--bg); padding: 24px; }
+  .tba-init { font-size: 13px; font-weight: 800; color: var(--teal); margin-bottom: 8px; }
+  .tba-name { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .tba-role { font-size: 10px; color: var(--muted); line-height: 1.4; }
+
+  /* CTA B */
+  .cta-b { padding: 96px 60px; text-align: center; border-top: 1px solid var(--border); }
+  .cta-b h2 { font-size: clamp(32px,5vw,64px); font-weight: 900; letter-spacing: -3px; line-height: 1; color: #fff; margin-bottom: 16px; }
+  .cta-b p { font-size: 15px; color: var(--muted); margin-bottom: 36px; }
+  .cta-b-btns { display: flex; gap: 12px; justify-content: center; }
+  .btn-b-primary { padding: 14px 32px; background: var(--teal); color: #030303; border-radius: 8px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; font-family: inherit; }
+  .btn-b-sec { padding: 14px 32px; background: transparent; color: #737373; border-radius: 8px; font-size: 14px; font-weight: 600; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; font-family: inherit; }
+
+  /* FOOTER B */
+  .footer-b { border-top: 1px solid var(--border); padding: 28px 60px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #3f3f46; }
+  .footer-b .flogo { font-size: 13px; font-weight: 800; color: var(--teal); letter-spacing: .1em; }
+  .footer-b-links { display: flex; gap: 24px; }
+  .footer-b-links a { color: #3f3f46; text-decoration: none; }
+
+
+  /* ══════════════════════════════════════════════════
+     OPTION C — GLASS PREMIUM
+     Gradient mesh bg, frosted glass cards, vivid
+  ══════════════════════════════════════════════════ */
+
+  #optC {
+    --bg: #04060d;
+    --teal: #2affd6;
+    --purple: #8b5cf6;
+    --blue: #3b82f6;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --glass: rgba(255,255,255,0.03);
+    --glass-border: rgba(255,255,255,0.08);
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    position: relative;
+  }
+  #optC::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(43,255,214,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(139,92,246,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 90%, rgba(59,130,246,0.05) 0%, transparent 60%);
+  }
+
+  #optC > * { position: relative; z-index: 1; }
+
+  /* NAV C */
+  .nav-c {
+    position: sticky; top: 46px; z-index: 100;
+    margin: 16px 24px 0;
+    background: rgba(4,6,13,0.7); backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; height: 60px;
+  }
+  .nav-c-logo { font-size: 16px; font-weight: 800; color: var(--teal); letter-spacing: .06em; text-decoration: none; }
+  .nav-c-links { display: flex; gap: 4px; }
+  .nav-c-link { padding: 6px 14px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; color: var(--muted); transition: all .2s; }
+  .nav-c-link:hover, .nav-c-link.active { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-c-actions { display: flex; gap: 8px; }
+  .btn-c-ghost { padding: 7px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; font-family: inherit; }
+  .btn-c-solid { padding: 7px 20px; background: linear-gradient(135deg, var(--teal), #00c9a7); border: none; border-radius: 8px; font-size: 13px; font-weight: 700; color: #030303; cursor: pointer; font-family: inherit; }
+
+  /* HERO C */
+  .hero-c { padding: 88px 56px 72px; max-width: 1300px; margin: 0 auto; }
+  .hero-c-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); background: rgba(42,255,214,0.06); border: 1px solid rgba(42,255,214,0.18); padding: 6px 14px; border-radius: 100px; margin-bottom: 28px; }
+  .hero-c-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px rgba(42,255,214,0.9); }
+  .hero-c h1 { font-size: clamp(44px,5.5vw,72px); font-weight: 900; line-height: 1.04; letter-spacing: -2.5px; color: #fff; margin-bottom: 24px; }
+  .hero-c h1 .grad { background: linear-gradient(90deg, var(--teal) 0%, #60a5fa 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-c-sub { font-size: 17px; color: var(--muted); line-height: 1.75; max-width: 600px; }
+
+  /* GLASS SECTION */
+  .glass-section { max-width: 1300px; margin: 0 auto; padding: 0 56px 72px; }
+  .glass-sec-label { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .glass-sec-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .glass-sec-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+
+  /* HOW C */
+  .how-c-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .how-c-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); border-radius: 20px; padding: 32px 28px;
+    transition: border-color .2s, background .2s;
+  }
+  .how-c-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(42,255,214,0.2); }
+  .how-c-num { font-size: 11px; font-weight: 700; letter-spacing: .2em; color: var(--teal); margin-bottom: 20px; }
+  .how-c-icon { font-size: 28px; margin-bottom: 14px; }
+  .how-c-title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .how-c-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* PRODUCTS C */
+  .prod-c-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  .prod-c-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); border-radius: 20px; padding: 24px 20px;
+    transition: border-color .2s, background .2s; cursor: pointer;
+  }
+  .prod-c-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(42,255,214,0.2); }
+  .prod-c-card.featured { border-color: rgba(42,255,214,0.2); background: rgba(42,255,214,0.03); }
+  .pcc-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 14px; }
+  .pcc-tag.core { background: rgba(42,255,214,0.08); color: var(--teal); border: 1px solid rgba(42,255,214,0.15); }
+  .pcc-tag.pat { background: rgba(251,191,36,0.08); color: #fbbf24; border: 1px solid rgba(251,191,36,0.15); }
+  .pcc-icon { font-size: 24px; margin-bottom: 12px; }
+  .pcc-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .pcc-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+  .pcc-link { font-size: 11px; font-weight: 700; color: var(--teal); text-decoration: none; }
+
+  /* CUSTOMERS C */
+  .cust-c-section { padding: 72px 0; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .cust-c-inner { max-width: 1300px; margin: 0 auto; padding: 0 56px; }
+  .cust-c-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 28px; }
+  .cust-c-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); border-radius: 20px; padding: 32px 28px;
+    transition: border-color .2s;
+  }
+  .cust-c-card:hover { border-color: rgba(42,255,214,0.15); }
+  .cust-c-num { font-size: 52px; font-weight: 900; letter-spacing: -3px; line-height: 1; margin-bottom: 6px; }
+  .cust-c-company { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+  .cust-c-detail { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+  .cust-c-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 3px 10px; border-radius: 4px; }
+
+  /* LOGOS C */
+  .logos-c { padding: 32px 56px; display: flex; flex-direction: column; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .logos-c-label { font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #334155; }
+  .logos-c-list { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+  .logos-c-item { font-size: 13px; font-weight: 700; color: #334155; }
+
+  /* TEAM C */
+  .team-c { max-width: 1300px; margin: 0 auto; padding: 72px 56px; }
+  .team-c-founders { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .tcf-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); border-radius: 20px; padding: 28px;
+    display: flex; gap: 18px; align-items: flex-start; transition: border-color .2s;
+  }
+  .tcf-card:hover { border-color: rgba(42,255,214,0.15); }
+  .tcf-av { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; flex-shrink: 0; }
+  .tcf-av.blue { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.2); color: #60a5fa; }
+  .tcf-av.teal { background: rgba(42,255,214,0.10); border: 1px solid rgba(42,255,214,0.2); color: var(--teal); }
+  .tcf-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .tcf-role { font-size: 11px; font-weight: 600; color: var(--teal); margin-bottom: 8px; }
+  .tcf-bio { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .team-c-adv-label { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #334155; margin-bottom: 12px; }
+  .team-c-advisors { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+  .tca-card {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); border-radius: 14px; padding: 18px; transition: border-color .2s;
+  }
+  .tca-card:hover { border-color: rgba(42,255,214,0.12); }
+  .tca-init { width: 32px; height: 32px; border-radius: 8px; background: rgba(42,255,214,0.06); border: 1px solid rgba(42,255,214,0.12); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--teal); margin-bottom: 10px; }
+  .tca-name { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .tca-role { font-size: 10px; color: var(--muted); line-height: 1.4; }
+
+  /* CTA C */
+  .cta-c { padding: 80px 56px; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
+  .cta-c h2 { font-size: clamp(28px,4vw,48px); font-weight: 900; letter-spacing: -2px; color: #fff; margin-bottom: 14px; }
+  .cta-c h2 .grad { background: linear-gradient(90deg, var(--teal) 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .cta-c p { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+  .cta-c-btns { display: flex; gap: 12px; justify-content: center; }
+  .btn-c-primary { padding: 13px 30px; background: linear-gradient(135deg, var(--teal), #00c9a7); color: #030303; border-radius: 10px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; font-family: inherit; }
+  .btn-c-sec { padding: 13px 30px; background: rgba(255,255,255,0.04); color: #94a3b8; border-radius: 10px; font-size: 14px; font-weight: 600; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; font-family: inherit; }
+
+  /* FOOTER C */
+  .footer-c { border-top: 1px solid rgba(255,255,255,0.04); padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #334155; }
+  .footer-c .flogo { font-size: 15px; font-weight: 800; color: var(--teal); }
+  .footer-c-links { display: flex; gap: 24px; }
+  .footer-c-links a { color: #334155; text-decoration: none; }
+
+
+  /* ══════════════════════════════════════════════════
+     OPTION D — CURSOR STYLE
+     Pure black, dot-grid hero, centered layout, clean
+  ══════════════════════════════════════════════════ */
+
+  #optD {
+    --bg: #000000;
+    --card: #0f0f0f;
+    --border: rgba(255,255,255,0.08);
+    --teal: #1de9b6;
+    --text: #ffffff;
+    --muted: #888888;
+    --dim: #444444;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* NAV D */
+  .nav-d4 {
+    position: sticky; top: 46px; z-index: 100;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 60px;
+  }
+  .nav-d4-logo { font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -.03em; text-decoration: none; }
+  .nav-d4-logo span { color: var(--teal); }
+  .nav-d4-links { display: flex; gap: 2px; }
+  .nav-d4-link { padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; }
+  .nav-d4-link:hover, .nav-d4-link.active { color: #fff; }
+  .nav-d4-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-d4-ghost { padding: 7px 16px; background: transparent; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; font-family: inherit; transition: all .15s; }
+  .btn-d4-ghost:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
+  .btn-d4-solid { padding: 7px 18px; background: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; color: #000; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+  .btn-d4-solid:hover { opacity: .85; }
+
+  /* HERO D */
+  .hero-d4 {
+    position: relative; padding: 120px 40px 100px;
+    text-align: center; overflow: hidden;
+  }
+  .hero-d4::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 20%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 90% at 50% 50%, black 20%, transparent 100%);
+  }
+  .hero-d4::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 400px; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 70% 60% at 50% -10%, rgba(29,233,182,0.07) 0%, transparent 70%);
+  }
+  .hero-d4 > * { position: relative; z-index: 1; }
+  .hero-d4-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 500; color: var(--muted);
+    background: #0f0f0f; border: 1px solid var(--border);
+    padding: 5px 14px; border-radius: 100px; margin-bottom: 36px;
+  }
+  .hero-d4-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+  .hero-d4 h1 {
+    font-size: clamp(44px, 6.5vw, 84px); font-weight: 700;
+    line-height: 1.04; letter-spacing: -3.5px; color: #fff;
+    margin: 0 auto 24px; max-width: 820px;
+  }
+  .hero-d4-sub {
+    font-size: 18px; color: var(--muted); line-height: 1.7;
+    max-width: 520px; margin: 0 auto 44px;
+    font-weight: 400;
+  }
+  .hero-d4-btns { display: flex; gap: 12px; justify-content: center; margin-bottom: 64px; }
+  .btn-d4-hero-p { padding: 12px 28px; background: #fff; color: #000; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+  .btn-d4-hero-p:hover { opacity: .85; }
+  .btn-d4-hero-s { padding: 12px 28px; background: transparent; color: var(--muted); border: 1px solid var(--border); border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all .15s; }
+  .btn-d4-hero-s:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
+
+  /* fake terminal / data viz in hero */
+  .hero-d4-terminal {
+    max-width: 680px; margin: 0 auto;
+    background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; overflow: hidden;
+  }
+  .hdt-bar {
+    padding: 10px 16px; background: #181818; border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .hdt-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .hdt-title { flex: 1; text-align: center; font-size: 11px; color: #444; font-weight: 500; letter-spacing: .02em; }
+  .hdt-body { padding: 20px 24px; text-align: left; }
+  .hdt-line { font-family: 'SF Mono','Fira Code','Menlo',monospace; font-size: 12px; line-height: 1.8; }
+  .hdt-key { color: #5eead4; }
+  .hdt-val { color: #a3a3a3; }
+  .hdt-str { color: #86efac; }
+  .hdt-num { color: #fb923c; }
+  .hdt-comment { color: #404040; }
+
+  /* HOW IT WORKS D4 */
+  .how-d4 { border-top: 1px solid var(--border); }
+  .how-d4-inner { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+  .how-d4-label { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: 56px; text-align: center; }
+  .how-d4-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .how-d4-step { padding: 0 48px 0 0; border-right: 1px solid var(--border); }
+  .how-d4-step:last-child { border-right: none; padding-right: 0; padding-left: 48px; }
+  .how-d4-step:nth-child(2) { padding: 0 48px 0 48px; }
+  .how-d4-num { font-family: 'SF Mono','Fira Code','Menlo',monospace; font-size: 11px; font-weight: 600; color: var(--teal); letter-spacing: .1em; margin-bottom: 24px; }
+  .how-d4-icon { font-size: 26px; margin-bottom: 16px; }
+  .how-d4-title { font-size: 18px; font-weight: 600; color: #fff; letter-spacing: -.3px; margin-bottom: 10px; }
+  .how-d4-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+  /* PRODUCTS D4 */
+  .products-d4 { border-top: 1px solid var(--border); }
+  .products-d4-inner { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+  .prod-d4-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: 12px; }
+  .prod-d4-title { font-size: 36px; font-weight: 700; letter-spacing: -1.5px; color: #fff; margin-bottom: 8px; }
+  .prod-d4-sub { font-size: 16px; color: var(--muted); margin-bottom: 48px; }
+  .prod-d4-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .prod-d4-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px; cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .prod-d4-card:hover { border-color: rgba(255,255,255,0.16); background: #141414; }
+  .prod-d4-card.feat { border-color: rgba(29,233,182,0.2); }
+  .pdc4-tag { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; display: block; }
+  .pdc4-tag.amber { color: #f59e0b; }
+  .pdc4-icon { font-size: 26px; margin-bottom: 14px; }
+  .pdc4-name { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -.5px; margin-bottom: 10px; }
+  .pdc4-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; }
+  .pdc4-link { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5); text-decoration: none; transition: color .15s; }
+  .pdc4-link:hover { color: #fff; }
+
+  /* CUSTOMERS D4 */
+  .customers-d4 { border-top: 1px solid var(--border); }
+  .customers-d4-inner { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+  .cust-d4-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: 12px; text-align: center; }
+  .cust-d4-title { font-size: 36px; font-weight: 700; letter-spacing: -1.5px; color: #fff; margin-bottom: 56px; text-align: center; }
+  .cust-d4-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border-radius: 16px; overflow: hidden; }
+  .cust-d4-stat { background: var(--card); padding: 44px 36px; }
+  .cust-d4-stat-num { font-size: 54px; font-weight: 700; letter-spacing: -3px; color: #fff; line-height: 1; margin-bottom: 6px; }
+  .cust-d4-stat-num.teal { color: var(--teal); }
+  .cust-d4-company { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+  .cust-d4-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* LOGOS D4 */
+  .logos-d4 { border-top: 1px solid var(--border); padding: 44px 40px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .logos-d4-label { font-size: 12px; font-weight: 500; color: var(--dim); }
+  .logos-d4-list { display: flex; gap: 48px; flex-wrap: wrap; justify-content: center; }
+  .logos-d4-item { font-size: 14px; font-weight: 600; color: var(--dim); transition: color .15s; }
+  .logos-d4-item:hover { color: var(--muted); }
+
+  /* TEAM D4 */
+  .team-d4 { border-top: 1px solid var(--border); }
+  .team-d4-inner { max-width: 1100px; margin: 0 auto; padding: 80px 40px; }
+  .team-d4-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: 12px; }
+  .team-d4-title { font-size: 36px; font-weight: 700; letter-spacing: -1.5px; color: #fff; margin-bottom: 8px; }
+  .team-d4-sub { font-size: 15px; color: var(--muted); margin-bottom: 48px; }
+  .team-d4-founders { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .tdf4-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; transition: border-color .2s; }
+  .tdf4-card:hover { border-color: rgba(255,255,255,0.14); }
+  .tdf4-av { width: 44px; height: 44px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 16px; }
+  .tdf4-name { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 2px; letter-spacing: -.2px; }
+  .tdf4-role { font-size: 12px; font-weight: 500; color: var(--teal); margin-bottom: 10px; }
+  .tdf4-bio { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .team-d4-adv-label { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); margin-bottom: 14px; }
+  .team-d4-advisors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .tda4-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color .2s; }
+  .tda4-card:hover { border-color: rgba(255,255,255,0.12); }
+  .tda4-init { font-size: 11px; font-weight: 700; color: var(--teal); margin-bottom: 8px; }
+  .tda4-name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+  .tda4-role { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  /* CTA D4 */
+  .cta-d4 { border-top: 1px solid var(--border); padding: 120px 40px; text-align: center; position: relative; overflow: hidden; }
+  .cta-d4::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(29,233,182,0.05) 0%, transparent 70%);
+  }
+  .cta-d4 > * { position: relative; z-index: 1; }
+  .cta-d4 h2 { font-size: clamp(32px, 5vw, 60px); font-weight: 700; letter-spacing: -2.5px; color: #fff; margin-bottom: 16px; line-height: 1.06; }
+  .cta-d4 p { font-size: 17px; color: var(--muted); margin-bottom: 40px; }
+  .cta-d4-btns { display: flex; gap: 12px; justify-content: center; }
+  .btn-d4-cta-p { padding: 13px 32px; background: #fff; color: #000; border-radius: 8px; font-size: 15px; font-weight: 600; border: none; cursor: pointer; font-family: inherit; transition: opacity .15s; }
+  .btn-d4-cta-p:hover { opacity: .85; }
+  .btn-d4-cta-s { padding: 13px 32px; background: transparent; color: var(--muted); border-radius: 8px; font-size: 15px; font-weight: 500; border: 1px solid var(--border); cursor: pointer; font-family: inherit; transition: all .15s; }
+  .btn-d4-cta-s:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
+
+  /* FOOTER D4 */
+  .footer-d4 { border-top: 1px solid var(--border); padding: 28px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--dim); }
+  .footer-d4-logo { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: -.03em; }
+  .footer-d4-logo span { color: var(--teal); }
+  .footer-d4-links { display: flex; gap: 24px; }
+  .footer-d4-links a { color: var(--dim); text-decoration: none; transition: color .15s; }
+  .footer-d4-links a:hover { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ── SWITCHER ── -->
+<div class="switcher">
+  <span>DataraAI Modern Options →</span>
+  <button class="sw-btn active" onclick="show('A',this)">Option A — Bento Spatial</button>
+  <div class="sw-sep">|</div>
+  <button class="sw-btn" onclick="show('B',this)">Option B — Editorial Minimal</button>
+  <div class="sw-sep">|</div>
+  <button class="sw-btn" onclick="show('C',this)">Option C — Glass Premium</button>
+  <div class="sw-sep">|</div>
+  <button class="sw-btn" onclick="show('D',this)">Option D — Cursor Style</button>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     OPTION A — BENTO SPATIAL
+══════════════════════════════════════════════════ -->
+<div id="optA" class="option-frame active">
+
+  <nav class="nav-a">
+    <a href="#" class="nav-a-logo">DataraAI</a>
+    <div class="nav-a-links">
+      <a href="#" class="nav-a-link active">Products</a>
+      <a href="#" class="nav-a-link">Customers</a>
+      <a href="#" class="nav-a-link">Company</a>
+    </div>
+    <div class="nav-a-actions">
+      <button class="btn-a-ghost">Sign In</button>
+      <button class="btn-a-solid">Get Access</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-a">
+    <div class="hero-a-eyebrow">NVIDIA Inception Member · 2026</div>
+    <h1>AI Training Data<br>for <span class="teal">Physical</span><br><span class="outline">Robots</span></h1>
+    <p class="hero-a-sub">Enterprise-grade synthetic and real-world datasets covering humanoid, automotive, and data center robotics — structured for direct model ingestion.</p>
+    <div class="hero-a-chips" style="margin-top:36px;">
+      <span class="chip-a lit">Humanoid</span>
+      <span class="chip-a lit">Automotive</span>
+      <span class="chip-a lit">Data Center</span>
+      <span class="chip-a">Dexterous</span>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="bento-how">
+    <div class="bento-step">
+      <div class="bento-step-num">01</div>
+      <div class="bento-step-label">Step 01</div>
+      <div class="bento-step-icon">🎥</div>
+      <div class="bento-step-title">EXO Capture</div>
+      <div class="bento-step-desc">Use existing factory cameras. No new hardware required.</div>
+    </div>
+    <div class="bento-step">
+      <div class="bento-step-num">02</div>
+      <div class="bento-step-label">Step 02</div>
+      <div class="bento-step-icon">⚙️</div>
+      <div class="bento-step-title">RoboEyeView Conversion</div>
+      <div class="bento-step-desc">Patented EXO→EGO synthesis. Robot-perspective datasets with physics-aware rendering.</div>
+    </div>
+    <div class="bento-step">
+      <div class="bento-step-num">03</div>
+      <div class="bento-step-label">Step 03</div>
+      <div class="bento-step-icon">🚀</div>
+      <div class="bento-step-title">Train & Deploy</div>
+      <div class="bento-step-desc">&gt;95% accuracy. Faster Sim-to-Real. Ready for foundation models and robot OEMs.</div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="bento-products">
+    <div class="bento-products-header">
+      <div class="bento-products-title">Products</div>
+      <div class="bento-products-sub">Four products. Full Physical AI data stack.</div>
+    </div>
+    <div class="bento-grid">
+      <div class="bento-card span2" onclick="window.location='robodatahub.html'">
+        <div class="bc-tag core">Core Platform</div>
+        <div class="bc-icon">📦</div>
+        <div class="bc-name">RoboDataHub</div>
+        <div class="bc-desc">EGO + EXO datasets across automotive, warehouse, data center, and dexterity.</div>
+        <a href="robodatahub.html" class="bc-link">Browse datasets →</a>
+      </div>
+      <div class="bento-card" onclick="window.location='roboeyeview.html'">
+        <div class="bc-tag pat">Patented IP</div>
+        <div class="bc-icon">👁️</div>
+        <div class="bc-name">RoboEyeView</div>
+        <div class="bc-desc">EXO→EGO view synthesis. 85% → 95%+ accuracy.</div>
+        <a href="roboeyeview.html" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bento-card">
+        <div class="bc-tag pat">Patented IP</div>
+        <div class="bc-icon">🖐️</div>
+        <div class="bc-name">RoboHandMotion</div>
+        <div class="bc-desc">Hand, tool, and object interaction data for humanoid and dexterous training.</div>
+        <a href="#" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bento-card span2">
+        <div class="bc-tag core">Task Intelligence</div>
+        <div class="bc-icon">🧩</div>
+        <div class="bc-name">RoboTaskManipulator</div>
+        <div class="bc-desc">Assembly, pick-place, and cabling workflows. 95% precision at Peer Robotics.</div>
+        <a href="#" class="bc-link">See case study →</a>
+      </div>
+      <div class="bento-card" style="background:linear-gradient(135deg,rgba(0,245,196,0.07),rgba(0,245,196,0.02));border-color:rgba(0,245,196,0.15);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:8px;">
+        <div style="font-size:36px;font-weight:900;color:#00f5c4;letter-spacing:-2px;">95%+</div>
+        <div style="font-size:11px;color:#71717a;font-weight:600;">Model Accuracy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMERS -->
+  <div class="bento-customers">
+    <div class="bento-customers-inner">
+      <div class="bc-header">
+        <div>
+          <div class="sec-hd-a">Customers</div>
+          <div class="sec-title-a">Measurable outcomes.</div>
+        </div>
+      </div>
+      <div class="bc-metrics">
+        <div class="bcm-card">
+          <div class="bcm-num teal">3.8×</div>
+          <div class="bcm-company">Figure AI</div>
+          <div class="bcm-detail">Faster model convergence on manipulation tasks using RoboDataHub dexterous sequences vs. in-house collection.</div>
+          <span class="bcm-tag" style="background:rgba(0,245,196,0.08);color:#00f5c4;border:1px solid rgba(0,245,196,0.15);">Humanoid</span>
+        </div>
+        <div class="bcm-card">
+          <div class="bcm-num violet">60%</div>
+          <div class="bcm-company">BMW Robotics</div>
+          <div class="bcm-detail">Reduction in labeling cost for production-line vision models using RoboEyeView EGO synthesis pipeline.</div>
+          <span class="bcm-tag" style="background:rgba(139,92,246,0.08);color:#a78bfa;border:1px solid rgba(139,92,246,0.15);">Automotive</span>
+        </div>
+        <div class="bcm-card">
+          <div class="bcm-num blue">99.1%</div>
+          <div class="bcm-company">Foxconn Smart Factory</div>
+          <div class="bcm-detail">Label accuracy on rack-navigation sequences, exceeding internal baseline by 4.7 percentage points.</div>
+          <span class="bcm-tag" style="background:rgba(59,130,246,0.08);color:#60a5fa;border:1px solid rgba(59,130,246,0.15);">Data Center</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGOS -->
+  <div class="logos-a">
+    <div class="logos-a-label">Trusted by teams at</div>
+    <div class="logos-a-list">
+      <span class="logos-a-item">NVIDIA</span><span class="logos-a-item">BMW Group</span><span class="logos-a-item">Figure AI</span><span class="logos-a-item">Boston Dynamics</span><span class="logos-a-item">Foxconn</span><span class="logos-a-item">Waymo</span><span class="logos-a-item">1X Technologies</span>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="team-a">
+    <div class="sec-hd-a">Company</div>
+    <div class="sec-title-a">Team</div>
+    <p class="sec-sub-a" style="margin-bottom:28px;">Built by PhysicalAI veterans. 40+ years of combined expertise from NVIDIA, IIT, and deep robotics.</p>
+    <div class="team-a-founders">
+      <div class="taf-card">
+        <div class="taf-av blue">DS</div>
+        <div><div class="taf-name">Durgesh Srivastava</div><div class="taf-role">Co-Founder & CEO</div><p class="taf-bio">Serial entrepreneur (exited MIPS). Ex-NVIDIA Sr. Director AI & Robotics. Omniverse, Systems, LLM expert. IIT Kanpur.</p></div>
+      </div>
+      <div class="taf-card">
+        <div class="taf-av teal">NR</div>
+        <div><div class="taf-name">Niraj Rai</div><div class="taf-role">Co-Founder & CTO</div><p class="taf-bio">Serial entrepreneur. Founder SproutsAi. Ex-CTO Vimaan (AI/Robotics). Software & AI expert. IIT Kharagpur.</p></div>
+      </div>
+    </div>
+    <div class="team-a-adv-label">Advisors</div>
+    <div class="team-a-advisors">
+      <div class="taa-card"><div class="taa-init">BK</div><div class="taa-name">Brian Kelleher</div><div class="taa-role">Sr. VP NVIDIA · Angel Investor</div></div>
+      <div class="taa-card"><div class="taa-init">TG</div><div class="taa-name">Dr. Teck Joo Goh</div><div class="taa-role">Angel Investor · Corporate VP SkyeChip · ex-GM Intel</div></div>
+      <div class="taa-card"><div class="taa-init">AR</div><div class="taa-name">Dr. Amit Roy-Chowdhury</div><div class="taa-role">Professor & UC Presidential Chair · Chair Robotics, UC Riverside</div></div>
+      <div class="taa-card"><div class="taa-init">LA</div><div class="taa-name">Lomesh Agarwal</div><div class="taa-role">VP Software Apptronik · Ex-MagicLeap</div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-a">
+    <h2>Ready to close the<br><span class="teal">Sim-to-Real</span> gap?</h2>
+    <p>Join leading robotics companies using DataraAI's real-world data to achieve 95%+ precision.</p>
+    <div class="cta-a-btns">
+      <button class="btn-a-primary">Request a Demo</button>
+      <button class="btn-a-sec">Explore RoboDataHub</button>
+    </div>
+  </div>
+
+  <footer class="footer-a">
+    <div class="flogo">DataraAI</div>
+    <div class="footer-a-links"><a href="#">Products</a><a href="#">Customers</a><a href="#">Company</a><a href="#">Contact</a></div>
+    <div>© 2026 DataraAI · NVIDIA Inception Member</div>
+  </footer>
+
+</div><!-- /optA -->
+
+
+<!-- ══════════════════════════════════════════════════
+     OPTION B — EDITORIAL MINIMAL
+══════════════════════════════════════════════════ -->
+<div id="optB" class="option-frame">
+
+  <nav class="nav-b">
+    <a href="#" class="nav-b-logo">DataraAI</a>
+    <div class="nav-b-links">
+      <a href="#" class="nav-b-link active">Products</a>
+      <a href="#" class="nav-b-link">Customers</a>
+      <a href="#" class="nav-b-link">Company</a>
+    </div>
+    <button class="btn-b-cta">Get Access</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-b">
+    <div class="hero-b-kicker">NVIDIA Inception Member · 2026</div>
+    <h1>AI Training<br>Data for<br><span class="outline">Physical</span><br>Robots</h1>
+    <p class="hero-b-sub">Enterprise-grade synthetic and real-world datasets covering humanoid, automotive, and data center robotics — structured for direct model ingestion.</p>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-b">
+    <div class="how-b-header">
+      <div class="how-b-title">How It Works</div>
+      <div style="font-size:12px;color:#525252;">Factory footage → robot training data. Three steps.</div>
+    </div>
+    <div class="how-b-steps">
+      <div class="how-b-step">
+        <div class="how-b-num">01</div>
+        <div class="how-b-step-title">EXO Capture</div>
+        <div class="how-b-step-desc">Use existing factory cameras. No new hardware required.</div>
+      </div>
+      <div class="how-b-step">
+        <div class="how-b-num">02</div>
+        <div class="how-b-step-title">RoboEyeView Conversion</div>
+        <div class="how-b-step-desc">Patented EXO→EGO synthesis. Robot-perspective datasets with physics-aware rendering.</div>
+      </div>
+      <div class="how-b-step">
+        <div class="how-b-num">03</div>
+        <div class="how-b-step-title">Train & Deploy</div>
+        <div class="how-b-step-desc">&gt;95% accuracy. Faster Sim-to-Real. Ready for foundation models and robot OEMs.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products-b">
+    <div class="pb-header">
+      <div class="pb-title">Products</div>
+    </div>
+    <div class="pb-row" onclick="window.location='robodatahub.html'">
+      <div><div class="pb-row-name">RoboDataHub</div><span class="pb-row-tag core">Core Platform</span></div>
+      <div class="pb-row-desc">EGO + EXO datasets across automotive, warehouse, data center, and dexterity.</div>
+      <div class="pb-row-arrow">→</div>
+    </div>
+    <div class="pb-row" onclick="window.location='roboeyeview.html'">
+      <div><div class="pb-row-name">RoboEyeView</div><span class="pb-row-tag pat">Patented IP</span></div>
+      <div class="pb-row-desc">EXO→EGO view synthesis. 85% → 95%+ accuracy.</div>
+      <div class="pb-row-arrow">→</div>
+    </div>
+    <div class="pb-row">
+      <div><div class="pb-row-name">RoboHandMotion</div><span class="pb-row-tag pat">Patented IP</span></div>
+      <div class="pb-row-desc">Hand, tool, and object interaction data for humanoid and dexterous training.</div>
+      <div class="pb-row-arrow">→</div>
+    </div>
+    <div class="pb-row">
+      <div><div class="pb-row-name">RoboTaskManipulator</div><span class="pb-row-tag core">Task Intelligence</span></div>
+      <div class="pb-row-desc">Assembly, pick-place, and cabling workflows. 95% precision at Peer Robotics.</div>
+      <div class="pb-row-arrow">→</div>
+    </div>
+  </div>
+
+  <!-- CUSTOMERS -->
+  <div class="customers-b">
+    <div class="pb-title">Customers</div>
+    <div style="font-size:12px;color:#525252;margin-top:6px;">Measurable outcomes from production deployments.</div>
+    <div class="cb-grid">
+      <div class="cb-cell">
+        <div class="cb-num" style="color:#1de9b6;">3.8×</div>
+        <div class="cb-company">Figure AI</div>
+        <div class="cb-detail">Faster model convergence on manipulation tasks using RoboDataHub dexterous sequences vs. in-house collection.</div>
+        <div class="cb-tag">Humanoid</div>
+      </div>
+      <div class="cb-cell">
+        <div class="cb-num" style="color:#a78bfa;">60%</div>
+        <div class="cb-company">BMW Robotics</div>
+        <div class="cb-detail">Reduction in labeling cost for production-line vision models using RoboEyeView EGO synthesis pipeline.</div>
+        <div class="cb-tag">Automotive</div>
+      </div>
+      <div class="cb-cell">
+        <div class="cb-num" style="color:#60a5fa;">99.1%</div>
+        <div class="cb-company">Foxconn Smart Factory</div>
+        <div class="cb-detail">Label accuracy on rack-navigation sequences, exceeding internal baseline by 4.7 percentage points.</div>
+        <div class="cb-tag">Data Center</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGOS -->
+  <div class="logos-b">
+    <div class="logos-b-label">Trusted by teams at</div>
+    <div class="logos-b-list">
+      <span class="logos-b-item">NVIDIA</span><span class="logos-b-item">BMW Group</span><span class="logos-b-item">Figure AI</span><span class="logos-b-item">Boston Dynamics</span><span class="logos-b-item">Foxconn</span><span class="logos-b-item">Waymo</span><span class="logos-b-item">1X Technologies</span>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="team-b">
+    <div class="pb-title">Team</div>
+    <div style="font-size:12px;color:#525252;margin-top:6px;">Built by PhysicalAI veterans. 40+ years of combined expertise from NVIDIA, IIT, and deep robotics.</div>
+    <div class="team-b-founders">
+      <div class="tbf-cell"><div class="tbf-name">Durgesh Srivastava</div><div class="tbf-role">Co-Founder & CEO</div><div class="tbf-bio">Serial entrepreneur (exited MIPS). Ex-NVIDIA Sr. Director AI & Robotics. Omniverse, Systems, LLM expert. IIT Kanpur.</div></div>
+      <div class="tbf-cell"><div class="tbf-name">Niraj Rai</div><div class="tbf-role">Co-Founder & CTO</div><div class="tbf-bio">Serial entrepreneur. Founder SproutsAi. Ex-CTO Vimaan (AI/Robotics). Software & AI expert. IIT Kharagpur.</div></div>
+    </div>
+    <div class="team-b-adv-label">Advisors</div>
+    <div class="team-b-advisors">
+      <div class="tba-cell"><div class="tba-init">BK</div><div class="tba-name">Brian Kelleher</div><div class="tba-role">Sr. VP NVIDIA · Angel Investor</div></div>
+      <div class="tba-cell"><div class="tba-init">TG</div><div class="tba-name">Dr. Teck Joo Goh</div><div class="tba-role">Angel Investor · Corporate VP SkyeChip · ex-GM Intel</div></div>
+      <div class="tba-cell"><div class="tba-init">AR</div><div class="tba-name">Dr. Amit Roy-Chowdhury</div><div class="tba-role">Professor & UC Presidential Chair · Chair Robotics, UC Riverside</div></div>
+      <div class="tba-cell"><div class="tba-init">LA</div><div class="tba-name">Lomesh Agarwal</div><div class="tba-role">VP Software Apptronik · Ex-MagicLeap</div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-b">
+    <h2>Ready to close the<br>Sim-to-Real gap?</h2>
+    <p>Join leading robotics companies using DataraAI's real-world data to achieve 95%+ precision.</p>
+    <div class="cta-b-btns">
+      <button class="btn-b-primary">Request a Demo</button>
+      <button class="btn-b-sec">Explore RoboDataHub</button>
+    </div>
+  </div>
+
+  <footer class="footer-b">
+    <div class="flogo">DataraAI</div>
+    <div class="footer-b-links"><a href="#">Products</a><a href="#">Customers</a><a href="#">Company</a><a href="#">Contact</a></div>
+    <div>© 2026 DataraAI · NVIDIA Inception Member</div>
+  </footer>
+
+</div><!-- /optB -->
+
+
+<!-- ══════════════════════════════════════════════════
+     OPTION C — GLASS PREMIUM
+══════════════════════════════════════════════════ -->
+<div id="optC" class="option-frame">
+
+  <nav class="nav-c">
+    <a href="#" class="nav-c-logo">DataraAI</a>
+    <div class="nav-c-links">
+      <a href="#" class="nav-c-link active">Products</a>
+      <a href="#" class="nav-c-link">Customers</a>
+      <a href="#" class="nav-c-link">Company</a>
+    </div>
+    <div class="nav-c-actions">
+      <button class="btn-c-ghost">Sign In</button>
+      <button class="btn-c-solid">Get Access</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-c">
+    <div class="hero-c-badge"><span class="hero-c-badge-dot"></span>NVIDIA Inception Member · 2026</div>
+    <h1>AI Training Data<br>for <span class="grad">Physical Robots</span></h1>
+    <p class="hero-c-sub">Enterprise-grade synthetic and real-world datasets covering humanoid, automotive, and data center robotics — structured for direct model ingestion.</p>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="glass-section">
+    <div class="glass-sec-label">How It Works</div>
+    <div class="glass-sec-title">Factory footage → robot training data.</div>
+    <div class="glass-sec-sub">Three steps.</div>
+    <div class="how-c-grid">
+      <div class="how-c-card">
+        <div class="how-c-num">Step 01</div>
+        <div class="how-c-icon">🎥</div>
+        <div class="how-c-title">EXO Capture</div>
+        <div class="how-c-desc">Use existing factory cameras. No new hardware required.</div>
+      </div>
+      <div class="how-c-card">
+        <div class="how-c-num">Step 02</div>
+        <div class="how-c-icon">⚙️</div>
+        <div class="how-c-title">RoboEyeView Conversion</div>
+        <div class="how-c-desc">Patented EXO→EGO synthesis. Robot-perspective datasets with physics-aware rendering.</div>
+      </div>
+      <div class="how-c-card">
+        <div class="how-c-num">Step 03</div>
+        <div class="how-c-icon">🚀</div>
+        <div class="how-c-title">Train & Deploy</div>
+        <div class="how-c-desc">&gt;95% accuracy. Faster Sim-to-Real. Ready for foundation models and robot OEMs.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="glass-section">
+    <div class="glass-sec-label">Products</div>
+    <div class="glass-sec-title">Four products. Full Physical AI data stack.</div>
+    <div class="glass-sec-sub" style="margin-bottom:28px;"></div>
+    <div class="prod-c-grid">
+      <div class="prod-c-card featured" onclick="window.location='robodatahub.html'">
+        <div class="pcc-tag core">Core Platform</div>
+        <div class="pcc-icon">📦</div>
+        <div class="pcc-name">RoboDataHub</div>
+        <div class="pcc-desc">EGO + EXO datasets across automotive, warehouse, data center, and dexterity.</div>
+        <a href="robodatahub.html" class="pcc-link">Browse datasets →</a>
+      </div>
+      <div class="prod-c-card" onclick="window.location='roboeyeview.html'">
+        <div class="pcc-tag pat">Patented IP</div>
+        <div class="pcc-icon">👁️</div>
+        <div class="pcc-name">RoboEyeView</div>
+        <div class="pcc-desc">EXO→EGO view synthesis. 85% → 95%+ accuracy.</div>
+        <a href="roboeyeview.html" class="pcc-link">Learn more →</a>
+      </div>
+      <div class="prod-c-card">
+        <div class="pcc-tag pat">Patented IP</div>
+        <div class="pcc-icon">🖐️</div>
+        <div class="pcc-name">RoboHandMotion</div>
+        <div class="pcc-desc">Hand, tool, and object interaction data for humanoid and dexterous training.</div>
+        <a href="#" class="pcc-link">Learn more →</a>
+      </div>
+      <div class="prod-c-card">
+        <div class="pcc-tag core">Task Intelligence</div>
+        <div class="pcc-icon">🧩</div>
+        <div class="pcc-name">RoboTaskManipulator</div>
+        <div class="pcc-desc">Assembly, pick-place, and cabling workflows. 95% precision at Peer Robotics.</div>
+        <a href="#" class="pcc-link">See case study →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMERS -->
+  <div class="cust-c-section">
+    <div class="cust-c-inner">
+      <div class="glass-sec-label">Customers</div>
+      <div class="glass-sec-title">Measurable outcomes from production deployments.</div>
+      <div class="cust-c-grid">
+        <div class="cust-c-card">
+          <div class="cust-c-num" style="color:#2affd6;">3.8×</div>
+          <div class="cust-c-company">Figure AI</div>
+          <div class="cust-c-detail">Faster model convergence on manipulation tasks using RoboDataHub dexterous sequences vs. in-house collection.</div>
+          <span class="cust-c-tag" style="background:rgba(42,255,214,0.08);color:#2affd6;border:1px solid rgba(42,255,214,0.15);">Humanoid</span>
+        </div>
+        <div class="cust-c-card">
+          <div class="cust-c-num" style="color:#a78bfa;">60%</div>
+          <div class="cust-c-company">BMW Robotics</div>
+          <div class="cust-c-detail">Reduction in labeling cost for production-line vision models using RoboEyeView EGO synthesis pipeline.</div>
+          <span class="cust-c-tag" style="background:rgba(139,92,246,0.08);color:#a78bfa;border:1px solid rgba(139,92,246,0.15);">Automotive</span>
+        </div>
+        <div class="cust-c-card">
+          <div class="cust-c-num" style="color:#60a5fa;">99.1%</div>
+          <div class="cust-c-company">Foxconn Smart Factory</div>
+          <div class="cust-c-detail">Label accuracy on rack-navigation sequences, exceeding internal baseline by 4.7 percentage points.</div>
+          <span class="cust-c-tag" style="background:rgba(59,130,246,0.08);color:#60a5fa;border:1px solid rgba(59,130,246,0.15);">Data Center</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGOS -->
+  <div class="logos-c">
+    <div class="logos-c-label">Trusted by teams at</div>
+    <div class="logos-c-list">
+      <span class="logos-c-item">NVIDIA</span><span class="logos-c-item">BMW Group</span><span class="logos-c-item">Figure AI</span><span class="logos-c-item">Boston Dynamics</span><span class="logos-c-item">Foxconn</span><span class="logos-c-item">Waymo</span><span class="logos-c-item">1X Technologies</span>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="team-c">
+    <div class="glass-sec-label">Company</div>
+    <div class="glass-sec-title">Team</div>
+    <div class="glass-sec-sub" style="margin-bottom:28px;">Built by PhysicalAI veterans. 40+ years of combined expertise from NVIDIA, IIT, and deep robotics.</div>
+    <div class="team-c-founders">
+      <div class="tcf-card">
+        <div class="tcf-av blue">DS</div>
+        <div><div class="tcf-name">Durgesh Srivastava</div><div class="tcf-role">Co-Founder & CEO</div><p class="tcf-bio">Serial entrepreneur (exited MIPS). Ex-NVIDIA Sr. Director AI & Robotics. Omniverse, Systems, LLM expert. IIT Kanpur.</p></div>
+      </div>
+      <div class="tcf-card">
+        <div class="tcf-av teal">NR</div>
+        <div><div class="tcf-name">Niraj Rai</div><div class="tcf-role">Co-Founder & CTO</div><p class="tcf-bio">Serial entrepreneur. Founder SproutsAi. Ex-CTO Vimaan (AI/Robotics). Software & AI expert. IIT Kharagpur.</p></div>
+      </div>
+    </div>
+    <div class="team-c-adv-label">Advisors</div>
+    <div class="team-c-advisors">
+      <div class="tca-card"><div class="tca-init">BK</div><div class="tca-name">Brian Kelleher</div><div class="tca-role">Sr. VP NVIDIA · Angel Investor</div></div>
+      <div class="tca-card"><div class="tca-init">TG</div><div class="tca-name">Dr. Teck Joo Goh</div><div class="tca-role">Angel Investor · Corporate VP SkyeChip · ex-GM Intel</div></div>
+      <div class="tca-card"><div class="tca-init">AR</div><div class="tca-name">Dr. Amit Roy-Chowdhury</div><div class="tca-role">Professor & UC Presidential Chair · Chair Robotics, UC Riverside</div></div>
+      <div class="tca-card"><div class="tca-init">LA</div><div class="tca-name">Lomesh Agarwal</div><div class="tca-role">VP Software Apptronik · Ex-MagicLeap</div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-c">
+    <h2>Ready to close the<br><span class="grad">Sim-to-Real gap?</span></h2>
+    <p>Join leading robotics companies using DataraAI's real-world data to achieve 95%+ precision.</p>
+    <div class="cta-c-btns">
+      <button class="btn-c-primary">Request a Demo</button>
+      <button class="btn-c-sec">Explore RoboDataHub</button>
+    </div>
+  </div>
+
+  <footer class="footer-c">
+    <div class="flogo">DataraAI</div>
+    <div class="footer-c-links"><a href="#">Products</a><a href="#">Customers</a><a href="#">Company</a><a href="#">Contact</a></div>
+    <div>© 2026 DataraAI · NVIDIA Inception Member</div>
+  </footer>
+
+</div><!-- /optC -->
+
+
+<!-- ══════════════════════════════════════════════════
+     OPTION D — CURSOR STYLE
+══════════════════════════════════════════════════ -->
+<div id="optD" class="option-frame">
+
+  <nav class="nav-d4">
+    <a href="#" class="nav-d4-logo">Datara<span>AI</span></a>
+    <div class="nav-d4-links">
+      <a href="#" class="nav-d4-link active">Products</a>
+      <a href="#" class="nav-d4-link">Customers</a>
+      <a href="#" class="nav-d4-link">Company</a>
+    </div>
+    <div class="nav-d4-actions">
+      <button class="btn-d4-ghost">Sign In</button>
+      <button class="btn-d4-solid">Get Access</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-d4">
+    <div class="hero-d4-badge">
+      <span class="hero-d4-badge-dot"></span>
+      NVIDIA Inception Member · 2026
+    </div>
+    <h1>AI Training Data<br>for Physical Robots</h1>
+    <p class="hero-d4-sub">Enterprise-grade synthetic and real-world datasets covering humanoid, automotive, and data center robotics — structured for direct model ingestion.</p>
+    <div class="hero-d4-btns">
+      <button class="btn-d4-hero-p">Request a Demo</button>
+      <button class="btn-d4-hero-s">Explore RoboDataHub</button>
+    </div>
+    <!-- Fake data terminal -->
+    <div class="hero-d4-terminal">
+      <div class="hdt-bar">
+        <span class="hdt-dot" style="background:#ff5f57;"></span>
+        <span class="hdt-dot" style="background:#febc2e;"></span>
+        <span class="hdt-dot" style="background:#28c840;"></span>
+        <span class="hdt-title">robodatahub — dataset query</span>
+      </div>
+      <div class="hdt-body">
+        <div class="hdt-line"><span class="hdt-comment"># RoboDataHub · EGO dataset query</span></div>
+        <div class="hdt-line"><span class="hdt-key">dataset</span><span class="hdt-val">: </span><span class="hdt-str">"humanoid-dexterous-v3"</span></div>
+        <div class="hdt-line"><span class="hdt-key">frames</span><span class="hdt-val">: </span><span class="hdt-num">2_840_000</span><span class="hdt-val">  </span><span class="hdt-comment"># EGO perspective</span></div>
+        <div class="hdt-line"><span class="hdt-key">accuracy</span><span class="hdt-val">: </span><span class="hdt-num">95.4<span class="hdt-val">%</span></span><span class="hdt-val">  </span><span class="hdt-comment"># sim-to-real benchmark</span></div>
+        <div class="hdt-line"><span class="hdt-key">format</span><span class="hdt-val">: </span><span class="hdt-str">["LEROBOT", "HDF5", "RLDS"]</span></div>
+        <div class="hdt-line"><span class="hdt-key">status</span><span class="hdt-val">: </span><span class="hdt-str" style="color:#4ade80;">✓ ready</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-d4">
+    <div class="how-d4-inner">
+      <div class="how-d4-label">How It Works</div>
+      <div class="how-d4-steps">
+        <div class="how-d4-step">
+          <div class="how-d4-num">01</div>
+          <div class="how-d4-icon">🎥</div>
+          <div class="how-d4-title">EXO Capture</div>
+          <div class="how-d4-desc">Use existing factory cameras. No new hardware required.</div>
+        </div>
+        <div class="how-d4-step">
+          <div class="how-d4-num">02</div>
+          <div class="how-d4-icon">⚙️</div>
+          <div class="how-d4-title">RoboEyeView Conversion</div>
+          <div class="how-d4-desc">Patented EXO→EGO synthesis. Robot-perspective datasets with physics-aware rendering.</div>
+        </div>
+        <div class="how-d4-step">
+          <div class="how-d4-num">03</div>
+          <div class="how-d4-icon">🚀</div>
+          <div class="how-d4-title">Train & Deploy</div>
+          <div class="how-d4-desc">&gt;95% accuracy. Faster Sim-to-Real. Ready for foundation models and robot OEMs.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products-d4">
+    <div class="products-d4-inner">
+      <div class="prod-d4-eyebrow">Products</div>
+      <div class="prod-d4-title">Full Physical AI data stack.</div>
+      <div class="prod-d4-sub">Four products covering every stage of robot training data.</div>
+      <div class="prod-d4-grid">
+        <div class="prod-d4-card feat" onclick="window.location='robodatahub.html'">
+          <span class="pdc4-tag">Core Platform</span>
+          <div class="pdc4-icon">📦</div>
+          <div class="pdc4-name">RoboDataHub</div>
+          <div class="pdc4-desc">EGO + EXO datasets across automotive, warehouse, data center, and dexterity.</div>
+          <a href="robodatahub.html" class="pdc4-link">Browse datasets →</a>
+        </div>
+        <div class="prod-d4-card" onclick="window.location='roboeyeview.html'">
+          <span class="pdc4-tag amber">Patented IP</span>
+          <div class="pdc4-icon">👁️</div>
+          <div class="pdc4-name">RoboEyeView</div>
+          <div class="pdc4-desc">EXO→EGO view synthesis. 85% → 95%+ accuracy.</div>
+          <a href="roboeyeview.html" class="pdc4-link">Learn more →</a>
+        </div>
+        <div class="prod-d4-card">
+          <span class="pdc4-tag amber">Patented IP</span>
+          <div class="pdc4-icon">🖐️</div>
+          <div class="pdc4-name">RoboHandMotion</div>
+          <div class="pdc4-desc">Hand, tool, and object interaction data for humanoid and dexterous training.</div>
+          <a href="#" class="pdc4-link">Learn more →</a>
+        </div>
+        <div class="prod-d4-card">
+          <span class="pdc4-tag">Task Intelligence</span>
+          <div class="pdc4-icon">🧩</div>
+          <div class="pdc4-name">RoboTaskManipulator</div>
+          <div class="pdc4-desc">Assembly, pick-place, and cabling workflows. 95% precision at Peer Robotics.</div>
+          <a href="#" class="pdc4-link">See case study →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOMERS -->
+  <div class="customers-d4">
+    <div class="customers-d4-inner">
+      <div class="cust-d4-eyebrow">Customers</div>
+      <div class="cust-d4-title">Measurable outcomes.</div>
+      <div class="cust-d4-stats">
+        <div class="cust-d4-stat">
+          <div class="cust-d4-stat-num teal">3.8×</div>
+          <div class="cust-d4-company">Figure AI</div>
+          <div class="cust-d4-detail">Faster model convergence on manipulation tasks using RoboDataHub dexterous sequences vs. in-house collection.</div>
+        </div>
+        <div class="cust-d4-stat">
+          <div class="cust-d4-stat-num" style="color:#a78bfa;">60%</div>
+          <div class="cust-d4-company">BMW Robotics</div>
+          <div class="cust-d4-detail">Reduction in labeling cost for production-line vision models using RoboEyeView EGO synthesis pipeline.</div>
+        </div>
+        <div class="cust-d4-stat">
+          <div class="cust-d4-stat-num" style="color:#60a5fa;">99.1%</div>
+          <div class="cust-d4-company">Foxconn Smart Factory</div>
+          <div class="cust-d4-detail">Label accuracy on rack-navigation sequences, exceeding internal baseline by 4.7 points.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGOS -->
+  <div class="logos-d4">
+    <div class="logos-d4-label">Trusted by teams at</div>
+    <div class="logos-d4-list">
+      <span class="logos-d4-item">NVIDIA</span>
+      <span class="logos-d4-item">BMW Group</span>
+      <span class="logos-d4-item">Figure AI</span>
+      <span class="logos-d4-item">Boston Dynamics</span>
+      <span class="logos-d4-item">Foxconn</span>
+      <span class="logos-d4-item">Waymo</span>
+      <span class="logos-d4-item">1X Technologies</span>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div class="team-d4">
+    <div class="team-d4-inner">
+      <div class="team-d4-eyebrow">Company</div>
+      <div class="team-d4-title">Team</div>
+      <div class="team-d4-sub">Built by PhysicalAI veterans. 40+ years of combined expertise from NVIDIA, IIT, and deep robotics.</div>
+      <div class="team-d4-founders">
+        <div class="tdf4-card">
+          <div class="tdf4-av">DS</div>
+          <div class="tdf4-name">Durgesh Srivastava</div>
+          <div class="tdf4-role">Co-Founder & CEO</div>
+          <div class="tdf4-bio">Serial entrepreneur (exited MIPS). Ex-NVIDIA Sr. Director AI & Robotics. Omniverse, Systems, LLM expert. IIT Kanpur.</div>
+        </div>
+        <div class="tdf4-card">
+          <div class="tdf4-av">NR</div>
+          <div class="tdf4-name">Niraj Rai</div>
+          <div class="tdf4-role">Co-Founder & CTO</div>
+          <div class="tdf4-bio">Serial entrepreneur. Founder SproutsAi. Ex-CTO Vimaan (AI/Robotics). Software & AI expert. IIT Kharagpur.</div>
+        </div>
+      </div>
+      <div class="team-d4-adv-label">Advisors</div>
+      <div class="team-d4-advisors">
+        <div class="tda4-card"><div class="tda4-init">BK</div><div class="tda4-name">Brian Kelleher</div><div class="tda4-role">Sr. VP NVIDIA · Angel Investor</div></div>
+        <div class="tda4-card"><div class="tda4-init">TG</div><div class="tda4-name">Dr. Teck Joo Goh</div><div class="tda4-role">Angel Investor · Corporate VP SkyeChip · ex-GM Intel</div></div>
+        <div class="tda4-card"><div class="tda4-init">AR</div><div class="tda4-name">Dr. Amit Roy-Chowdhury</div><div class="tda4-role">Professor & UC Presidential Chair · Chair Robotics, UC Riverside</div></div>
+        <div class="tda4-card"><div class="tda4-init">LA</div><div class="tda4-name">Lomesh Agarwal</div><div class="tda4-role">VP Software Apptronik · Ex-MagicLeap</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-d4">
+    <h2>Ready to close the<br>Sim-to-Real gap?</h2>
+    <p>Join leading robotics companies using DataraAI's real-world data to achieve 95%+ precision.</p>
+    <div class="cta-d4-btns">
+      <button class="btn-d4-cta-p">Request a Demo</button>
+      <button class="btn-d4-cta-s">Explore RoboDataHub</button>
+    </div>
+  </div>
+
+  <footer class="footer-d4">
+    <div class="footer-d4-logo">Datara<span>AI</span></div>
+    <div class="footer-d4-links">
+      <a href="#">Products</a><a href="#">Customers</a><a href="#">Company</a><a href="#">Contact</a>
+    </div>
+    <div>© 2026 DataraAI · NVIDIA Inception Member</div>
+  </footer>
+
+</div><!-- /optD -->
+
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.option-frame').forEach(f => f.classList.remove('active'));
+    document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('opt' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>

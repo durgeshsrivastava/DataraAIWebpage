@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DataraAI — AI Training Data for Physical Robots</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    --teal: #1de9b6;
+    --blue: #1e88e5;
+    --bg: #07090a;
+    --bg-card: #0d1014;
+    --bg-sidebar: #040608;
+    --border: rgba(255,255,255,0.06);
+    --border-teal: rgba(29,233,182,0.2);
+    --border-blue: rgba(30,136,229,0.2);
+    --muted: #9ca3af;
+    --text: #f9fafb;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  /* NAV */
+  .nav-d {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(5,9,7,0.99); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(29,233,182,0.08);
+    display: flex; align-items: stretch; height: 88px;
+  }
+  .nav-d-logo {
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 0 32px; border-right: 1px solid rgba(255,255,255,0.04);
+    min-width: 220px; flex-shrink: 0;
+    position: relative; text-align: center;
+  }
+  .nav-d-logo.active::after {
+    content: ''; position: absolute; bottom: 0; left: 20%; right: 20%;
+    height: 2px; border-radius: 2px 2px 0 0;
+    background: var(--teal); box-shadow: 0 0 12px rgba(29,233,182,0.6);
+  }
+  .nav-d-logo .d-logo-name { font-size: 18px; font-weight: 800; letter-spacing: .04em; color: var(--teal); }
+  .nav-d-logo .d-logo-sub { font-size: 11px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+  .nav-d-tabs { display: flex; align-items: stretch; flex: 1; }
+  .nav-d-tab {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px; text-decoration: none; color: #9ca3af;
+    border-right: 1px solid rgba(255,255,255,0.04);
+    position: relative; transition: color .2s, background .2s;
+  }
+  .nav-d-tab:hover { color: #e5e7eb; background: rgba(255,255,255,0.02); }
+  .nav-d-tab .tab-label { font-size: 15px; font-weight: 700; }
+  .nav-d-tab .tab-sub { font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; opacity: .5; }
+  .nav-d-tab::after { content:''; position:absolute; bottom:0; left:20%; right:20%; height:2px; border-radius:2px 2px 0 0; background:transparent; transition:background .2s; }
+  .nav-d-tab.active { color: var(--teal); background: rgba(29,233,182,0.04); }
+  .nav-d-tab.active::after { background: var(--teal); box-shadow: 0 0 12px rgba(29,233,182,0.6); }
+  .nav-d-actions { display: flex; align-items: center; padding: 0 28px; gap: 10px; border-left: 1px solid rgba(255,255,255,0.04); flex-shrink: 0; }
+  .btn-d-ghost { padding: 7px 16px; background: transparent; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; font-size: 13px; font-weight: 600; color: #9ca3af; cursor: pointer; font-family: inherit; transition: border-color .2s, color .2s; }
+  .btn-d-ghost:hover { border-color: var(--teal); color: var(--teal); }
+  .btn-d-solid { padding: 7px 18px; background: var(--teal); border: none; border-radius: 8px; font-size: 13px; font-weight: 700; color: #040608; cursor: pointer; font-family: inherit; }
+
+  /* HERO */
+  .hero-d { padding: 72px 0 64px; position: relative; overflow: hidden; }
+  .hero-d-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(29,233,182,0.06) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 50% at 90% 80%, rgba(30,136,229,0.04) 0%, transparent 60%);
+  }
+  .hero-d-inner { max-width: 1300px; margin: 0 auto; padding: 0 56px; position: relative; }
+  .hero-d-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--teal); background: linear-gradient(135deg,rgba(29,233,182,0.12),rgba(29,233,182,0.04));
+    border: 1px solid rgba(29,233,182,0.22); padding: 5px 12px; border-radius: 6px; margin-bottom: 20px;
+  }
+  .hero-d-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 6px rgba(29,233,182,0.9); }
+  .hero-d h1 { font-size: clamp(36px,4vw,54px); font-weight: 900; line-height: 1.08; letter-spacing: -1.5px; color: #fff; margin-bottom: 20px; }
+  .hero-d h1 .teal { color: var(--teal); }
+  .hero-d h1 .blue { color: #60a5fa; }
+  .hero-d-sub { font-size: 18px; color: var(--muted); line-height: 1.7; margin-bottom: 36px; }
+  .hero-d-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-d-primary { padding: 12px 28px; background: var(--teal); color: #040608; border-radius: 9px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; font-family: inherit; }
+  .btn-d-outline { padding: 12px 28px; background: transparent; color: #e5e7eb; border-radius: 9px; font-size: 14px; font-weight: 700; border: 1px solid rgba(255,255,255,0.14); cursor: pointer; font-family: inherit; }
+  .btn-d-outline:hover { border-color: rgba(255,255,255,0.3); }
+
+  /* HERO CARD */
+  .hero-d-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; box-shadow: 0 0 40px rgba(0,0,0,0.4); }
+  .hero-d-card .hdc-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; }
+  .hero-d-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 18px; }
+  .hd-stat { background: #0a0f0d; border: 1px solid rgba(29,233,182,0.1); border-radius: 10px; padding: 14px 12px; }
+  .hd-stat .sv { font-size: 22px; font-weight: 900; color: var(--teal); letter-spacing: -0.5px; }
+  .hd-stat .sl { font-size: 10px; color: var(--muted); margin-top: 3px; }
+  .hd-verticals { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hd-vert { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 4px; }
+  .hd-vert.auto { background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+  .hd-vert.wh { background: rgba(52,211,153,0.1); color: #34d399; border: 1px solid rgba(52,211,153,0.2); }
+  .hd-vert.dc { background: rgba(30,136,229,0.1); color: #60a5fa; border: 1px solid rgba(30,136,229,0.2); }
+  .hd-vert.dex { background: rgba(29,233,182,0.1); color: var(--teal); border: 1px solid var(--border-teal); }
+
+  /* LOGOS STRIP */
+  .logos-d {
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    background: #040608; padding: 22px 56px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .logos-d .ld-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: #6b7280; }
+  .logos-d .ld-list { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .logos-d .ld-item { font-size: 13px; font-weight: 700; color: #6b7280; letter-spacing: -.2px; }
+
+  /* SECTION HEADER */
+  .sec-d { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .sec-d .sq { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  .sec-d-title { font-size: 20px; font-weight: 800; color: #fff; }
+  .sec-d-sub { font-size: 13px; color: var(--muted); margin-bottom: 32px; margin-top: 4px; }
+
+  /* HOW IT WORKS */
+  .how-d { padding: 64px 56px; max-width: 1300px; margin: 0 auto; }
+  .how-grid-d { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 32px; }
+  .how-card-d { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px 24px; transition: border-color .2s; }
+  .how-card-d:hover { border-color: rgba(29,233,182,0.2); }
+  .how-num-d { font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); margin-bottom: 18px; }
+  .how-icon-d { font-size: 28px; margin-bottom: 14px; }
+  .how-title-d { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .how-desc-d { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* PRODUCTS */
+  .products-d { padding: 64px 56px; max-width: 1300px; margin: 0 auto; }
+  .pd-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+  .pd-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 20px; transition: border-color .2s; cursor: pointer; }
+  .pd-card:hover { border-color: rgba(29,233,182,0.2); }
+  .pd-card.featured { border-color: rgba(29,233,182,0.18); background: linear-gradient(135deg,rgba(29,233,182,0.06),rgba(29,233,182,0.02)); }
+  .pd-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 16px; }
+  .pd-icon.teal { background: rgba(29,233,182,0.12); border: 1px solid rgba(29,233,182,0.2); }
+  .pd-icon.blue { background: rgba(30,136,229,0.12); border: 1px solid rgba(30,136,229,0.2); }
+  .pd-icon.purple { background: rgba(167,139,250,0.12); border: 1px solid rgba(167,139,250,0.2); }
+  .pd-icon.orange { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.2); }
+  .pd-badge { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 2px 8px; border-radius: 3px; margin-bottom: 8px; }
+  .pd-badge.lib { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+  .pd-badge.pat { background: rgba(245,158,11,0.1); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+  .pd-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .pd-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+  .pd-link { font-size: 11px; font-weight: 700; color: var(--teal); text-decoration: none; }
+
+  /* TRACTION */
+  .traction-d { background: #040608; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .traction-d-inner { max-width: 1300px; margin: 0 auto; padding: 64px 56px; }
+  .td-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 32px; }
+  .td-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px 22px; transition: border-color .2s; }
+  .td-card:hover { border-color: rgba(29,233,182,0.15); }
+  .td-result { font-size: 42px; font-weight: 900; color: var(--teal); letter-spacing: -1.5px; margin-bottom: 6px; line-height: 1; }
+  .td-company { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .td-detail { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+  .td-vert { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; padding: 3px 9px; border-radius: 3px; background: rgba(29,233,182,0.08); color: var(--teal); border: 1px solid rgba(29,233,182,0.15); }
+
+  /* TEAM */
+  .team-d { padding: 64px 56px; max-width: 1300px; margin: 0 auto; }
+  .team-d-founders { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-bottom: 28px; }
+  .tdf-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; display: flex; gap: 18px; align-items: flex-start; transition: border-color .2s; }
+  .tdf-card:hover { border-color: rgba(29,233,182,0.15); }
+  .tdf-avatar { width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; flex-shrink: 0; }
+  .tdf-av-teal { background: linear-gradient(135deg,rgba(29,233,182,0.3),rgba(29,233,182,0.1)); border: 1px solid rgba(29,233,182,0.3); color: var(--teal); }
+  .tdf-av-blue { background: linear-gradient(135deg,rgba(30,136,229,0.3),rgba(30,136,229,0.1)); border: 1px solid rgba(30,136,229,0.3); color: #60a5fa; }
+  .tdf-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .tdf-role { font-size: 11px; font-weight: 600; color: var(--teal); margin-bottom: 8px; letter-spacing: .04em; }
+  .tdf-bio { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .team-d-advisors { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  .tda-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; transition: border-color .2s; }
+  .tda-card:hover { border-color: rgba(29,233,182,0.15); }
+  .tda-init { width: 36px; height: 36px; border-radius: 8px; background: rgba(29,233,182,0.08); border: 1px solid rgba(29,233,182,0.15); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--teal); margin-bottom: 10px; }
+  .tda-name { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .tda-role { font-size: 10px; color: var(--muted); line-height: 1.4; }
+
+  /* CTA */
+  .cta-d2 {
+    padding: 48px 48px; text-align: center;
+    background: linear-gradient(135deg, #050e0a 0%, #060c14 50%, #04080f 100%);
+    border-top: 1px solid rgba(29,233,182,0.1);
+    color: #fff;
+  }
+  .cta-d2 h2 { font-size: clamp(22px,2.5vw,32px); font-weight: 800; letter-spacing: -.5px; margin-bottom: 12px; }
+  .cta-d2 p { font-size: 15px; color: #6b7280; margin-bottom: 28px; }
+  .cta-d2-btns { display: flex; gap: 12px; justify-content: center; }
+  .cta-d2 .btn-w { padding: 11px 26px; background: var(--teal); color: #040608; border-radius: 9px; font-weight: 700; font-size: 14px; border: none; cursor: pointer; font-family: inherit; }
+  .cta-d2 .btn-t { padding: 11px 26px; background: transparent; color: #9ca3af; border-radius: 9px; font-weight: 600; font-size: 14px; border: 1px solid rgba(255,255,255,0.12); cursor: pointer; font-family: inherit; }
+
+  /* FOOTER */
+  .footer-d { background: #040608; border-top: 1px solid var(--border); padding: 36px 56px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6b7280; }
+  .footer-d .fd-logo { font-size: 16px; font-weight: 800; color: var(--teal); letter-spacing: .04em; }
+  .footer-d .fd-links { display: flex; gap: 24px; }
+  .footer-d .fd-links a { color: #6b7280; text-decoration: none; transition: color .2s; }
+  .footer-d .fd-links a:hover { color: #9ca3af; }
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav-d">
+    <div class="nav-d-logo">
+      <div class="d-logo-name">DataraAI</div>
+      <div class="d-logo-sub">Data-as-a-Service</div>
+    </div>
+    <div class="nav-d-tabs">
+      <a href="#products" class="nav-d-tab">
+        <span class="tab-label">Products</span>
+        <span class="tab-sub">AI Data</span>
+      </a>
+      <a href="#customers" class="nav-d-tab">
+        <span class="tab-label">Customers</span>
+        <span class="tab-sub">Case Studies</span>
+      </a>
+      <a href="#company" class="nav-d-tab">
+        <span class="tab-label">Company</span>
+        <span class="tab-sub">Team · Mission</span>
+      </a>
+    </div>
+    <div class="nav-d-actions">
+      <button class="btn-d-ghost">Sign In</button>
+      <button class="btn-d-solid">Get Access</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-d">
+    <div class="hero-d-bg"></div>
+    <div class="hero-d-inner">
+      <div class="hero-d-badge"><span class="dot"></span>NVIDIA Inception Member · 2026</div>
+      <h1>AI Training Data<br>for <span class="teal">Physical</span> <span class="blue">Robots</span></h1>
+      <p class="hero-d-sub">Enterprise-grade synthetic and real-world datasets covering humanoid, automotive, and data center robotics — structured for direct model ingestion.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="how-d">
+    <div class="sec-d">
+      <div class="sq" style="background:#1de9b6;box-shadow:0 0 10px rgba(29,233,182,0.5);"></div>
+      <div class="sec-d-title">How It Works</div>
+    </div>
+    <p class="sec-d-sub">Factory footage → robot training data. Three steps.</p>
+    <div class="how-grid-d">
+      <div class="how-card-d">
+        <div class="how-num-d">Step 01</div>
+        <div class="how-icon-d">🎥</div>
+        <div class="how-title-d">EXO Capture</div>
+        <div class="how-desc-d">Use existing factory cameras. No new hardware required.</div>
+      </div>
+      <div class="how-card-d">
+        <div class="how-num-d">Step 02</div>
+        <div class="how-icon-d">⚙️</div>
+        <div class="how-title-d">RoboEyeView Conversion</div>
+        <div class="how-desc-d">Patented EXO→EGO synthesis. Robot-perspective datasets with physics-aware rendering.</div>
+      </div>
+      <div class="how-card-d">
+        <div class="how-num-d">Step 03</div>
+        <div class="how-icon-d">🚀</div>
+        <div class="how-title-d">Train & Deploy</div>
+        <div class="how-desc-d">&gt;95% accuracy. Faster Sim-to-Real. Ready for foundation models and robot OEMs.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="products-d">
+    <div class="sec-d">
+      <div class="sq" style="background:#1de9b6;box-shadow:0 0 10px rgba(29,233,182,0.5);"></div>
+      <div class="sec-d-title">Products</div>
+    </div>
+    <p class="sec-d-sub">Four products. Full Physical AI data stack.</p>
+    <div class="pd-grid">
+      <div class="pd-card featured" onclick="window.location='robodatahub.html'" style="cursor:pointer;">
+        <div class="pd-icon teal">📦</div>
+        <div class="pd-badge lib">Core Platform</div>
+        <div class="pd-name">RoboDataHub</div>
+        <p class="pd-desc">EGO + EXO datasets across automotive, warehouse, data center, and dexterity.</p>
+        <a href="robodatahub.html" class="pd-link">Browse datasets →</a>
+      </div>
+      <div class="pd-card" onclick="window.location='roboeyeview.html'" style="cursor:pointer;">
+        <div class="pd-icon blue">👁️</div>
+        <div class="pd-badge pat">Patented IP</div>
+        <div class="pd-name">RoboEyeView</div>
+        <p class="pd-desc">EXO→EGO view synthesis. 85% → 95%+ accuracy.</p>
+        <a href="roboeyeview.html" class="pd-link">Learn more →</a>
+      </div>
+      <div class="pd-card">
+        <div class="pd-icon purple">🖐️</div>
+        <div class="pd-badge pat">Patented IP</div>
+        <div class="pd-name">RoboHandMotion</div>
+        <p class="pd-desc">Hand, tool, and object interaction data for humanoid and dexterous training.</p>
+        <a href="#" class="pd-link">Learn more →</a>
+      </div>
+      <div class="pd-card">
+        <div class="pd-icon orange">🧩</div>
+        <div class="pd-badge lib">Task Intelligence</div>
+        <div class="pd-name">RoboTaskManipulator</div>
+        <p class="pd-desc">Assembly, pick-place, and cabling workflows. 95% precision at Peer Robotics.</p>
+        <a href="#" class="pd-link">See case study →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMER RESULTS -->
+  <section id="customers" class="traction-d">
+    <div class="traction-d-inner">
+      <div class="sec-d">
+        <div class="sq" style="background:#1e88e5;box-shadow:0 0 10px rgba(30,136,229,0.5);"></div>
+        <div class="sec-d-title">Customers</div>
+      </div>
+      <p class="sec-d-sub">Measurable outcomes from production deployments across robotics verticals.</p>
+      <div class="td-grid">
+        <div class="td-card">
+          <div class="td-result">3.8×</div>
+          <div class="td-company">Figure AI</div>
+          <p class="td-detail">Faster model convergence on manipulation tasks using RoboDataHub dexterous sequences vs. in-house collection.</p>
+          <span class="td-vert">Humanoid</span>
+        </div>
+        <div class="td-card">
+          <div class="td-result">60%</div>
+          <div class="td-company">BMW Robotics</div>
+          <p class="td-detail">Reduction in labeling cost for production-line vision models using RoboEyeView EGO synthesis pipeline.</p>
+          <span class="td-vert" style="background:rgba(167,139,250,0.08);color:#a78bfa;border-color:rgba(167,139,250,0.15);">Automotive</span>
+        </div>
+        <div class="td-card">
+          <div class="td-result">99.1%</div>
+          <div class="td-company">Foxconn Smart Factory</div>
+          <p class="td-detail">Label accuracy on rack-navigation sequences, exceeding internal baseline by 4.7 percentage points.</p>
+          <span class="td-vert" style="background:rgba(52,211,153,0.08);color:#34d399;border-color:rgba(52,211,153,0.15);">Data Center</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGOS STRIP -->
+  <div class="logos-d">
+    <div class="ld-label">Trusted by teams at</div>
+    <div class="ld-list">
+      <span class="ld-item">NVIDIA</span>
+      <span class="ld-item">BMW Group</span>
+      <span class="ld-item">Figure AI</span>
+      <span class="ld-item">Boston Dynamics</span>
+      <span class="ld-item">Foxconn</span>
+      <span class="ld-item">Waymo</span>
+      <span class="ld-item">1X Technologies</span>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <section id="company" class="team-d">
+    <div class="sec-d">
+      <div class="sq" style="background:#a78bfa;box-shadow:0 0 10px rgba(167,139,250,0.5);"></div>
+      <div class="sec-d-title">Team</div>
+    </div>
+    <p class="sec-d-sub">Built by PhysicalAI veterans. 40+ years of combined expertise from NVIDIA, IIT, and deep robotics.</p>
+    <div class="team-d-founders">
+      <div class="tdf-card">
+        <div class="tdf-avatar tdf-av-blue">DS</div>
+        <div>
+          <div class="tdf-name">Durgesh Srivastava</div>
+          <div class="tdf-role">Co-Founder & CEO</div>
+          <p class="tdf-bio">Serial entrepreneur (exited MIPS). Ex-NVIDIA Sr. Director AI & Robotics. Omniverse, Systems, LLM expert. IIT Kanpur.</p>
+        </div>
+      </div>
+      <div class="tdf-card">
+        <div class="tdf-avatar tdf-av-teal">NR</div>
+        <div>
+          <div class="tdf-name">Niraj Rai</div>
+          <div class="tdf-role">Co-Founder & CTO</div>
+          <p class="tdf-bio">Serial entrepreneur. Founder SproutsAi. Ex-CTO Vimaan (AI/Robotics). Software & AI expert. IIT Kharagpur.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-bottom:16px;font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.14em;">Advisors</div>
+    <div class="team-d-advisors">
+      <div class="tda-card">
+        <div class="tda-init">BK</div>
+        <div class="tda-name">Brian Kelleher</div>
+        <div class="tda-role">Sr. VP NVIDIA · Angel Investor</div>
+      </div>
+      <div class="tda-card">
+        <div class="tda-init">TG</div>
+        <div class="tda-name">Dr. Teck Joo Goh</div>
+        <div class="tda-role">Angel Investor · Corporate VP SkyeChip · ex-GM Intel</div>
+      </div>
+      <div class="tda-card">
+        <div class="tda-init">AR</div>
+        <div class="tda-name">Dr. Amit Roy-Chowdhury</div>
+        <div class="tda-role">Professor & UC Presidential Chair · Chair Robotics, UC Riverside</div>
+      </div>
+      <div class="tda-card">
+        <div class="tda-init">LA</div>
+        <div class="tda-name">Lomesh Agarwal</div>
+        <div class="tda-role">VP Software Apptronik · Ex-MagicLeap</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-d2">
+    <h2>Ready to close the Sim-to-Real gap?</h2>
+    <p>Join leading robotics companies using DataraAI's real-world data to achieve 95%+ precision.</p>
+    <div class="cta-d2-btns">
+      <button class="btn-w">Request a Demo</button>
+      <button class="btn-t">Explore RoboDataHub</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer-d">
+    <div class="fd-logo">DataraAI</div>
+    <div class="fd-links">
+      <a href="#">Products</a>
+      <a href="#">Docs</a>
+      <a href="#">Customers</a>
+      <a href="#">Company</a>
+      <a href="#">Contact</a>
+    </div>
+    <div>© 2026 DataraAI · NVIDIA Inception Member</div>
+  </footer>
+
+
+<script>
+  const logo = document.querySelector('.nav-d-logo');
+  const tabs = document.querySelectorAll('.nav-d-tab');
+  const navHeight = 88;
+
+  const sections = [
+    { el: document.querySelector('.hero-d'),              tab: null },
+    { el: document.getElementById('how-it-works'),        tab: null },
+    { el: document.getElementById('products'),            tab: document.querySelector('[href="#products"]') },
+    { el: document.getElementById('customers'),           tab: document.querySelector('[href="#customers"]') },
+    { el: document.getElementById('company'),             tab: document.querySelector('[href="#company"]') },
+  ].filter(s => s.el);
+
+  function updateActive() {
+    const scrollY = window.scrollY + navHeight + 60;
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.offsetTop <= scrollY) current = s;
+    }
+    logo.classList.remove('active');
+    tabs.forEach(t => t.classList.remove('active'));
+    if (current.tab) current.tab.classList.add('active');
+    else logo.classList.add('active');
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+</script>
+</body>
+</html>
