@@ -128,26 +128,30 @@
     <!-- Page header -->
     <div style="margin-bottom:32px;">
       <h1 style="font-size:28px;font-weight:900;color:#fff;margin:0 0 8px;line-height:1.1;">RoboEyeView</h1>
-      <p style="font-size:15px;color:#6b7280;margin:0;line-height:1.8;">EXO Data. Multiple robot-perspective EGO views — labeled and ready for training.</p>
+      <p style="font-size:15px;color:#6b7280;margin:0 0 12px;line-height:1.8;">Patented pipeline that converts <span style="color:#60a5fa;font-weight:600;">EXO</span> footage into <span style="color:#1de9b6;font-weight:600;">EGO</span> datasets — labeled and ready for robot model training.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <span style="font-size:12px;font-weight:600;color:#60a5fa;background:rgba(30,136,229,0.08);border:1px solid rgba(30,136,229,0.2);padding:4px 12px;border-radius:6px;"><strong>EXO</strong> — Exocentric: external fixed-camera view of the workspace</span>
+        <span style="font-size:12px;font-weight:600;color:#1de9b6;background:rgba(29,233,182,0.08);border:1px solid rgba(29,233,182,0.2);padding:4px 12px;border-radius:6px;"><strong>EGO</strong> — Egocentric: synthesized robot's-eye perspective for training</span>
+      </div>
     </div>
 
     <!-- How it works -->
     <div style="background:#0d1014;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:28px 32px;margin-bottom:36px;">
       <p style="font-size:11px;font-weight:800;color:#9ca3af;margin:0 0 24px;letter-spacing:.1em;text-transform:uppercase;">HOW IT WORKS</p>
-      <div style="display:flex;align-items:center;gap:0;">
+      <div style="display:flex;align-items:stretch;gap:0;">
 
         <!-- EXO block -->
         <div style="flex:1;background:rgba(30,136,229,0.07);border:1px solid rgba(30,136,229,0.25);border-radius:12px;padding:20px 22px;">
           <div style="width:36px;height:36px;border-radius:8px;background:rgba(30,136,229,0.15);border:1px solid rgba(30,136,229,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
-          <p style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin:0 0 4px;">Step 01</p>
-          <p style="font-size:16px;font-weight:800;color:#fff;margin:0 0 8px;">EXO Data</p>
-          <p style="font-size:11px;color:#6b7280;margin:0;line-height:1.5;">Any camera, any environment. No special equipment.</p>
+          <p style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#60a5fa;margin:0 0 4px;">Step 01 · Capture</p>
+          <p style="font-size:16px;font-weight:800;color:#fff;margin:0 0 6px;">Exocentric Footage</p>
+          <p style="font-size:11px;color:#6b7280;margin:0;line-height:1.6;">External, third-person footage from any fixed camera — overhead, wall-mounted, or stationary.</p>
         </div>
 
         <!-- Arrow -->
-        <div style="padding:0 16px;display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+        <div style="padding:0 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;">
           <div style="width:52px;height:3px;background:linear-gradient(to right,#1e88e5,#1de9b6);border-radius:2px;box-shadow:0 0 8px rgba(29,233,182,0.4);"></div>
           <svg width="13" height="18" viewBox="0 0 10 14" fill="none"><path d="M1 1l8 6-8 6" stroke="#1de9b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -163,7 +167,7 @@
         </div>
 
         <!-- Arrow -->
-        <div style="padding:0 16px;display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;">
+        <div style="padding:0 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0;">
           <div style="width:52px;height:3px;background:linear-gradient(to right,#1de9b6,#f59e0b);border-radius:2px;box-shadow:0 0 8px rgba(245,158,11,0.4);"></div>
           <svg width="13" height="18" viewBox="0 0 10 14" fill="none"><path d="M1 1l8 6-8 6" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
@@ -173,9 +177,9 @@
           <div style="width:36px;height:36px;border-radius:8px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
           </div>
-          <p style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f59e0b;margin:0 0 4px;">Step 03</p>
-          <p style="font-size:16px;font-weight:800;color:#fff;margin:0 0 8px;">EGO Output</p>
-          <p style="font-size:11px;color:#6b7280;margin:0;line-height:1.5;">Labeled EGO views, training-ready.</p>
+          <p style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f59e0b;margin:0 0 4px;">Step 03 · Training Data</p>
+          <p style="font-size:16px;font-weight:800;color:#fff;margin:0 0 6px;">Egocentric Datasets</p>
+          <p style="font-size:11px;color:#6b7280;margin:0;line-height:1.6;">Robot's-eye perspective — labeled, multi-angle, ready for model training.</p>
         </div>
 
       </div>
@@ -589,7 +593,7 @@
           </div>
           <div>
             <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 3px;">Run RoboEyeView on Your EXO Footage</p>
-            <p style="font-size:12px;color:#6b7280;margin:0;line-height:1.5;">Already have EXO Datas? We'll synthesize robot-ready EGO viewpoints across any task, environment, or robot form factor.</p>
+            <p style="font-size:12px;color:#6b7280;margin:0;line-height:1.5;">Already have EXO footage (external camera recordings)? We'll synthesize robot-ready EGO datasets — egocentric robot-perspective viewpoints — across any task, environment, or robot form factor.</p>
           </div>
         </div>
         <div style="display:flex;gap:8px;flex-shrink:0;align-items:center;">
