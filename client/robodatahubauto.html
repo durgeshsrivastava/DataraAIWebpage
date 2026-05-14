@@ -19,7 +19,7 @@
   --border2: rgba(255,255,255,0.11);
   --muted:   #4a4a6a;
   --muted2:  #8585a0;
-  --nav-h:   58px;
+  --nav-h:   88px;
   --sub-h:   40px;
 }
 
@@ -30,37 +30,15 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
 .d-hidden { display: none !important; }
 
 /* ── Nav ── */
-.d-nav {
-  position: sticky; top: 0; z-index: 100;
-  height: var(--nav-h);
-  background: rgba(7,7,10,0.95);
-  backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; padding: 0 28px;
-}
-.d-logo { display:flex; align-items:center; gap:10px; text-decoration:none; margin-right:36px; flex-shrink:0; }
-.d-logo-icon {
-  width:34px; height:34px; border-radius:9px;
-  background: linear-gradient(135deg, var(--green), var(--green2));
-  display:flex; align-items:center; justify-content:center;
-  font-weight:900; font-size:15px; color:#000;
-  box-shadow: 0 0 16px rgba(0,229,160,0.35);
-}
-.d-logo-name { font-size:14px; font-weight:800; color:#ededf2; letter-spacing:-.3px; }
-.d-logo-sub  { font-size:8.5px; font-weight:500; color:var(--muted2); letter-spacing:.8px; text-transform:uppercase; margin-top:1px; }
-.d-nav-links { display:flex; align-items:center; gap:2px; flex:1; }
-.d-nav-item  { display:flex; flex-direction:column; padding:5px 13px; border-radius:8px; text-decoration:none; transition:background .15s; }
-.d-nav-item:hover { background:rgba(255,255,255,0.04); }
-.d-nav-item.active { background:rgba(0,229,160,0.07); }
-.d-nl { font-size:12.5px; font-weight:600; color:#ededf2; letter-spacing:-.2px; }
-.d-ns { font-size:8.5px; font-weight:600; color:var(--muted); letter-spacing:.7px; text-transform:uppercase; margin-top:1px; }
-.d-nav-item.active .d-nl { color:var(--green); }
-.d-nav-right { display:flex; align-items:center; gap:8px; margin-left:auto; flex-shrink:0; }
-.d-admin-chip { display:flex; flex-direction:column; align-items:center; background:rgba(255,255,255,0.05); border:1px solid var(--border2); border-radius:8px; padding:3px 11px; }
-.d-acl { font-size:7.5px; font-weight:800; color:var(--muted); letter-spacing:1.2px; text-transform:uppercase; }
-.d-acn { font-size:11.5px; font-weight:700; color:#ededf2; }
-.d-btn-so { font-size:12.5px; font-weight:500; color:var(--muted2); background:none; border:1px solid var(--border2); border-radius:8px; padding:5px 13px; cursor:pointer; font-family:inherit; transition:color .15s,border-color .15s; }
-.d-btn-so:hover { color:#ededf2; border-color:rgba(255,255,255,0.2); }
+.nav-tab { flex:1; display:inline-flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-decoration:none; font-size:13px; font-weight:600; letter-spacing:.04em; color:#9ca3af; background:transparent; border-right:1px solid rgba(255,255,255,0.04); position:relative; transition:color .2s,background .2s; }
+.nav-tab:last-child { border-right:none; }
+.nav-tab:hover { color:#e5e7eb; background:rgba(255,255,255,0.02); }
+.nav-tab .tab-label { font-size:15px; font-weight:700; }
+.nav-tab .tab-sub { font-size:10px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; opacity:.5; }
+.nav-tab::after { content:''; position:absolute; bottom:0; left:20%; right:20%; height:2px; border-radius:2px 2px 0 0; background:transparent; transition:background .2s; }
+.nav-tab.active { color:#1de9b6; background:rgba(29,233,182,0.04); }
+.nav-tab.active::after { background:#1de9b6; box-shadow:0 0 12px rgba(29,233,182,0.6); }
+.nav-tab.active .tab-sub { opacity:.7; }
 
 /* ── Subbar ── */
 .d-subbar {
@@ -164,7 +142,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
 .d-sec-count { font-size:11px; color:var(--muted); font-weight:600; }
 
 /* ── Dataset grid ── */
-.d-ds-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:44px; }
+.d-ds-grid { display:flex; flex-wrap:wrap; gap:16px; margin-bottom:44px; }
 
 /* ── Cards ── */
 .d-card {
@@ -174,6 +152,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
   transition:border-color .25s, transform .25s, box-shadow .25s;
   cursor:pointer;
   position:relative;
+  flex: 0 0 calc(33.333% - 11px);
 }
 .d-card::before {
   content:''; position:absolute; top:0; left:0; right:0; height:2px;
@@ -233,23 +212,28 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
 <div id="optD">
 
   <!-- Nav -->
-  <nav class="d-nav">
-    <a class="d-logo" href="homepage.html">
-      <div class="d-logo-icon">D</div>
-      <div><div class="d-logo-name">DataraAI</div><div class="d-logo-sub">Data-as-a-Service</div></div>
+  <div style="position:sticky;top:0;z-index:100;background:rgba(5,9,7,0.99);border-bottom:1px solid rgba(29,233,182,0.08);display:flex;align-items:stretch;height:88px;backdrop-filter:blur(12px);">
+    <a href="homepage.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;min-width:220px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.04);padding:0 32px;transition:background .2s;" onmouseover="this.style.background='rgba(29,233,182,0.04)'" onmouseout="this.style.background='transparent'">
+      <span style="font-size:18px;font-weight:800;letter-spacing:.04em;color:#1de9b6;">DataraAI</span>
+      <span style="font-size:11px;font-weight:500;color:#6b7280;margin-top:2px;">← Back to Home</span>
     </a>
-    <div class="d-nav-links">
-      <a class="d-nav-item" href="homepage.html"><span class="d-nl">Home</span><span class="d-ns">Overview</span></a>
-      <a class="d-nav-item" href="homepage.html#products"><span class="d-nl">Solutions</span><span class="d-ns">Full Stack</span></a>
-      <a class="d-nav-item active" href="#"><span class="d-nl">RoboDataHub</span><span class="d-ns">Dataset Catalog</span></a>
-      <a class="d-nav-item" href="roboeyeview.html"><span class="d-nl">RoboEyeView</span><span class="d-ns">Visual Intelligence</span></a>
-      <a class="d-nav-item" href="company.html"><span class="d-nl">Company</span><span class="d-ns">Team / Mission</span></a>
-    </div>
-    <div class="d-nav-right">
-      <div class="d-admin-chip"><span class="d-acl">Admin</span><span class="d-acn">Datara AI</span></div>
-      <button class="d-btn-so">Sign Out</button>
-    </div>
-  </nav>
+    <a href="robodatahub.html" class="nav-tab active">
+      <span class="tab-label">RoboDataHub</span>
+      <span class="tab-sub">Dataset Catalog</span>
+    </a>
+    <a href="roboeyeview.html" class="nav-tab">
+      <span class="tab-label">RoboEyeView</span>
+      <span class="tab-sub">Visual Intelligence</span>
+    </a>
+    <a href="#" class="nav-tab">
+      <span class="tab-label">RoboHandMotion</span>
+      <span class="tab-sub">Humanoid Data</span>
+    </a>
+    <a href="#" class="nav-tab">
+      <span class="tab-label">RoboTaskManipulator</span>
+      <span class="tab-sub">Task Execution</span>
+    </a>
+  </div>
 
   <!-- Subbar -->
   <div class="d-subbar">
@@ -259,7 +243,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
       <span class="d-bc-cur">CARAUTOMATION</span>
     </div>
     <div class="d-sbr">
-      <span class="d-items-l">Showing: <strong id="d-count">26</strong> datasets</span>
+      <span class="d-items-l">Showing: <strong id="d-count">34</strong> datasets</span>
       <div class="d-live-p"><div class="d-live-d"></div><span class="d-live-l">Live Connection</span></div>
       <button class="d-btn-imp">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5v7M3 6l3 3 3-3M1.5 10.5h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -276,7 +260,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
         <h1>RoboDataHub<br>Automotive</h1>
         <p class="d-hero-desc">High-fidelity, fully-labelled manufacturing datasets captured from live OEM production floors — built for robotics automation training pipelines.</p>
         <div class="d-hero-stats">
-          <div class="d-hs"><span class="d-hs-val">26</span><span class="d-hs-lbl">Datasets</span></div>
+          <div class="d-hs"><span class="d-hs-val">34</span><span class="d-hs-lbl">Datasets</span></div>
           <div class="d-hs"><span class="d-hs-val">6</span><span class="d-hs-lbl">OEM Brands</span></div>
           <div class="d-hs"><span class="d-hs-val g">Live</span><span class="d-hs-lbl">Status</span></div>
           <div class="d-hs"><span class="d-hs-val g">Public</span><span class="d-hs-lbl">Access</span></div>
@@ -286,7 +270,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
         <img src="images/frontGrille_012.png" alt="Automotive production line">
         <div class="d-hero-img-ov"></div>
         <div class="d-hero-badge"><div class="d-hb-b">Featured · Robotics AI</div><div class="d-hb-n">Assembly Line — Live Capture</div></div>
-        <div class="d-hero-pill"><strong>26</strong> datasets available</div>
+        <div class="d-hero-pill"><strong>34</strong> datasets available</div>
       </div>
     </div>
   </div>
@@ -296,7 +280,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
     <div class="d-stats-inner">
       <div class="d-sb"><span class="d-sb-val">5,500<sup>+</sup></span><span class="d-sb-lbl">Total Hours</span></div>
       <div class="d-sb"><span class="d-sb-val">6<sup> OEMs</sup></span><span class="d-sb-lbl">Partner Brands</span></div>
-      <div class="d-sb"><span class="d-sb-val">26<sup> ds</sup></span><span class="d-sb-lbl">Total Datasets</span></div>
+      <div class="d-sb"><span class="d-sb-val">34<sup> ds</sup></span><span class="d-sb-lbl">Total Datasets</span></div>
       <div class="d-sb"><span class="d-sb-val">98.4<sup>%</sup></span><span class="d-sb-lbl">Label Accuracy</span></div>
       <div class="d-sb"><span class="d-sb-val">10<sup> types</sup></span><span class="d-sb-lbl">Operation Classes</span></div>
     </div>
@@ -380,7 +364,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
           <div class="d-sec-dot"></div>
           <span class="d-sec-title">Assembly Line</span>
           <div class="d-sec-line"></div>
-          <span class="d-sec-count">7 datasets</span>
+          <span class="d-sec-count">9 datasets</span>
         </div>
         <div class="d-ds-grid">
           <div class="d-card" data-dbrand="bmw">
@@ -474,6 +458,32 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
             <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">950 hrs</div></div>
             <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/doorPanel</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
           </div>
+          <div class="d-card" data-dbrand="bmw">
+            <div class="d-card-head"><div class="d-card-title">Front Grille Assembly</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Front grille assembly"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">2,100 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/BMW/frontGrille</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="ford">
+            <div class="d-card-head"><div class="d-card-title">Front Seat Installation</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontSeat_007.png" alt="Front seat installation"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">1,400 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Ford/frontSeat</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
         </div>
       </div>
 
@@ -483,7 +493,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
           <div class="d-sec-dot"></div>
           <span class="d-sec-title">QC Inspection</span>
           <div class="d-sec-line"></div>
-          <span class="d-sec-count">7 datasets</span>
+          <span class="d-sec-count">9 datasets</span>
         </div>
         <div class="d-ds-grid">
           <div class="d-card" data-dbrand="bmw">
@@ -577,6 +587,32 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
             <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Defect Labels</div><div class="d-tag">520 hrs</div></div>
             <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/paintSurfaceQC</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
           </div>
+          <div class="d-card" data-dbrand="bmw">
+            <div class="d-card-head"><div class="d-card-title">Passenger Seat QC Inspection</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Passenger seat QC"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Seg Masks</div><div class="d-tag">900 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/BMW/passengerSeatQC</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="tesla">
+            <div class="d-card-head"><div class="d-card-title">Grille &amp; Fascia Gap Inspection</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Grille gap inspection" style="filter:brightness(0.85);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Defect Labels</div><div class="d-tag">680 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Tesla/grilleFascia</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
         </div>
       </div>
 
@@ -586,7 +622,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
           <div class="d-sec-dot"></div>
           <span class="d-sec-title">Paint &amp; Body</span>
           <div class="d-sec-line"></div>
-          <span class="d-sec-count">4 datasets</span>
+          <span class="d-sec-count">6 datasets</span>
         </div>
         <div class="d-ds-grid">
           <div class="d-card" data-dbrand="tesla">
@@ -641,6 +677,32 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
             <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">780 hrs</div></div>
             <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/primerCoat</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
           </div>
+          <div class="d-card" data-dbrand="tesla">
+            <div class="d-card-head"><div class="d-card-title">Spray Paint Application</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Spray paint" style="filter:hue-rotate(20deg) brightness(0.8);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Seg Masks</div><div class="d-tag">1,300 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Tesla/sprayPaint</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Surface Sanding &amp; Prep</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Surface sanding" style="filter:hue-rotate(200deg) brightness(0.75);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">480 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/sanding</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
         </div>
       </div>
 
@@ -650,7 +712,7 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
           <div class="d-sec-dot"></div>
           <span class="d-sec-title">Wiring &amp; Sensors</span>
           <div class="d-sec-line"></div>
-          <span class="d-sec-count">4 datasets</span>
+          <span class="d-sec-count">6 datasets</span>
         </div>
         <div class="d-ds-grid">
           <div class="d-card" data-dbrand="multi">
@@ -704,6 +766,32 @@ body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; }
             </div>
             <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">410 hrs</div></div>
             <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/sensorWiring</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Engine Harness Routing</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontSeat_007.png" alt="Engine harness" style="filter:brightness(0.6) saturate(0.4);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">860 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/engineHarness</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Sensor Module Installation</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Sensor module" style="filter:brightness(0.6) saturate(0.4);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Bbox</div><div class="d-tag">720 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/sensorModule</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
           </div>
         </div>
       </div>
