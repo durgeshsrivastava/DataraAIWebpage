@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RoboEyeView</title>
+<title>RoboEyeView — DataraAI</title>
 <link rel="stylesheet" href="css/output.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -29,20 +29,58 @@
   .sidebar-item.active { background:rgba(29,233,182,0.1);border:1px solid rgba(29,233,182,0.15); }
 
   /* ── Transform card ── */
-  .xform-card { background:#0d1014;border:1px solid rgba(255,255,255,0.06);border-radius:14px;overflow:hidden;padding:20px 24px; }
+  .xform-card {
+    background: linear-gradient(135deg, #0d1014 0%, #080b0f 100%);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 20px 24px 20px 27px;
+    transition: box-shadow .25s, border-color .25s;
+    position: relative;
+  }
+  .xform-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 14px 0 0 14px;
+    background: rgba(29,233,182,0.5);
+  }
+  .card-dc::before { background: linear-gradient(to bottom, #1e88e5 0%, rgba(30,136,229,0.15) 100%); }
+  .card-dc:hover { box-shadow: 0 6px 36px rgba(0,0,0,0.5), 0 0 28px rgba(30,136,229,0.08); border-color: rgba(30,136,229,0.18); }
+  .card-hu::before { background: linear-gradient(to bottom, #34d399 0%, rgba(52,211,153,0.15) 100%); }
+  .card-hu:hover { box-shadow: 0 6px 36px rgba(0,0,0,0.5), 0 0 28px rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.18); }
+  .card-au::before { background: linear-gradient(to bottom, #a78bfa 0%, rgba(167,139,250,0.15) 100%); }
+  .card-au:hover { box-shadow: 0 6px 36px rgba(0,0,0,0.5), 0 0 28px rgba(167,139,250,0.12); border-color: rgba(167,139,250,0.2); }
 
   /* ── EXO image box ── */
-  .exo-box { position:relative;border-radius:10px;overflow:hidden;border:2px solid rgba(30,136,229,0.4);height:160px; }
-  .exo-label { position:absolute;top:8px;left:8px;font-size:9px;font-weight:800;letter-spacing:.12em;color:#fff;background:#1e88e5;padding:3px 8px;border-radius:4px; }
+  .exo-box {
+    position: relative; border-radius: 10px; overflow: hidden;
+    border: 2px solid rgba(30,136,229,0.5); height: 160px;
+    box-shadow: 0 0 20px rgba(30,136,229,0.1), inset 0 0 24px rgba(30,136,229,0.05);
+  }
+  .exo-label { position:absolute;top:8px;left:8px;font-size:9px;font-weight:800;letter-spacing:.12em;color:#fff;background:#1e88e5;padding:3px 8px;border-radius:4px;box-shadow:0 2px 8px rgba(30,136,229,0.4); }
 
   /* ── EGO image box ── */
-  .ego-box { position:relative;border-radius:8px;overflow:hidden;border:2px solid rgba(245,158,11,0.7);height:160px; }
-  .ego-label { position:absolute;top:6px;left:6px;font-size:8px;font-weight:800;letter-spacing:.08em;color:#040608;background:#1de9b6;padding:2px 6px;border-radius:3px; }
+  .ego-box {
+    position: relative; border-radius: 8px; overflow: hidden;
+    border: 2px solid rgba(245,158,11,0.65); height: 160px;
+    box-shadow: 0 0 14px rgba(245,158,11,0.1), inset 0 0 16px rgba(245,158,11,0.04);
+  }
+  .ego-label { position:absolute;top:6px;left:6px;font-size:8px;font-weight:800;letter-spacing:.08em;color:#040608;background:#1de9b6;padding:2px 6px;border-radius:3px;box-shadow:0 1px 6px rgba(29,233,182,0.4); }
+
+  /* ── 2×2 EGO grid ── */
+  .ego-grid { display:grid;grid-template-columns:1fr 1fr;gap:8px; }
 
   /* ── Arrow pipe ── */
   .pipe { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 16px;flex-shrink:0; }
-  .pipe-line { width:2px;flex:1;background:linear-gradient(to bottom,rgba(29,233,182,0.1),rgba(29,233,182,0.5),rgba(29,233,182,0.1)); }
-  .pipe-badge { background:linear-gradient(135deg,rgba(29,233,182,0.18),rgba(29,233,182,0.06));border:2px solid rgba(29,233,182,0.55);border-radius:16px;padding:16px 14px;text-align:center;white-space:nowrap;box-shadow:0 0 32px rgba(29,233,182,0.15),0 0 60px rgba(29,233,182,0.04); }
+  .pipe-line { width:2px;height:24px;background:linear-gradient(to bottom,rgba(29,233,182,0.05),rgba(29,233,182,0.55),rgba(29,233,182,0.05)); }
+  .pipe-badge {
+    background: linear-gradient(135deg, rgba(29,233,182,0.15), rgba(29,233,182,0.04));
+    border: 2px solid rgba(29,233,182,0.5);
+    border-radius: 16px; padding: 16px 14px; text-align: center; white-space: nowrap;
+    box-shadow: 0 0 32px rgba(29,233,182,0.18), 0 0 60px rgba(29,233,182,0.06), inset 0 1px 0 rgba(29,233,182,0.15);
+  }
 
   /* ── Step badge ── */
   .step-num { width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0; }
@@ -55,11 +93,25 @@
   .tag-purple { background:rgba(167,139,250,0.1);color:#a78bfa;border:1px solid rgba(167,139,250,0.2); }
 
   /* ── Availability ── */
-  .avail-lib { font-size:10px;font-weight:600;color:#22c55e;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);padding:2px 8px;border-radius:10px; }
-  .avail-od { font-size:10px;font-weight:600;color:#f59e0b;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);padding:2px 8px;border-radius:10px; }
+  .avail-lib { font-size:10px;font-weight:700;color:#22c55e;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);padding:3px 10px;border-radius:10px;white-space:nowrap; }
+  .avail-od  { font-size:10px;font-weight:700;color:#f59e0b;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);padding:3px 10px;border-radius:10px;white-space:nowrap; }
 
   /* ── Section heading ── */
-  .section-head { display:flex;align-items:center;gap:10px;margin-bottom:16px; }
+  .section-head { display:flex;align-items:center;gap:10px;margin-bottom:20px; }
+  .section-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 8px; flex-shrink: 0;
+  }
+  .section-pill-dc  { background:rgba(30,136,229,0.08);border:1px solid rgba(30,136,229,0.2); }
+  .section-pill-hu  { background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2); }
+  .section-pill-au  { background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2); }
+
+  /* ── Stats strip ── */
+  .stat-strip { display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px; }
+  .stat-tile { background:#0d1014;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:16px 20px;text-align:center;transition:border-color .2s; }
+  .stat-tile:hover { border-color:rgba(29,233,182,0.15); }
+  .stat-num { font-size:26px;font-weight:900;color:#1de9b6;letter-spacing:-1px;margin:0; }
+  .stat-lbl { font-size:10px;font-weight:600;color:#4b5563;margin:3px 0 0;letter-spacing:.1em;text-transform:uppercase; }
 
   /* scrollbar */
   ::-webkit-scrollbar { width:5px;height:5px; }
@@ -70,7 +122,7 @@
 <body>
 
 <!-- ── Top nav bar ── -->
-<div style="background:rgba(5,9,7,0.99);border-bottom:1px solid rgba(29,233,182,0.08);display:flex;align-items:stretch;height:88px;backdrop-filter:blur(12px);">
+<div style="position:sticky;top:0;z-index:100;background:rgba(5,9,7,0.99);border-bottom:1px solid rgba(29,233,182,0.08);display:flex;align-items:stretch;height:88px;backdrop-filter:blur(12px);">
   <a href="homepage.html" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;min-width:220px;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.04);padding:0 32px;transition:background .2s;" onmouseover="this.style.background='rgba(29,233,182,0.04)'" onmouseout="this.style.background='transparent'">
     <span style="font-size:18px;font-weight:800;letter-spacing:.04em;color:#1de9b6;">DataraAI</span>
     <span style="font-size:11px;font-weight:500;color:#6b7280;margin-top:2px;">← Back to Home</span>
@@ -118,30 +170,56 @@
       </a>
     </div>
     <div style="padding:16px 20px;border-top:1px solid rgba(255,255,255,0.05);">
-      <button style="width:100%;background:#1de9b6;color:#040608;border:none;padding:9px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Get Access</button>
+      <button style="width:100%;background:#1de9b6;color:#040608;border:none;padding:9px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:opacity .2s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">Get Access</button>
     </div>
   </div>
 
   <!-- Main content -->
-  <div style="flex:1;padding:32px 40px;overflow:auto;">
+  <div style="flex:1;padding:36px 44px;overflow:auto;background:linear-gradient(180deg,rgba(29,233,182,0.015) 0%,transparent 220px);">
 
     <!-- Page header -->
-    <div style="margin-bottom:32px;">
-      <h1 style="font-size:28px;font-weight:900;color:#fff;margin:0 0 8px;line-height:1.1;">RoboEyeView</h1>
-      <p style="font-size:15px;color:#6b7280;margin:0 0 12px;line-height:1.8;">Patented pipeline that converts <span style="color:#60a5fa;font-weight:600;">EXO</span> footage into <span style="color:#1de9b6;font-weight:600;">EGO</span> datasets — labeled and ready for robot model training.</p>
+    <div style="margin-bottom:24px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:rgba(29,233,182,0.12);border:1px solid rgba(29,233,182,0.35);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(29,233,182,0.2);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h1 style="font-size:30px;font-weight:900;color:#fff;margin:0;line-height:1;letter-spacing:-.5px;">RoboEyeView</h1>
+        <span style="font-size:10px;font-weight:700;color:#1de9b6;background:rgba(29,233,182,0.1);border:1px solid rgba(29,233,182,0.25);padding:3px 9px;border-radius:20px;letter-spacing:.08em;">PATENTED</span>
+      </div>
+      <p style="font-size:15px;color:#6b7280;margin:0 0 14px;line-height:1.8;max-width:640px;">Patented pipeline that converts <span style="color:#60a5fa;font-weight:600;">EXO</span> footage into <span style="color:#1de9b6;font-weight:600;">EGO</span> datasets — labeled and ready for robot model training.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <span style="font-size:12px;font-weight:600;color:#60a5fa;background:rgba(30,136,229,0.08);border:1px solid rgba(30,136,229,0.2);padding:4px 12px;border-radius:6px;"><strong>EXO</strong> — Exocentric: external fixed-camera view of the workspace</span>
-        <span style="font-size:12px;font-weight:600;color:#1de9b6;background:rgba(29,233,182,0.08);border:1px solid rgba(29,233,182,0.2);padding:4px 12px;border-radius:6px;"><strong>EGO</strong> — Egocentric: synthesized robot's-eye perspective for training</span>
+        <span style="font-size:12px;font-weight:600;color:#60a5fa;background:rgba(30,136,229,0.08);border:1px solid rgba(30,136,229,0.2);padding:5px 13px;border-radius:6px;"><strong>EXO</strong> — Exocentric: external fixed-camera view of the workspace</span>
+        <span style="font-size:12px;font-weight:600;color:#1de9b6;background:rgba(29,233,182,0.08);border:1px solid rgba(29,233,182,0.2);padding:5px 13px;border-radius:6px;"><strong>EGO</strong> — Egocentric: synthesized robot's-eye perspective for training</span>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="stat-strip">
+      <div class="stat-tile">
+        <p class="stat-num">6</p>
+        <p class="stat-lbl">Datasets</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-num">5,570+</p>
+        <p class="stat-lbl">EGO Hours</p>
+      </div>
+      <div class="stat-tile">
+        <p class="stat-num">3</p>
+        <p class="stat-lbl">Verticals</p>
+      </div>
+      <div class="stat-tile" style="border-color:rgba(29,233,182,0.12);background:linear-gradient(135deg,rgba(29,233,182,0.05),#0d1014);">
+        <p class="stat-num" style="font-size:18px;letter-spacing:0;">Patented</p>
+        <p class="stat-lbl">EXO → EGO Pipeline</p>
       </div>
     </div>
 
     <!-- How it works -->
-    <div style="background:#0d1014;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:28px 32px;margin-bottom:36px;">
-      <p style="font-size:11px;font-weight:800;color:#9ca3af;margin:0 0 24px;letter-spacing:.1em;text-transform:uppercase;">HOW IT WORKS</p>
-      <div style="display:flex;align-items:stretch;gap:0;">
+    <div style="background:linear-gradient(135deg,#0d1014 0%,#080c10 100%);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:28px 32px;margin-bottom:40px;box-shadow:0 4px 24px rgba(0,0,0,0.3);">
+      <p style="font-size:11px;font-weight:800;color:#4b5563;margin:0 0 24px;letter-spacing:.14em;text-transform:uppercase;">HOW IT WORKS</p>
+      <div style="display:flex;align-items:center;gap:0;">
 
         <!-- EXO block -->
-        <div style="flex:1;background:rgba(30,136,229,0.07);border:1px solid rgba(30,136,229,0.25);border-radius:12px;padding:20px 22px;">
+        <div style="flex:1;background:rgba(30,136,229,0.06);border:1px solid rgba(30,136,229,0.22);border-radius:12px;padding:20px 22px;">
           <div style="width:36px;height:36px;border-radius:8px;background:rgba(30,136,229,0.15);border:1px solid rgba(30,136,229,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
@@ -159,8 +237,8 @@
         </div>
 
         <!-- Engine block -->
-        <div style="flex:1;background:rgba(29,233,182,0.12);border:2px solid rgba(29,233,182,0.55);border-radius:12px;padding:20px 22px;box-shadow:0 0 24px rgba(29,233,182,0.12),inset 0 1px 0 rgba(29,233,182,0.15);">
-          <div style="width:36px;height:36px;border-radius:8px;background:rgba(29,233,182,0.2);border:1px solid rgba(29,233,182,0.5);display:flex;align-items:center;justify-content:center;margin-bottom:12px;box-shadow:0 0 12px rgba(29,233,182,0.3);">
+        <div style="flex:1;background:rgba(29,233,182,0.1);border:2px solid rgba(29,233,182,0.5);border-radius:12px;padding:20px 22px;box-shadow:0 0 28px rgba(29,233,182,0.14),inset 0 1px 0 rgba(29,233,182,0.15);">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(29,233,182,0.2);border:1px solid rgba(29,233,182,0.5);display:flex;align-items:center;justify-content:center;margin-bottom:12px;box-shadow:0 0 14px rgba(29,233,182,0.35);">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
           <p style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#1de9b6;margin:0 0 4px;text-shadow:0 0 8px rgba(29,233,182,0.5);">Step 02</p>
@@ -177,7 +255,7 @@
         </div>
 
         <!-- EGO block -->
-        <div style="flex:1;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:20px 22px;">
+        <div style="flex:1;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.22);border-radius:12px;padding:20px 22px;">
           <div style="width:36px;height:36px;border-radius:8px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
           </div>
@@ -190,19 +268,22 @@
     </div>
 
     <!-- Transformation Showcase -->
-    <div style="display:flex;flex-direction:column;gap:36px;">
+    <div style="display:flex;flex-direction:column;gap:40px;">
 
       <!-- ── Data Center ── -->
       <div id="dc">
         <div class="section-head">
-          <span style="width:12px;height:12px;border-radius:3px;background:#1e88e5;flex-shrink:0;"></span>
-          <span style="font-size:16px;font-weight:800;color:#fff;">Data Center</span>
-          <div style="flex:1;height:1px;background:rgba(30,136,229,0.1);"></div>
+          <div class="section-pill section-pill-dc">
+            <span style="width:8px;height:8px;border-radius:2px;background:#1e88e5;flex-shrink:0;box-shadow:0 0 8px rgba(30,136,229,0.7);"></span>
+            <span style="font-size:14px;font-weight:800;color:#fff;">Data Center</span>
+            <span style="font-size:11px;font-weight:600;color:#4b5563;">2 datasets · 2,040 hrs</span>
+          </div>
+          <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(30,136,229,0.25),transparent);margin-left:4px;"></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;">
 
           <!-- Data 1 -->
-          <div class="xform-card">
+          <div class="xform-card card-dc">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div>
                 <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 2px;">Server Rack Hardware Swap</p>
@@ -210,8 +291,8 @@
               </div>
               <span class="avail-lib">In Library</span>
             </div>
-            <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:0;">
+              <div style="width:200px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/data1_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -221,7 +302,7 @@
               <div class="pipe">
                 <div class="pipe-line"></div>
                 <div class="pipe-badge">
-                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 16px rgba(29,233,182,0.35);">
+                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 18px rgba(29,233,182,0.4);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                   </div>
                   <p style="font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1de9b6;margin:0 0 2px;text-shadow:0 0 10px rgba(29,233,182,0.6);">RoboEyeView</p>
@@ -233,27 +314,27 @@
               </div>
               <div style="flex:1;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f59e0b;margin:0 0 6px;">Generated EGO Views</p>
-                <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                <div class="ego-grid">
+                  <div class="ego-box">
                     <img src="images/rev/data1_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Front</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/data1_ego2.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Overhead</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/data1_ego3.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Side</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/data1_ego3.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Low Angle</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
               <span class="tag tag-teal">Scene Reconstruction</span>
               <span class="tag tag-teal">Depth Estimation</span>
               <span class="tag tag-blue">Multi-angle Synthesis</span>
@@ -262,7 +343,7 @@
           </div>
 
           <!-- Data 2 -->
-          <div class="xform-card">
+          <div class="xform-card card-dc">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div>
                 <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 2px;">Server Rack Inspection</p>
@@ -270,8 +351,8 @@
               </div>
               <span class="avail-lib">In Library</span>
             </div>
-            <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:0;">
+              <div style="width:200px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/data2_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -281,7 +362,7 @@
               <div class="pipe">
                 <div class="pipe-line"></div>
                 <div class="pipe-badge">
-                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 16px rgba(29,233,182,0.35);">
+                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 18px rgba(29,233,182,0.4);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                   </div>
                   <p style="font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1de9b6;margin:0 0 2px;text-shadow:0 0 10px rgba(29,233,182,0.6);">RoboEyeView</p>
@@ -293,27 +374,27 @@
               </div>
               <div style="flex:1;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f59e0b;margin:0 0 6px;">Generated EGO Views</p>
-                <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                <div class="ego-grid">
+                  <div class="ego-box">
                     <img src="images/rev/data2_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Front</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/data2_ego2.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Overhead</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/data2_ego3.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Side</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/data2_ego3.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Low Angle</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
               <span class="tag tag-teal">Scene Reconstruction</span>
               <span class="tag tag-teal">Depth Estimation</span>
               <span class="tag tag-blue">Multi-angle Synthesis</span>
@@ -327,14 +408,17 @@
       <!-- ── Humanoid ── -->
       <div id="hu">
         <div class="section-head">
-          <span style="width:12px;height:12px;border-radius:3px;background:#34d399;flex-shrink:0;"></span>
-          <span style="font-size:16px;font-weight:800;color:#fff;">Humanoid</span>
-          <div style="flex:1;height:1px;background:rgba(52,211,153,0.1);"></div>
+          <div class="section-pill section-pill-hu">
+            <span style="width:8px;height:8px;border-radius:2px;background:#34d399;flex-shrink:0;box-shadow:0 0 8px rgba(52,211,153,0.7);"></span>
+            <span style="font-size:14px;font-weight:800;color:#fff;">Humanoid</span>
+            <span style="font-size:11px;font-weight:600;color:#4b5563;">3 datasets · 1,430 hrs</span>
+          </div>
+          <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(52,211,153,0.25),transparent);margin-left:4px;"></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;">
 
           <!-- Human 1 -->
-          <div class="xform-card">
+          <div class="xform-card card-hu">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div>
                 <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 2px;">Kitchen Drawer Manipulation</p>
@@ -342,8 +426,8 @@
               </div>
               <span class="avail-od">On-demand</span>
             </div>
-            <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:0;">
+              <div style="width:200px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/human1_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -353,7 +437,7 @@
               <div class="pipe">
                 <div class="pipe-line"></div>
                 <div class="pipe-badge">
-                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 16px rgba(29,233,182,0.35);">
+                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 18px rgba(29,233,182,0.4);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                   </div>
                   <p style="font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1de9b6;margin:0 0 2px;text-shadow:0 0 10px rgba(29,233,182,0.6);">RoboEyeView</p>
@@ -365,27 +449,27 @@
               </div>
               <div style="flex:1;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f59e0b;margin:0 0 6px;">Generated EGO Views</p>
-                <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                <div class="ego-grid">
+                  <div class="ego-box">
                     <img src="images/rev/human1_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Robot Hand-level</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human1_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Side</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human1_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Overhead</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human1_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Low Angle</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
               <span class="tag tag-teal">Hand Pose Tracking</span>
               <span class="tag tag-teal">Wrist-level Synthesis</span>
               <span class="tag tag-orange">Grasp Points</span>
@@ -394,7 +478,7 @@
           </div>
 
           <!-- Human 2 -->
-          <div class="xform-card">
+          <div class="xform-card card-hu">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div>
                 <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 2px;">Surface Cleaning — Stovetop</p>
@@ -402,8 +486,8 @@
               </div>
               <span class="avail-lib">In Library</span>
             </div>
-            <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:0;">
+              <div style="width:200px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/human2_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -413,7 +497,7 @@
               <div class="pipe">
                 <div class="pipe-line"></div>
                 <div class="pipe-badge">
-                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 16px rgba(29,233,182,0.35);">
+                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 18px rgba(29,233,182,0.4);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                   </div>
                   <p style="font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1de9b6;margin:0 0 2px;text-shadow:0 0 10px rgba(29,233,182,0.6);">RoboEyeView</p>
@@ -425,27 +509,27 @@
               </div>
               <div style="flex:1;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f59e0b;margin:0 0 6px;">Generated EGO Views</p>
-                <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                <div class="ego-grid">
+                  <div class="ego-box">
                     <img src="images/rev/human2_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Mid-range</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human2_ego2.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Close-up</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human2_ego2.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Overhead</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human2_ego2.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Low Angle</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
               <span class="tag tag-teal">Hand Pose Tracking</span>
               <span class="tag tag-teal">Surface Segmentation</span>
               <span class="tag tag-blue">Multi-distance Views</span>
@@ -454,7 +538,7 @@
           </div>
 
           <!-- Human 3 -->
-          <div class="xform-card">
+          <div class="xform-card card-hu">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div>
                 <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 2px;">Dishwashing — Sink Manipulation</p>
@@ -462,8 +546,8 @@
               </div>
               <span class="avail-od">On-demand</span>
             </div>
-            <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:0;">
+              <div style="width:200px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/human3_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -473,7 +557,7 @@
               <div class="pipe">
                 <div class="pipe-line"></div>
                 <div class="pipe-badge">
-                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 16px rgba(29,233,182,0.35);">
+                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 18px rgba(29,233,182,0.4);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                   </div>
                   <p style="font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1de9b6;margin:0 0 2px;text-shadow:0 0 10px rgba(29,233,182,0.6);">RoboEyeView</p>
@@ -485,27 +569,27 @@
               </div>
               <div style="flex:1;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f59e0b;margin:0 0 6px;">Generated EGO Views</p>
-                <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                <div class="ego-grid">
+                  <div class="ego-box">
                     <img src="images/rev/human3_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Hand-level Grasp</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human3_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Side</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human3_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Overhead</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/human3_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Low Angle</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
               <span class="tag tag-teal">Grasp Keypoints</span>
               <span class="tag tag-teal">Wet Object Handling</span>
               <span class="tag tag-orange">Edge Conditions</span>
@@ -519,14 +603,17 @@
       <!-- ── Automotive ── -->
       <div id="au">
         <div class="section-head">
-          <span style="width:12px;height:12px;border-radius:3px;background:#a78bfa;flex-shrink:0;"></span>
-          <span style="font-size:16px;font-weight:800;color:#fff;">Automotive</span>
-          <div style="flex:1;height:1px;background:rgba(167,139,250,0.1);"></div>
+          <div class="section-pill section-pill-au">
+            <span style="width:8px;height:8px;border-radius:2px;background:#a78bfa;flex-shrink:0;box-shadow:0 0 8px rgba(167,139,250,0.7);"></span>
+            <span style="font-size:14px;font-weight:800;color:#fff;">Automotive</span>
+            <span style="font-size:11px;font-weight:600;color:#4b5563;">1 dataset · 2,100 hrs</span>
+          </div>
+          <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(167,139,250,0.25),transparent);margin-left:4px;"></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;">
 
           <!-- Auto 1 -->
-          <div class="xform-card">
+          <div class="xform-card card-au">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
               <div>
                 <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 2px;">BMW Grille Assembly — Production Line</p>
@@ -534,8 +621,8 @@
               </div>
               <span class="avail-lib">In Library</span>
             </div>
-            <div style="display:flex;align-items:stretch;gap:0;">
-              <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:0;">
+              <div style="width:200px;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#60a5fa;margin:0 0 6px;">EXO Source</p>
                 <div class="exo-box">
                   <img src="images/rev/auto1_exo.png" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -545,7 +632,7 @@
               <div class="pipe">
                 <div class="pipe-line"></div>
                 <div class="pipe-badge">
-                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 16px rgba(29,233,182,0.35);">
+                  <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.18);border:1px solid rgba(29,233,182,0.45);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 0 18px rgba(29,233,182,0.4);">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.8" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                   </div>
                   <p style="font-size:8px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1de9b6;margin:0 0 2px;text-shadow:0 0 10px rgba(29,233,182,0.6);">RoboEyeView</p>
@@ -557,27 +644,27 @@
               </div>
               <div style="flex:1;">
                 <p style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f59e0b;margin:0 0 6px;">Generated EGO Views</p>
-                <div style="display:flex;flex-wrap:wrap;gap:8px;">
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                <div class="ego-grid">
+                  <div class="ego-box">
                     <img src="images/rev/auto1_ego1.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Front</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/auto1_ego2.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Rotate Left</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/auto1_ego3.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Low Angle</span>
                   </div>
-                  <div class="ego-box" style="width:220px;flex-shrink:0;">
+                  <div class="ego-box">
                     <img src="images/rev/auto1_ego4.png" style="width:100%;height:100%;object-fit:cover;display:block;">
                     <span class="ego-label">Studio</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);">
               <span class="tag tag-teal">Scene Reconstruction</span>
               <span class="tag tag-teal">Rotation Synthesis</span>
               <span class="tag tag-purple">Low-angle Views</span>
@@ -590,23 +677,23 @@
       </div>
 
       <!-- ── Request section ── -->
-      <div style="margin-top:8px;padding:28px 32px;background:linear-gradient(135deg,rgba(29,233,182,0.04) 0%,rgba(255,255,255,0.02) 100%);border:1px dashed rgba(255,255,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
-        <div style="display:flex;align-items:center;gap:14px;">
-          <div style="width:40px;height:40px;border-radius:10px;background:rgba(29,233,182,0.08);border:1px solid rgba(29,233,182,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <div style="margin-top:4px;padding:28px 32px;background:linear-gradient(135deg,rgba(29,233,182,0.05) 0%,rgba(255,255,255,0.02) 100%);border:1px solid rgba(29,233,182,0.12);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:24px;box-shadow:0 0 40px rgba(29,233,182,0.06);">
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="width:44px;height:44px;border-radius:11px;background:rgba(29,233,182,0.1);border:1px solid rgba(29,233,182,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 16px rgba(29,233,182,0.15);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1de9b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </div>
           <div>
-            <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 3px;">Run RoboEyeView on Your EXO Footage</p>
-            <p style="font-size:12px;color:#6b7280;margin:0;line-height:1.5;">Already have EXO footage (external camera recordings)? We'll synthesize robot-ready EGO datasets — egocentric robot-perspective viewpoints — across any task, environment, or robot form factor.</p>
+            <p style="font-size:15px;font-weight:700;color:#fff;margin:0 0 4px;">Run RoboEyeView on Your EXO Footage</p>
+            <p style="font-size:12px;color:#6b7280;margin:0;line-height:1.5;max-width:480px;">Already have EXO footage? We'll synthesize robot-ready EGO datasets — egocentric robot-perspective viewpoints — across any task, environment, or robot form factor.</p>
           </div>
         </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;align-items:center;">
+        <div style="display:flex;gap:8px;flex-shrink:0;align-items:center;flex-direction:column;">
           <div style="display:flex;gap:5px;">
             <span style="font-size:10px;font-weight:700;color:#1e88e5;background:rgba(30,136,229,0.1);border:1px solid rgba(30,136,229,0.2);padding:3px 8px;border-radius:4px;">Data Center</span>
             <span style="font-size:10px;font-weight:700;color:#34d399;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);padding:3px 8px;border-radius:4px;">Humanoid</span>
             <span style="font-size:10px;font-weight:700;color:#a78bfa;background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);padding:3px 8px;border-radius:4px;">Automotive</span>
           </div>
-          <button style="font-size:12px;font-weight:700;color:#040608;background:#1de9b6;border:none;padding:8px 20px;border-radius:8px;cursor:pointer;white-space:nowrap;">Submit Your Footage</button>
+          <button style="width:100%;font-size:13px;font-weight:700;color:#040608;background:#1de9b6;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;transition:opacity .2s;white-space:nowrap;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">Submit Your Footage</button>
         </div>
       </div>
 
