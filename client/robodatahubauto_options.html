@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automotive RoboDataHub — Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #030405; color: #fff; }
+
+/* ── Switcher ── */
+.switcher { position: sticky; top: 0; z-index: 200; background: #030405; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 8px; padding: 10px 24px; }
+.sw-label { font-size: 11px; font-weight: 700; color: #4b5563; letter-spacing: .1em; text-transform: uppercase; margin-right: 4px; }
+.sw-btn { padding: 6px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: #6b7280; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .15s; }
+.sw-btn.on { background: #a78bfa; border-color: #a78bfa; color: #040608; }
+
+.opt { display: none; }
+.opt.active { display: block; }
+
+/* ─────────────────────────────────────────
+   OPTION A — Brand-First Premium
+───────────────────────────────────────── */
+#optA {
+  --purple: #a78bfa;
+  --purple-dim: rgba(167,139,250,0.15);
+  --bg: #07090a;
+  --bg-card: #0d1014;
+  --border: rgba(255,255,255,0.06);
+  --muted: #6b7280;
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+/* Nav */
+.a-nav { background: rgba(5,9,7,0.99); border-bottom: 1px solid rgba(29,233,182,0.08); display: flex; align-items: stretch; height: 72px; backdrop-filter: blur(12px); }
+.a-nav-logo { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 200px; border-right: 1px solid rgba(255,255,255,0.04); text-decoration: none; padding: 0 24px; }
+.a-nav-logo .name { font-size: 16px; font-weight: 800; color: #1de9b6; letter-spacing: .04em; }
+.a-nav-logo .sub { font-size: 10px; color: #6b7280; margin-top: 2px; }
+.a-nav-tabs { display: flex; align-items: stretch; flex: 1; }
+.a-nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none; color: #6b7280; border-right: 1px solid rgba(255,255,255,0.04); font-size: 13px; font-weight: 700; position: relative; transition: color .2s; }
+.a-nav-tab:hover { color: #e5e7eb; background: rgba(255,255,255,0.02); }
+.a-nav-tab .sub { font-size: 9px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; opacity: .5; }
+.a-nav-tab.active { color: #1de9b6; background: rgba(29,233,182,0.04); }
+.a-nav-tab.active::after { content:''; position:absolute; bottom:0; left:20%; right:20%; height:2px; border-radius:2px 2px 0 0; background:#1de9b6; box-shadow:0 0 10px rgba(29,233,182,0.6); }
+.a-nav-actions { display: flex; align-items: center; gap: 8px; padding: 0 20px; border-left: 1px solid rgba(255,255,255,0.04); }
+.a-btn-ghost { padding: 6px 14px; background: transparent; border: 1px solid rgba(255,255,255,0.12); border-radius: 7px; font-size: 12px; font-weight: 600; color: #9ca3af; cursor: pointer; font-family: inherit; }
+.a-btn-solid { padding: 6px 16px; background: var(--purple); border: none; border-radius: 7px; font-size: 12px; font-weight: 700; color: #040608; cursor: pointer; font-family: inherit; }
+
+/* Hero banner */
+.a-hero {
+  position: relative; overflow: hidden;
+  padding: 56px 56px 48px;
+  background: linear-gradient(135deg, #0a0614 0%, #130920 35%, #0c0718 65%, #07090a 100%);
+}
+.a-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 120% at 80% 50%, rgba(167,139,250,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 60% at 10% 80%, rgba(29,233,182,0.06) 0%, transparent 60%);
+}
+.a-hero-inner { position: relative; z-index: 1; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.a-hero-left { flex: 1; }
+.a-hero-eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.a-hero-eyebrow a { font-size: 12px; color: #4b5563; text-decoration: none; }
+.a-hero-eyebrow span { color: #374151; }
+.a-hero-eyebrow .cur { font-size: 12px; color: var(--purple); font-weight: 600; }
+.a-hero h1 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 900; line-height: 1.08; letter-spacing: -1.5px; color: #fff; margin-bottom: 12px; }
+.a-hero h1 span { color: var(--purple); }
+.a-hero p { font-size: 15px; color: #6b7280; line-height: 1.7; max-width: 480px; margin-bottom: 28px; }
+.a-hero-btns { display: flex; gap: 10px; }
+.a-hero-btn-p { padding: 10px 24px; background: var(--purple); color: #040608; border-radius: 8px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; font-family: inherit; }
+.a-hero-btn-g { padding: 10px 24px; background: transparent; color: #9ca3af; border-radius: 8px; font-size: 13px; font-weight: 600; border: 1px solid rgba(255,255,255,0.12); cursor: pointer; font-family: inherit; }
+.a-hero-right { display: flex; gap: 12px; flex-shrink: 0; }
+.a-stat-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(167,139,250,0.15); border-radius: 12px; padding: 18px 22px; text-align: center; min-width: 110px; }
+.a-stat-box .num { font-size: 28px; font-weight: 900; color: var(--purple); line-height: 1; }
+.a-stat-box .lbl { font-size: 10px; font-weight: 600; color: #4b5563; margin-top: 4px; letter-spacing: .06em; text-transform: uppercase; }
+
+/* Body layout */
+.a-body { display: flex; min-height: calc(100vh - 72px - 160px); }
+.a-sidebar { width: 210px; flex-shrink: 0; background: #040608; border-right: 1px solid rgba(255,255,255,0.05); padding: 20px 12px; }
+.a-sidebar-label { font-size: 10px; font-weight: 700; color: #374151; letter-spacing: .12em; text-transform: uppercase; padding: 0 8px; margin-bottom: 10px; }
+.a-sidebar-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; text-decoration: none; margin-bottom: 2px; transition: background .15s; }
+.a-sidebar-item:hover { background: rgba(255,255,255,0.04); }
+.a-sidebar-item.active { background: rgba(167,139,250,0.1); border: 1px solid rgba(167,139,250,0.2); }
+.a-sidebar-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.a-sidebar-text { font-size: 13px; font-weight: 700; color: #d1d5db; }
+.a-sidebar-item.active .a-sidebar-text { color: #fff; }
+.a-main { flex: 1; padding: 32px 40px; }
+
+/* Car catalog */
+.a-catalog-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 36px; }
+.a-brand-card {
+  border-radius: 12px; padding: 18px 14px; text-align: center; cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.06); background: var(--bg-card);
+  transition: border-color .2s, transform .2s; position: relative; overflow: hidden;
+}
+.a-brand-card:hover { transform: translateY(-3px); border-color: rgba(167,139,250,0.3); }
+.a-brand-card.selected { border-color: var(--purple); background: rgba(167,139,250,0.07); }
+.a-brand-logo { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; margin: 0 auto 10px; letter-spacing: -.5px; }
+.a-brand-name { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+.a-brand-meta { font-size: 10px; color: var(--muted); line-height: 1.5; }
+.a-brand-badge { position: absolute; top: 8px; right: 8px; font-size: 9px; font-weight: 700; color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); padding: 1px 6px; border-radius: 10px; }
+
+/* Section head */
+.a-sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.a-sec-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.a-sec-title { font-size: 15px; font-weight: 800; color: #fff; }
+.a-sec-line { flex: 1; height: 1px; background: rgba(167,139,250,0.12); }
+.a-sec-count { font-size: 11px; color: #4b5563; font-weight: 600; }
+
+/* Dataset grid */
+.a-ds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+.a-ds-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: border-color .2s, transform .2s; }
+.a-ds-card:hover { border-color: rgba(167,139,250,0.3); transform: translateY(-2px); }
+.a-ds-img { height: 160px; position: relative; overflow: hidden; flex-shrink: 0; }
+.a-ds-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.a-ds-card:hover .a-ds-img img { transform: scale(1.04); }
+.a-ds-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0d1014 0%, rgba(13,16,20,0.4) 50%, transparent 100%); }
+.a-ds-brand-chip { position: absolute; top: 10px; left: 10px; font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 4px; letter-spacing: .06em; }
+.a-ds-type { position: absolute; top: 10px; right: 10px; font-size: 9px; font-weight: 800; letter-spacing: .08em; background: rgba(0,0,0,0.7); padding: 2px 6px; border-radius: 3px; }
+.a-ds-body { padding: 14px; flex: 1; display: flex; flex-direction: column; }
+.a-ds-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+.a-ds-desc { font-size: 11px; color: #4b5563; line-height: 1.55; margin-bottom: 10px; flex: 1; }
+.a-ds-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 10px; }
+.a-tag { font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 3px; }
+.a-tag-teal { background: rgba(29,233,182,0.1); color: #1de9b6; border: 1px solid rgba(29,233,182,0.2); }
+.a-tag-blue { background: rgba(30,136,229,0.1); color: #60a5fa; border: 1px solid rgba(30,136,229,0.2); }
+.a-tag-purple { background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+.a-tag-orange { background: rgba(251,146,60,0.1); color: #fb923c; border: 1px solid rgba(251,146,60,0.2); }
+.a-ds-footer { display: flex; align-items: center; justify-content: space-between; }
+.a-ds-hrs { font-size: 13px; font-weight: 700; color: var(--purple); }
+.avail-lib { font-size: 10px; font-weight: 600; color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); padding: 2px 8px; border-radius: 10px; }
+.avail-od { font-size: 10px; font-weight: 600; color: #f59e0b; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); padding: 2px 8px; border-radius: 10px; }
+
+
+/* ─────────────────────────────────────────
+   OPTION C — Live Catalog View
+───────────────────────────────────────── */
+#optC {
+  --green: #00e5a0; --green2: #00b87a; --gglow: rgba(0,229,160,0.08);
+  --bg: #07070a; --surface: #101015; --card: #141419; --card2: #1b1b21;
+  --border: rgba(255,255,255,0.055); --border2: rgba(255,255,255,0.10);
+  --muted: #505068; --muted2: #8888a4;
+  background: var(--bg); min-height: 100vh; font-family: 'Inter', sans-serif;
+}
+/* Nav */
+.c-nav { height: 58px; background: rgba(7,7,10,0.96); backdrop-filter: blur(28px); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 0; }
+.c-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: 38px; flex-shrink: 0; }
+.c-logo-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--green); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 14px; color: #000; }
+.c-logo-name { font-size: 14px; font-weight: 800; color: #ededf2; letter-spacing: -.3px; line-height: 1.1; }
+.c-logo-sub { font-size: 8.5px; font-weight: 500; color: var(--muted); letter-spacing: .8px; text-transform: uppercase; }
+.c-nav-links { display: flex; align-items: center; gap: 2px; flex: 1; }
+.c-nav-item { display: flex; flex-direction: column; padding: 5px 13px; border-radius: 8px; text-decoration: none; transition: background .15s; cursor: pointer; }
+.c-nav-item:hover { background: rgba(255,255,255,0.04); }
+.c-nav-item.active { background: rgba(0,229,160,0.07); }
+.c-nl { font-size: 12.5px; font-weight: 600; color: #ededf2; letter-spacing: -.2px; }
+.c-ns { font-size: 8.5px; font-weight: 600; color: var(--muted); letter-spacing: .7px; text-transform: uppercase; margin-top: 1px; }
+.c-nav-item.active .c-nl { color: var(--green); }
+.c-nav-right { display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0; }
+.c-admin-chip { display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,0.05); border: 1px solid var(--border2); border-radius: 8px; padding: 3px 11px; }
+.c-acl { font-size: 7.5px; font-weight: 800; color: var(--muted); letter-spacing: 1.2px; text-transform: uppercase; }
+.c-acn { font-size: 11.5px; font-weight: 700; color: #ededf2; }
+.c-btn-so { font-size: 12.5px; font-weight: 500; color: var(--muted2); background: none; border: 1px solid var(--border2); border-radius: 8px; padding: 5px 13px; cursor: pointer; transition: all .15s; }
+.c-btn-so:hover { color: #ededf2; border-color: rgba(255,255,255,0.2); }
+/* Subbar */
+.c-subbar { height: 40px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; }
+.c-bc { display: flex; align-items: center; gap: 7px; flex: 1; }
+.c-bc a { font-size: 12px; font-weight: 600; color: var(--green); text-decoration: none; }
+.c-bc-sep { color: var(--muted); font-size: 11px; }
+.c-bc-cur { font-size: 12px; font-weight: 700; color: #ededf2; letter-spacing: .4px; }
+.c-sbr { display: flex; align-items: center; gap: 16px; }
+.c-items-l { font-size: 12px; color: var(--muted); }
+.c-items-l strong { color: #ededf2; font-weight: 700; }
+.c-live-p { display: flex; align-items: center; gap: 5px; }
+.c-live-d { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: cpulse 2s infinite; }
+@keyframes cpulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+.c-live-l { font-size: 11.5px; color: var(--green); font-weight: 500; }
+.c-btn-imp { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; color: var(--green); background: var(--gglow); border: 1px solid rgba(0,229,160,0.18); border-radius: 8px; padding: 4px 12px; cursor: pointer; transition: all .15s; }
+.c-btn-imp:hover { background: rgba(0,229,160,0.13); border-color: rgba(0,229,160,0.32); }
+/* Hero */
+.c-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; max-width: 1360px; margin: 0 auto; padding: 60px 40px 0; }
+.c-hero-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(0,229,160,0.07); border: 1px solid rgba(0,229,160,0.2); border-radius: 20px; padding: 5px 14px; margin-bottom: 20px; }
+.c-hero-tag-dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; }
+.c-hero-tag span { font-size: 10px; font-weight: 800; color: var(--green); letter-spacing: 1.3px; text-transform: uppercase; }
+.c-hero h1 { font-size: clamp(36px,4vw,58px); font-weight: 900; letter-spacing: -2.5px; line-height: 1.05; background: linear-gradient(148deg,#fff 42%,rgba(255,255,255,.32)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 18px; }
+.c-hero-desc { font-size: 15px; line-height: 1.72; color: var(--muted2); max-width: 440px; margin-bottom: 34px; }
+.c-hero-stats { display: grid; grid-template-columns: repeat(4,1fr); border: 1px solid var(--border2); border-radius: 14px; overflow: hidden; background: var(--border); gap: 1px; }
+.c-hs { background: var(--surface); padding: 15px 14px; display: flex; flex-direction: column; gap: 3px; }
+.c-hs-val { font-size: 20px; font-weight: 800; color: #ededf2; letter-spacing: -.5px; }
+.c-hs-val.g { color: var(--green); }
+.c-hs-lbl { font-size: 9px; font-weight: 700; color: var(--muted); letter-spacing: .9px; text-transform: uppercase; }
+.c-hero-img { position: relative; height: 390px; border-radius: 20px; overflow: hidden; border: 1px solid var(--border2); box-shadow: 0 28px 72px rgba(0,0,0,.65); }
+.c-hero-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.88) saturate(1.2); transition: transform .5s; }
+.c-hero-img:hover img { transform: scale(1.04); }
+.c-hero-img-ov { position: absolute; inset: 0; background: linear-gradient(155deg,rgba(0,0,0,.5) 0%,transparent 55%,rgba(0,229,160,.05) 100%); }
+.c-hero-badge { position: absolute; bottom: 18px; left: 18px; background: rgba(0,0,0,.75); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.1); border-radius: 11px; padding: 10px 16px; }
+.c-hb-b { font-size: 8.5px; font-weight: 800; color: var(--green); letter-spacing: 1.3px; text-transform: uppercase; margin-bottom: 3px; }
+.c-hb-n { font-size: 13px; font-weight: 700; color: #fff; }
+.c-hero-pill { position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; padding: 5px 12px; font-size: 11px; font-weight: 600; color: var(--muted2); }
+.c-hero-pill strong { color: var(--green); }
+/* Stats band */
+.c-stats-band { max-width: 1360px; margin: 44px auto 0; padding: 0 40px; }
+.c-stats-inner { display: grid; grid-template-columns: repeat(5,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border2); border-radius: 14px; overflow: hidden; }
+.c-sb { background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 3px; }
+.c-sb-val { font-size: 25px; font-weight: 900; color: #ededf2; letter-spacing: -.8px; }
+.c-sb-val sup { font-size: 13px; font-weight: 600; color: var(--muted2); vertical-align: super; }
+.c-sb-lbl { font-size: 9.5px; font-weight: 700; color: var(--muted); letter-spacing: .8px; text-transform: uppercase; }
+/* Section header + filters */
+.c-sec-hdr { max-width: 1360px; margin: 44px auto 0; padding: 0 40px; display: flex; align-items: flex-end; justify-content: space-between; }
+.c-sec-hdr h2 { font-size: 22px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 4px; color: #ededf2; }
+.c-sec-hdr p { font-size: 13px; color: var(--muted2); }
+.c-filters { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+.c-filter { font-size: 11.5px; font-weight: 600; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border2); background: none; color: var(--muted2); cursor: pointer; transition: all .15s; white-space: nowrap; font-family: inherit; }
+.c-filter.active { color: #ededf2; background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,.18); }
+.c-filter:hover { color: #ededf2; background: rgba(255,255,255,0.05); }
+/* Grid */
+.c-grid { max-width: 1360px; margin: 22px auto 0; padding: 0 40px 60px; display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+/* Card */
+.c-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transition: border-color .25s, transform .25s, box-shadow .25s; cursor: pointer; }
+.c-card:hover { border-color: rgba(0,229,160,.26); transform: translateY(-4px); box-shadow: 0 20px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(0,229,160,.06); }
+.c-card-head { padding: 18px 18px 10px; display: flex; align-items: center; justify-content: space-between; }
+.c-card-title { font-size: 16px; font-weight: 700; color: #ededf2; letter-spacing: -.3px; line-height: 1.2; }
+.c-badge { background: var(--green); color: #000; font-size: 8.5px; font-weight: 900; letter-spacing: .5px; padding: 3px 9px; border-radius: 20px; text-transform: uppercase; flex-shrink: 0; align-self: flex-start; margin-top: 2px; }
+.c-photos { padding: 0 18px; display: grid; grid-template-columns: 1fr 90px; grid-template-rows: 200px 96px; gap: 7px; }
+.c-ph-main { grid-row: 1/3; border-radius: 12px; overflow: hidden; background: var(--card2); position: relative; }
+.c-ph-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease; filter: brightness(.9) contrast(1.05) saturate(1.1); }
+.c-card:hover .c-ph-main img { transform: scale(1.06); }
+.c-ph-main::after { content: ''; position: absolute; inset: 0; border-radius: 12px; background: linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45)); pointer-events: none; }
+.c-ph-thumbs { display: grid; grid-template-rows: 1fr 1fr; gap: 7px; }
+.c-ph-t { border-radius: 9px; overflow: hidden; background: var(--card2); }
+.c-ph-t img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(.75) contrast(1.06) saturate(1.08); transition: transform .35s ease; }
+.c-card:hover .c-ph-t img { transform: scale(1.09); }
+.c-tags { padding: 11px 18px 0; display: flex; gap: 5px; flex-wrap: wrap; }
+.c-tag { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 6px; padding: 3px 9px; font-size: 10px; font-weight: 500; color: var(--muted2); }
+.c-card-foot { padding: 11px 18px 16px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.c-card-path { font-size: 10px; color: var(--muted); font-family: 'SF Mono','Fira Mono',monospace; }
+.c-btn-open { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--green); background: none; border: none; cursor: pointer; transition: gap .15s; font-family: inherit; }
+.c-btn-open:hover { gap: 8px; }
+/* CTA */
+.c-cta-wrap { max-width: 1360px; margin: 0 auto; padding: 0 40px 80px; }
+.c-cta { background: linear-gradient(128deg,rgba(0,229,160,.07) 0%,rgba(0,229,160,.02) 45%,transparent 70%); border: 1px solid rgba(0,229,160,.14); border-radius: 20px; padding: 48px 52px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.c-cta h2 { font-size: 26px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 9px; color: #ededf2; }
+.c-cta p { font-size: 14px; color: var(--muted2); line-height: 1.65; max-width: 460px; }
+.c-cta-btns { display: flex; gap: 10px; flex-shrink: 0; }
+.c-btn-primary { font-size: 13.5px; font-weight: 700; color: #000; background: var(--green); border: none; border-radius: 10px; padding: 13px 26px; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.c-btn-primary:hover { background: #00ffb2; transform: translateY(-1px); }
+.c-btn-outline { font-size: 13.5px; font-weight: 600; color: #ededf2; background: rgba(255,255,255,.06); border: 1px solid var(--border2); border-radius: 10px; padding: 13px 26px; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.c-btn-outline:hover { background: rgba(255,255,255,.1); }
+@media(max-width:1100px){.c-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.c-hero{grid-template-columns:1fr}.c-grid{grid-template-columns:1fr;padding:0 18px 60px}.c-nav-links{display:none}.c-stats-band,.c-sec-hdr,.c-cta-wrap{padding-left:18px;padding-right:18px}}
+
+/* ─────────────────────────────────────────
+   OPTION D — Sidebar + Live Catalog View
+───────────────────────────────────────── */
+#optD { --green:#00e5a0; --green2:#00b87a; --gglow:rgba(0,229,160,0.08); --bg:#07070a; --surface:#101015; --card:#141419; --card2:#1b1b21; --border:rgba(255,255,255,0.055); --border2:rgba(255,255,255,0.10); --muted:#505068; --muted2:#8888a4; background:var(--bg); min-height:100vh; font-family:'Inter',sans-serif; }
+/* Nav */
+.d-nav { height:58px; background:rgba(7,7,10,0.96); backdrop-filter:blur(28px); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 28px; }
+.d-logo { display:flex; align-items:center; gap:10px; text-decoration:none; margin-right:38px; flex-shrink:0; }
+.d-logo-icon { width:32px; height:32px; border-radius:8px; background:var(--green); display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; color:#000; }
+.d-logo-name { font-size:14px; font-weight:800; color:#ededf2; letter-spacing:-.3px; line-height:1.1; }
+.d-logo-sub { font-size:8.5px; font-weight:500; color:var(--muted); letter-spacing:.8px; text-transform:uppercase; }
+.d-nav-links { display:flex; align-items:center; gap:2px; flex:1; }
+.d-nav-item { display:flex; flex-direction:column; padding:5px 13px; border-radius:8px; text-decoration:none; transition:background .15s; }
+.d-nav-item:hover { background:rgba(255,255,255,0.04); }
+.d-nav-item.active { background:rgba(0,229,160,0.07); }
+.d-nl { font-size:12.5px; font-weight:600; color:#ededf2; letter-spacing:-.2px; }
+.d-ns { font-size:8.5px; font-weight:600; color:var(--muted); letter-spacing:.7px; text-transform:uppercase; margin-top:1px; }
+.d-nav-item.active .d-nl { color:var(--green); }
+.d-nav-right { display:flex; align-items:center; gap:8px; margin-left:auto; flex-shrink:0; }
+.d-admin-chip { display:flex; flex-direction:column; align-items:center; background:rgba(255,255,255,0.05); border:1px solid var(--border2); border-radius:8px; padding:3px 11px; }
+.d-acl { font-size:7.5px; font-weight:800; color:var(--muted); letter-spacing:1.2px; text-transform:uppercase; }
+.d-acn { font-size:11.5px; font-weight:700; color:#ededf2; }
+.d-btn-so { font-size:12.5px; font-weight:500; color:var(--muted2); background:none; border:1px solid var(--border2); border-radius:8px; padding:5px 13px; cursor:pointer; font-family:inherit; }
+/* Subbar */
+.d-subbar { height:40px; background:var(--surface); border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 28px; }
+.d-bc { display:flex; align-items:center; gap:7px; flex:1; }
+.d-bc a { font-size:12px; font-weight:600; color:var(--green); text-decoration:none; }
+.d-bc-sep { color:var(--muted); font-size:11px; }
+.d-bc-cur { font-size:12px; font-weight:700; color:#ededf2; letter-spacing:.4px; }
+.d-sbr { display:flex; align-items:center; gap:16px; }
+.d-items-l { font-size:12px; color:var(--muted); }
+.d-items-l strong { color:#ededf2; font-weight:700; }
+.d-live-p { display:flex; align-items:center; gap:5px; }
+.d-live-d { width:6px; height:6px; background:var(--green); border-radius:50%; animation:dpulse 2s infinite; }
+@keyframes dpulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+.d-live-l { font-size:11.5px; color:var(--green); font-weight:500; }
+.d-btn-imp { display:flex; align-items:center; gap:5px; font-size:12px; font-weight:700; color:var(--green); background:var(--gglow); border:1px solid rgba(0,229,160,0.18); border-radius:8px; padding:4px 12px; cursor:pointer; font-family:inherit; }
+/* Hero — two column */
+.d-hero { display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:center; max-width:1360px; margin:0 auto; padding:60px 40px 0; }
+.d-hero-tag { display:inline-flex; align-items:center; gap:7px; background:rgba(0,229,160,0.07); border:1px solid rgba(0,229,160,0.2); border-radius:20px; padding:5px 14px; margin-bottom:20px; }
+.d-hero-tag-dot { width:5px; height:5px; background:var(--green); border-radius:50%; }
+.d-hero-tag span { font-size:10px; font-weight:800; color:var(--green); letter-spacing:1.3px; text-transform:uppercase; }
+.d-hero h1 { font-size:clamp(36px,4vw,58px); font-weight:900; letter-spacing:-2.5px; line-height:1.05; background:linear-gradient(148deg,#fff 42%,rgba(255,255,255,.32)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:18px; }
+.d-hero-desc { font-size:15px; line-height:1.72; color:var(--muted2); max-width:440px; margin-bottom:34px; }
+.d-hero-stats { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border2); border-radius:14px; overflow:hidden; background:var(--border); gap:1px; }
+.d-hs { background:var(--surface); padding:15px 14px; display:flex; flex-direction:column; gap:3px; }
+.d-hs-val { font-size:20px; font-weight:800; color:#ededf2; letter-spacing:-.5px; }
+.d-hs-val.g { color:var(--green); }
+.d-hs-lbl { font-size:9px; font-weight:700; color:var(--muted); letter-spacing:.9px; text-transform:uppercase; }
+.d-hero-img { position:relative; height:390px; border-radius:20px; overflow:hidden; border:1px solid var(--border2); box-shadow:0 28px 72px rgba(0,0,0,.65); }
+.d-hero-img img { width:100%; height:100%; object-fit:cover; filter:brightness(.88) saturate(1.2); transition:transform .5s; }
+.d-hero-img:hover img { transform:scale(1.04); }
+.d-hero-img-ov { position:absolute; inset:0; background:linear-gradient(155deg,rgba(0,0,0,.5) 0%,transparent 55%,rgba(0,229,160,.05) 100%); }
+.d-hero-badge { position:absolute; bottom:18px; left:18px; background:rgba(0,0,0,.75); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,.1); border-radius:11px; padding:10px 16px; }
+.d-hb-b { font-size:8.5px; font-weight:800; color:var(--green); letter-spacing:1.3px; text-transform:uppercase; margin-bottom:3px; }
+.d-hb-n { font-size:13px; font-weight:700; color:#fff; }
+.d-hero-pill { position:absolute; top:16px; right:16px; background:rgba(0,0,0,.7); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:5px 12px; font-size:11px; font-weight:600; color:var(--muted2); }
+.d-hero-pill strong { color:var(--green); }
+/* Stats band */
+.d-stats-band { max-width:1360px; margin:44px auto 0; padding:0 40px; }
+.d-stats-inner { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border); border:1px solid var(--border2); border-radius:14px; overflow:hidden; }
+.d-sb { background:var(--surface); padding:18px 20px; display:flex; flex-direction:column; gap:3px; }
+.d-sb-val { font-size:25px; font-weight:900; color:#ededf2; letter-spacing:-.8px; }
+.d-sb-val sup { font-size:13px; font-weight:600; color:var(--muted2); vertical-align:super; }
+.d-sb-lbl { font-size:9.5px; font-weight:700; color:var(--muted); letter-spacing:.8px; text-transform:uppercase; }
+/* Body layout */
+.d-body { display:flex; max-width:1360px; margin:44px auto 0; padding:0 40px 60px; gap:0; }
+.d-sidebar { width:220px; flex-shrink:0; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px 12px; display:flex; flex-direction:column; margin-right:28px; align-self:flex-start; }
+.d-sidebar-label { font-size:10px; font-weight:700; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; padding:0 8px; margin-bottom:10px; }
+.d-sidebar-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; text-decoration:none; margin-bottom:2px; transition:background .15s; cursor:pointer; width:100%; background:none; border:1px solid transparent; font-family:inherit; }
+.d-sidebar-item:hover { background:rgba(255,255,255,0.04); }
+.d-sidebar-item.active { background:rgba(0,229,160,0.07); border-color:rgba(0,229,160,0.2); }
+.d-sidebar-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+.d-sidebar-text { font-size:13px; font-weight:600; color:var(--muted2); text-align:left; }
+.d-sidebar-item.active .d-sidebar-text { color:var(--green); }
+.d-main { flex:1; min-width:0; }
+/* Catalog */
+.d-catalog-label { font-size:11px; font-weight:700; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin-bottom:14px; }
+.d-catalog-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:36px; }
+.d-brand-card { border-radius:12px; padding:18px 14px; text-align:center; cursor:pointer; border:1px solid var(--border); background:var(--card); transition:border-color .2s,transform .2s; position:relative; overflow:hidden; }
+.d-brand-card:hover { transform:translateY(-3px); border-color:rgba(0,229,160,0.3); }
+.d-brand-card.selected { border-color:var(--green); background:rgba(0,229,160,0.05); }
+.d-brand-name { font-size:13px; font-weight:800; color:#ededf2; margin-bottom:4px; }
+.d-brand-meta { font-size:10px; color:var(--muted2); line-height:1.5; }
+.d-brand-badge { position:absolute; top:8px; right:8px; font-size:9px; font-weight:700; color:#22c55e; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2); padding:1px 6px; border-radius:10px; }
+/* Section heads */
+.d-sec-head { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.d-sec-dot { width:10px; height:10px; border-radius:3px; background:var(--green); flex-shrink:0; }
+.d-sec-title { font-size:15px; font-weight:800; color:#ededf2; }
+.d-sec-line { flex:1; height:1px; background:rgba(0,229,160,0.12); }
+.d-sec-count { font-size:11px; color:var(--muted); font-weight:600; }
+/* Dataset grid — Option C card style */
+.d-ds-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px; }
+.d-card { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; transition:border-color .25s,transform .25s,box-shadow .25s; cursor:pointer; }
+.d-card:hover { border-color:rgba(0,229,160,.26); transform:translateY(-4px); box-shadow:0 20px 56px rgba(0,0,0,.55),0 0 0 1px rgba(0,229,160,.06); }
+.d-card-head { padding:18px 18px 10px; display:flex; align-items:center; justify-content:space-between; }
+.d-card-title { font-size:15px; font-weight:700; color:#ededf2; letter-spacing:-.3px; line-height:1.2; }
+.d-badge { background:var(--green); color:#000; font-size:8.5px; font-weight:900; letter-spacing:.5px; padding:3px 9px; border-radius:20px; text-transform:uppercase; flex-shrink:0; align-self:flex-start; margin-top:2px; }
+.d-badge-od { background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3); font-size:8.5px; font-weight:900; letter-spacing:.5px; padding:3px 9px; border-radius:20px; text-transform:uppercase; flex-shrink:0; align-self:flex-start; margin-top:2px; }
+.d-photos { padding:0 18px; display:grid; grid-template-columns:1fr 90px; grid-template-rows:180px 86px; gap:7px; }
+.d-ph-main { grid-row:1/3; border-radius:12px; overflow:hidden; background:var(--card2); position:relative; }
+.d-ph-main img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .45s ease; filter:brightness(.9) contrast(1.05) saturate(1.1); }
+.d-card:hover .d-ph-main img { transform:scale(1.06); }
+.d-ph-main::after { content:''; position:absolute; inset:0; border-radius:12px; background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.45)); pointer-events:none; }
+.d-ph-thumbs { display:grid; grid-template-rows:1fr 1fr 1fr; gap:7px; grid-row:1/3; }
+.d-ph-t { border-radius:9px; overflow:hidden; background:var(--card2); }
+.d-ph-t img { width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.75) contrast(1.06) saturate(1.08); transition:transform .35s ease; }
+.d-card:hover .d-ph-t img { transform:scale(1.09); }
+.d-tags { padding:11px 18px 0; display:flex; gap:5px; flex-wrap:wrap; }
+.d-tag { background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:6px; padding:3px 9px; font-size:10px; font-weight:500; color:var(--muted2); }
+.d-card-foot { padding:11px 18px 16px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
+.d-card-path { font-size:10px; color:var(--muted); font-family:'SF Mono','Fira Mono',monospace; }
+.d-btn-open { display:flex; align-items:center; gap:4px; font-size:12px; font-weight:700; color:var(--green); background:none; border:none; cursor:pointer; transition:gap .15s; font-family:inherit; }
+.d-btn-open:hover { gap:8px; }
+/* CTA */
+.d-cta-wrap { max-width:1360px; margin:0 auto; padding:0 40px 80px; }
+.d-cta { background:linear-gradient(128deg,rgba(0,229,160,.07) 0%,rgba(0,229,160,.02) 45%,transparent 70%); border:1px solid rgba(0,229,160,.14); border-radius:20px; padding:48px 52px; display:flex; align-items:center; justify-content:space-between; gap:40px; }
+.d-cta h2 { font-size:26px; font-weight:800; letter-spacing:-.5px; margin-bottom:9px; color:#ededf2; }
+.d-cta p { font-size:14px; color:var(--muted2); line-height:1.65; max-width:460px; }
+.d-cta-btns { display:flex; gap:10px; flex-shrink:0; }
+.d-btn-primary { font-size:13.5px; font-weight:700; color:#000; background:var(--green); border:none; border-radius:10px; padding:13px 26px; cursor:pointer; white-space:nowrap; font-family:inherit; }
+.d-btn-outline { font-size:13.5px; font-weight:600; color:#ededf2; background:rgba(255,255,255,.06); border:1px solid var(--border2); border-radius:10px; padding:13px 26px; cursor:pointer; white-space:nowrap; font-family:inherit; }
+</style>
+</head>
+<body>
+
+<!-- Switcher -->
+<div class="switcher">
+  <span class="sw-label">Options</span>
+  <button class="sw-btn on" onclick="show('A',this)">Option A — Brand-First Premium</button>
+  <button class="sw-btn" onclick="show('C',this)">Option C — Live Catalog View</button>
+  <button class="sw-btn" onclick="show('D',this)">Option D — Sidebar + Live Catalog</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     OPTION A — Brand-First Premium
+══════════════════════════════════════ -->
+<div id="optA" class="opt active">
+
+  <!-- Nav -->
+  <nav class="a-nav">
+    <a href="homepage.html" class="a-nav-logo">
+      <span class="name">DataraAI</span>
+      <span class="sub">← Back to Home</span>
+    </a>
+    <div class="a-nav-tabs">
+      <a href="robodatahub.html" class="a-nav-tab active">
+        <span>RoboDataHub</span>
+        <span class="sub">Dataset Catalog</span>
+      </a>
+      <a href="roboeyeview.html" class="a-nav-tab">
+        <span>RoboEyeView</span>
+        <span class="sub">Visual Intelligence</span>
+      </a>
+      <a href="#" class="a-nav-tab">
+        <span>RoboHandMotion</span>
+        <span class="sub">Humanoid Data</span>
+      </a>
+      <a href="#" class="a-nav-tab">
+        <span>RoboTaskManipulator</span>
+        <span class="sub">Task Execution</span>
+      </a>
+    </div>
+    <div class="a-nav-actions">
+      <button class="a-btn-ghost">Sign In</button>
+      <button class="a-btn-solid">Get Access</button>
+    </div>
+  </nav>
+
+  <!-- Hero Banner -->
+  <div class="a-hero">
+    <div class="a-hero-inner">
+      <div class="a-hero-left">
+        <div class="a-hero-eyebrow">
+          <a href="robodatahub.html">RoboDataHub</a>
+          <span>›</span>
+          <span class="cur">Automotive</span>
+        </div>
+        <h1>Production-line Data<br>for <span>Automotive Robots</span></h1>
+        <p>Assembly, QC inspection, paint shop, and wiring datasets captured on real production lines — across BMW, Ford, Toyota, Audi, and multi-platform builds.</p>
+        <div class="a-hero-btns">
+          <button class="a-hero-btn-p">Request a Dataset</button>
+          <button class="a-hero-btn-g">View All Verticals</button>
+        </div>
+      </div>
+      <div class="a-hero-right">
+        <div class="a-stat-box">
+          <div class="num">5,500+</div>
+          <div class="lbl">Total Hours</div>
+        </div>
+        <div class="a-stat-box">
+          <div class="num">16</div>
+          <div class="lbl">Datasets</div>
+        </div>
+        <div class="a-stat-box">
+          <div class="num">5</div>
+          <div class="lbl">Car Brands</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="a-body">
+
+    <!-- Sidebar -->
+    <div class="a-sidebar">
+      <div style="margin-bottom:20px;">
+        <div class="a-sidebar-label" style="margin-bottom:8px;">Filter by Task</div>
+        <a href="#a-assembly" class="a-sidebar-item active">
+          <div class="a-sidebar-dot" style="background:#a78bfa;"></div>
+          <span class="a-sidebar-text">Assembly Line</span>
+        </a>
+        <a href="#a-qc" class="a-sidebar-item">
+          <div class="a-sidebar-dot" style="background:#6b7280;"></div>
+          <span class="a-sidebar-text">QC Inspection</span>
+        </a>
+        <a href="#a-paint" class="a-sidebar-item">
+          <div class="a-sidebar-dot" style="background:#6b7280;"></div>
+          <span class="a-sidebar-text">Paint &amp; Body</span>
+        </a>
+        <a href="#a-wiring" class="a-sidebar-item">
+          <div class="a-sidebar-dot" style="background:#6b7280;"></div>
+          <span class="a-sidebar-text">Wiring &amp; Sensors</span>
+        </a>
+      </div>
+      <div style="padding-top:16px;border-top:1px solid rgba(255,255,255,0.04);">
+        <div class="a-sidebar-label" style="margin-bottom:8px;">Filter by Brand</div>
+        <a href="#a-bmw" class="a-sidebar-item">
+          <div class="a-sidebar-dot" style="background:#60a5fa;"></div>
+          <span class="a-sidebar-text">BMW</span>
+        </a>
+        <a href="#a-ford" class="a-sidebar-item">
+          <div class="a-sidebar-dot" style="background:#34d399;"></div>
+          <span class="a-sidebar-text">Ford</span>
+        </a>
+        <a href="#a-toyota" class="a-sidebar-item">
+          <div class="a-sidebar-dot" style="background:#f87171;"></div>
+          <span class="a-sidebar-text">Toyota</span>
+        </a>
+        <a href="#a-audi" class="a-sidebar-item">
+          <div class="a-sidebar-dot" style="background:#9ca3af;"></div>
+          <span class="a-sidebar-text">Audi</span>
+        </a>
+
+        <a href="#a-multi" class="a-sidebar-item">
+          <div class="a-sidebar-dot" style="background:#1de9b6;"></div>
+          <span class="a-sidebar-text">Multi-Platform</span>
+        </a>
+      </div>
+      <div style="padding:16px 12px 0;margin-top:auto;">
+        <button style="width:100%;background:#a78bfa;color:#040608;border:none;padding:9px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">Get Access</button>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="a-main">
+
+      <!-- Car Brand Catalog -->
+      <div style="margin-bottom:32px;">
+        <p style="font-size:11px;font-weight:700;color:#374151;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;">Car Brand Catalog</p>
+        <div class="a-catalog-grid" style="grid-template-columns:repeat(5,1fr);">
+
+          <div class="a-brand-card selected" id="a-bmw">
+            <div class="a-brand-badge">In Library</div>
+            <div style="height:80px;margin:-18px -14px 12px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.05);">
+              <img src="images/frontGrille_012.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="a-brand-name">BMW</div>
+            <div class="a-brand-meta">2 datasets<br><span style="color:#a78bfa;font-weight:700;">3,000 hrs</span></div>
+          </div>
+
+          <div class="a-brand-card" id="a-ford">
+            <div style="height:80px;margin:-18px -14px 12px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.05);">
+              <img src="images/frontSeat_007.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="a-brand-name">Ford</div>
+            <div class="a-brand-meta">2 datasets<br><span style="color:#a78bfa;font-weight:700;">2,140 hrs</span></div>
+          </div>
+
+          <div class="a-brand-card" id="a-toyota">
+            <div style="height:80px;margin:-18px -14px 12px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.05);">
+              <img src="images/rearBumper_021.png" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="a-brand-name">Toyota</div>
+            <div class="a-brand-meta">2 datasets<br><span style="color:#a78bfa;font-weight:700;">2,060 hrs</span></div>
+          </div>
+
+          <div class="a-brand-card" id="a-audi">
+            <div style="height:80px;margin:-18px -14px 12px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.05);">
+              <img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center 20%;">
+            </div>
+            <div class="a-brand-name">Audi</div>
+            <div class="a-brand-meta">2 datasets<br><span style="color:#a78bfa;font-weight:700;">1,300 hrs</span></div>
+          </div>
+
+          <div class="a-brand-card" id="a-multi">
+            <div style="height:80px;margin:-18px -14px 12px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.05);">
+              <img src="images/rearBumper_021.png" style="width:100%;height:100%;object-fit:cover;display:block;object-position:right center;filter:brightness(0.85);">
+            </div>
+            <div class="a-brand-name">Multi-Platform</div>
+            <div class="a-brand-meta">6 datasets<br><span style="color:#a78bfa;font-weight:700;">4,680 hrs</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Assembly Line -->
+      <div id="a-assembly">
+        <div class="a-sec-head">
+          <div class="a-sec-dot"></div>
+          <span class="a-sec-title">Assembly Line</span>
+          <div class="a-sec-line"></div>
+          <span class="a-sec-count">6 datasets</span>
+        </div>
+        <div class="a-ds-grid">
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/frontGrille_012.png">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(96,165,250,0.15);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);">BMW</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Front Grille Assembly</div>
+              <div class="a-ds-desc">Multi-step grille fitting, fastening and QC inspection on BMW production line.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-purple">Seg</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">2,100 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/frontSeat_007.png">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.25);">Ford</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Front Seat Installation</div>
+              <div class="a-ds-desc">Seat alignment, bolt-down, and connector-clip sequences across multiple Ford platforms.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-teal">Bbox</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">1,400 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/rearBumper_021.png">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(248,113,113,0.12);color:#f87171;border:1px solid rgba(248,113,113,0.25);">Toyota</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Rear Bumper Assembly</div>
+              <div class="a-ds-desc">Bumper alignment, clip insertion, and sensor harness routing across multiple Toyota trim levels.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-orange">Edge Cases</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">1,100 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/rearBumper_021.png" style="object-position:30% center;">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.25);">Multi</div>
+              <div class="a-ds-type" style="color:#1de9b6;border-color:rgba(29,233,182,0.4);">EGO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Windshield Installation</div>
+              <div class="a-ds-desc">Robot-eye-view of adhesive application, glass placement and seal verification.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-teal">EGO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-purple">Seg</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">960 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/frontGrille_012.png" style="object-position:center 70%;">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(52,211,153,0.12);color:#34d399;border:1px solid rgba(52,211,153,0.25);">Ford</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Door Panel Trim Fitting</div>
+              <div class="a-ds-desc">Interior door panel alignment and clip-press sequences. Left/right variants across models.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-teal">Bbox</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">820 hrs</span><span class="avail-od">On-demand</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/frontSeat_007.png" style="object-position:center 20%;">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.25);">Multi</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Dashboard &amp; Console Fitment</div>
+              <div class="a-ds-desc">Instrument cluster insertion, HVAC module placement, and center console lock sequences.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-orange">Edge Cases</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">740 hrs</span><span class="avail-od">On-demand</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- QC -->
+      <div id="a-qc" style="margin-top:32px;">
+        <div class="a-sec-head">
+          <div class="a-sec-dot"></div>
+          <span class="a-sec-title">QC Inspection</span>
+          <div class="a-sec-line"></div>
+          <span class="a-sec-count">4 datasets</span>
+        </div>
+        <div class="a-ds-grid">
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/passengerSeat_0100_Rotate_left_45_degrees.png">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(96,165,250,0.15);color:#60a5fa;border:1px solid rgba(96,165,250,0.3);">BMW</div>
+              <div class="a-ds-type" style="color:#1de9b6;border-color:rgba(29,233,182,0.4);">EGO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Passenger Seat QC Inspection</div>
+              <div class="a-ds-desc">EGO-centric quality inspection of seat fitment, trim alignment, and seatbelt anchor verification.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-teal">EGO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-purple">Seg</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">900 hrs</span><span class="avail-od">On-demand</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/frontGrille_012.png" style="filter:brightness(0.85);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(156,163,175,0.15);color:#9ca3af;border:1px solid rgba(156,163,175,0.25);">Audi</div>
+              <div class="a-ds-type" style="color:#1de9b6;border-color:rgba(29,233,182,0.4);">EGO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Grille &amp; Fascia Gap Inspection</div>
+              <div class="a-ds-desc">Close-up EGO inspection of panel gap tolerances, paint continuity, and clip seating confirmation.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-teal">EGO-Centric</span><span class="a-tag a-tag-teal">Bbox</span><span class="a-tag a-tag-orange">Defect Labels</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">680 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/rearBumper_021.png" style="filter:brightness(0.75);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.25);">Multi</div>
+              <div class="a-ds-type" style="color:#1de9b6;border-color:rgba(29,233,182,0.4);">EGO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Underbody Structural Inspection</div>
+              <div class="a-ds-desc">Robot crawler view of weld seams, chassis mounting points, and exhaust hanger alignment.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-teal">EGO-Centric</span><span class="a-tag a-tag-purple">Seg</span><span class="a-tag a-tag-orange">Defect Labels</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">540 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" style="object-position:right center;filter:brightness(0.9);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(248,113,113,0.12);color:#f87171;border:1px solid rgba(248,113,113,0.25);">Toyota</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">End-of-Line Vehicle Audit</div>
+              <div class="a-ds-desc">Full-exterior EXO audit covering door operation, glass seal, lighting function, and trim gap checks.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-orange">Edge Cases</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">1,050 hrs</span><span class="avail-od">On-demand</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Paint -->
+      <div id="a-paint" style="margin-top:32px;">
+        <div class="a-sec-head">
+          <div class="a-sec-dot"></div>
+          <span class="a-sec-title">Paint &amp; Body</span>
+          <div class="a-sec-line"></div>
+          <span class="a-sec-count">3 datasets</span>
+        </div>
+        <div class="a-ds-grid">
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/frontGrille_012.png" style="filter:hue-rotate(20deg) brightness(0.8);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(156,163,175,0.15);color:#9ca3af;border:1px solid rgba(156,163,175,0.25);">Audi</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Spray Paint Application</div>
+              <div class="a-ds-desc">Robotic arm trajectories for primer, base coat, and clear coat application on full-body panels.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-purple">Seg</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">1,300 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/rearBumper_021.png" style="filter:hue-rotate(200deg) brightness(0.75);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.25);">Multi</div>
+              <div class="a-ds-type" style="color:#1de9b6;border-color:rgba(29,233,182,0.4);">EGO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Surface Sanding &amp; Prep</div>
+              <div class="a-ds-desc">EGO view of orbital sander paths. Wet-sand, dry-sand, and contour-following motions.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-teal">EGO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-orange">Edge Cases</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">480 hrs</span><span class="avail-od">On-demand</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/frontSeat_007.png" style="filter:hue-rotate(270deg) brightness(0.8);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.25);">Multi</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Body Panel Seam Sealing</div>
+              <div class="a-ds-desc">Sealant bead application along weld seams and panel joints. Multi-speed and pressure variation included.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-teal">Bbox</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">620 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Wiring -->
+      <div id="a-wiring" style="margin-top:32px;">
+        <div class="a-sec-head">
+          <div class="a-sec-dot"></div>
+          <span class="a-sec-title">Wiring &amp; Sensors</span>
+          <div class="a-sec-line"></div>
+          <span class="a-sec-count">3 datasets</span>
+        </div>
+        <div class="a-ds-grid">
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/frontSeat_007.png" style="filter:brightness(0.6) saturate(0.4);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.25);">Multi</div>
+              <div class="a-ds-type" style="color:#1de9b6;border-color:rgba(29,233,182,0.4);">EGO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Engine Harness Routing</div>
+              <div class="a-ds-desc">EGO-centric wiring harness routing in engine bay. Multi-connector identification included.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-teal">EGO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-orange">Edge Cases</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">860 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/rearBumper_021.png" style="filter:brightness(0.6) saturate(0.4);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.25);">Multi</div>
+              <div class="a-ds-type" style="color:#60a5fa;border-color:rgba(30,136,229,0.4);">EXO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Sensor Module Installation</div>
+              <div class="a-ds-desc">Parking sensor, camera module, and LiDAR bracket fitment across front and rear fascias.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-blue">EXO-Centric</span><span class="a-tag a-tag-teal">Task Labels</span><span class="a-tag a-tag-teal">Bbox</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">720 hrs</span><span class="avail-lib">In Library</span></div>
+            </div>
+          </div>
+
+          <div class="a-ds-card">
+            <div class="a-ds-img">
+              <img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" style="filter:brightness(0.65) saturate(0.4);">
+              <div class="a-ds-img-overlay"></div>
+              <div class="a-ds-brand-chip" style="background:rgba(29,233,182,0.1);color:#1de9b6;border:1px solid rgba(29,233,182,0.25);">Multi</div>
+              <div class="a-ds-type" style="color:#1de9b6;border-color:rgba(29,233,182,0.4);">EGO</div>
+            </div>
+            <div class="a-ds-body">
+              <div class="a-ds-title">Interior Connector Plug-In</div>
+              <div class="a-ds-desc">EGO view of seat, door, and airbag connector insertion. Force-feedback edge cases included.</div>
+              <div class="a-ds-tags"><span class="a-tag a-tag-teal">EGO-Centric</span><span class="a-tag a-tag-purple">Seg</span><span class="a-tag a-tag-orange">Edge Cases</span></div>
+              <div class="a-ds-footer"><span class="a-ds-hrs">490 hrs</span><span class="avail-od">On-demand</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Request -->
+      <div style="margin-top:32px;padding:24px 28px;background:linear-gradient(135deg,rgba(167,139,250,0.05),rgba(255,255,255,0.02));border:1px dashed rgba(167,139,250,0.2);border-radius:12px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+        <div>
+          <p style="font-size:14px;font-weight:700;color:#fff;margin:0 0 4px;">Need a Specific Platform or Task?</p>
+          <p style="font-size:12px;color:#4b5563;margin:0;">Our team captures any assembly workflow on any production line, on demand.</p>
+        </div>
+        <button style="background:#a78bfa;color:#040608;border:none;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">Submit Request</button>
+      </div>
+
+    </div><!-- /a-main -->
+  </div><!-- /a-body -->
+</div><!-- /optA -->
+
+
+
+<!-- ══════════════════════════════════════
+     OPTION C — Live Catalog View
+══════════════════════════════════════ -->
+<div id="optC" class="opt">
+
+  <!-- Nav -->
+  <nav class="c-nav">
+    <a class="c-logo" href="homepage.html">
+      <div class="c-logo-icon">D</div>
+      <div><div class="c-logo-name">DataraAI</div><div class="c-logo-sub">Data-as-a-Service</div></div>
+    </a>
+    <div class="c-nav-links">
+      <a class="c-nav-item" href="homepage.html"><span class="c-nl">Home</span><span class="c-ns">Overview</span></a>
+      <a class="c-nav-item" href="homepage.html#products"><span class="c-nl">Solutions</span><span class="c-ns">Full Stack</span></a>
+      <a class="c-nav-item active" href="#"><span class="c-nl">RoboDataHub</span><span class="c-ns">Dataset Catalog</span></a>
+      <a class="c-nav-item" href="roboeyeview.html"><span class="c-nl">RoboEyeView</span><span class="c-ns">Visual Intelligence</span></a>
+      <a class="c-nav-item" href="company.html"><span class="c-nl">Company</span><span class="c-ns">Team / Mission</span></a>
+    </div>
+    <div class="c-nav-right">
+      <div class="c-admin-chip"><span class="c-acl">Admin</span><span class="c-acn">Datara AI</span></div>
+      <button class="c-btn-so">Sign Out</button>
+    </div>
+  </nav>
+
+  <!-- Subbar -->
+  <div class="c-subbar">
+    <div class="c-bc">
+      <a href="robodatahub.html">RoboDataHub</a>
+      <span class="c-bc-sep">›</span>
+      <span class="c-bc-cur">CARAUTOMATION</span>
+    </div>
+    <div class="c-sbr">
+      <span class="c-items-l">Items: <strong id="c-count">11</strong></span>
+      <div class="c-live-p"><div class="c-live-d"></div><span class="c-live-l">Live Connection</span></div>
+      <button class="c-btn-imp">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5v7M3 6l3 3 3-3M1.5 10.5h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Import Data
+      </button>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="c-hero">
+    <div>
+      <div class="c-hero-tag"><div class="c-hero-tag-dot"></div><span>Automotive · Robotics AI</span></div>
+      <h1>RoboDataHub<br>Automotive</h1>
+      <p class="c-hero-desc">High-fidelity, fully-labelled manufacturing datasets captured from live OEM production floors — built for robotics automation training pipelines.</p>
+      <div class="c-hero-stats">
+        <div class="c-hs"><span class="c-hs-val">11</span><span class="c-hs-lbl">Datasets</span></div>
+        <div class="c-hs"><span class="c-hs-val">4</span><span class="c-hs-lbl">OEM Brands</span></div>
+        <div class="c-hs"><span class="c-hs-val g">Live</span><span class="c-hs-lbl">Status</span></div>
+        <div class="c-hs"><span class="c-hs-val g">Public</span><span class="c-hs-lbl">Access</span></div>
+      </div>
+    </div>
+    <div class="c-hero-img">
+      <img src="images/frontGrille_012.png" alt="Automotive production line">
+      <div class="c-hero-img-ov"></div>
+      <div class="c-hero-badge"><div class="c-hb-b">Featured · Robotics AI</div><div class="c-hb-n">Assembly Line — Live Capture</div></div>
+      <div class="c-hero-pill"><strong>11</strong> datasets available</div>
+    </div>
+  </section>
+
+  <!-- Stats Band -->
+  <div class="c-stats-band">
+    <div class="c-stats-inner">
+      <div class="c-sb"><span class="c-sb-val">5,500<sup>+</sup></span><span class="c-sb-lbl">Total Hours</span></div>
+      <div class="c-sb"><span class="c-sb-val">4<sup> OEMs</sup></span><span class="c-sb-lbl">Partner Brands</span></div>
+      <div class="c-sb"><span class="c-sb-val">16<sup> ds</sup></span><span class="c-sb-lbl">Total Datasets</span></div>
+      <div class="c-sb"><span class="c-sb-val">98.4<sup>%</sup></span><span class="c-sb-lbl">Label Accuracy</span></div>
+      <div class="c-sb"><span class="c-sb-val">10<sup> types</sup></span><span class="c-sb-lbl">Operation Classes</span></div>
+    </div>
+  </div>
+
+  <!-- Section Header + Filters -->
+  <div class="c-sec-hdr">
+    <div><h2>Dataset Catalog</h2><p>Structured, ready-to-train datasets from live manufacturing environments</p></div>
+    <div class="c-filters">
+      <button class="c-filter active" data-cf="all">All</button>
+      <button class="c-filter" data-cf="bmw">BMW</button>
+      <button class="c-filter" data-cf="ford">Ford</button>
+      <button class="c-filter" data-cf="toyota">Toyota</button>
+      <button class="c-filter" data-cf="audi">Audi</button>
+      <button class="c-filter" data-cf="body">Body Parts</button>
+      <button class="c-filter" data-cf="ops">Operations</button>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="c-grid" id="c-cardGrid">
+
+    <!-- 1. Front Grille -->
+    <div class="c-card" data-ctags="body bmw">
+      <div class="c-card-head"><div class="c-card-title">Front Grille</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/frontGrille_012.png" alt="Front grille assembly"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/rearBumper_021.png" alt="Grille detail"></div>
+          <div class="c-ph-t"><img src="images/frontSeat_007.png" alt="Assembly station"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">3,200 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Geometry Check</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/BMW/frontGrille</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 2. Front Bumper -->
+    <div class="c-card" data-ctags="body bmw ford">
+      <div class="c-card-head"><div class="c-card-title">Front Bumper</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/rearBumper_021.png" alt="Front bumper production" style="object-position:left center;"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/frontGrille_012.png" alt="Bumper detail"></div>
+          <div class="c-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Assembly station"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">5,400 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Vision Scan</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/body/frontBumper</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 3. Rear Bumper -->
+    <div class="c-card" data-ctags="body bmw toyota">
+      <div class="c-card-head"><div class="c-card-title">Rear Bumper</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/rearBumper_021.png" alt="Rear bumper line" style="object-position:right center;filter:brightness(.85) contrast(1.1) saturate(1.1);"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/frontGrille_012.png" alt="Bumper station"></div>
+          <div class="c-ph-t"><img src="images/frontSeat_007.png" alt="Rear detail"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">4,800 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Dual-Arm Robot</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/body/rearBumper</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 4. Passenger Seat -->
+    <div class="c-card" data-ctags="body ford audi">
+      <div class="c-card-head"><div class="c-card-title">Passenger Seat</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Passenger seat assembly" style="object-position:center 20%;"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/frontSeat_007.png" alt="Seat fitting"></div>
+          <div class="c-ph-t"><img src="images/frontGrille_012.png" alt="Interior QC"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">3,600 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Interior QC</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/ford/passengerSeat</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 5. Front Seat -->
+    <div class="c-card" data-ctags="body toyota audi">
+      <div class="c-card-head"><div class="c-card-title">Front Seat</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/frontSeat_007.png" alt="Front seat installation"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Seat mechanism"></div>
+          <div class="c-ph-t"><img src="images/rearBumper_021.png" alt="Fit check"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">2,700 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Precision Fit</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/toyota/frontSeat</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 6. Repair Detection -->
+    <div class="c-card" data-ctags="ops bmw ford toyota audi">
+      <div class="c-card-head"><div class="c-card-title">Repair Detection</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/rearBumper_021.png" alt="Surface defect scan" style="filter:brightness(.75) contrast(1.15) saturate(.8) hue-rotate(20deg);"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/frontGrille_012.png" alt="Defect scan"></div>
+          <div class="c-ph-t"><img src="images/frontSeat_007.png" alt="Panel inspection"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">7,200 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Defect Masks</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/ops/repair</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 7. Nut/Bolt Fastening -->
+    <div class="c-card" data-ctags="ops bmw ford toyota audi">
+      <div class="c-card-head"><div class="c-card-title">Nut/Bolt Fastening</div><span class="c-badge">On Demand</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/frontSeat_007.png" alt="Robotic torque fastening" style="filter:brightness(.8) contrast(1.1) saturate(.9);"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/frontGrille_012.png" alt="Bolt close-up"></div>
+          <div class="c-ph-t"><img src="images/rearBumper_021.png" alt="Torque check"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">4,900 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Torque Verified</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/ops/nutBoltFastening</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 8. Paint & Body -->
+    <div class="c-card" data-ctags="ops body toyota ford">
+      <div class="c-card-head"><div class="c-card-title">Paint &amp; Body Inspection</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/frontGrille_012.png" alt="Paint shop inspection" style="filter:brightness(.85) contrast(1.05) saturate(1.3) hue-rotate(-10deg);"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/rearBumper_021.png" alt="Surface coat"></div>
+          <div class="c-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Body panel"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">5,800 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Color · Gloss · Defect</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/ops/paintInspection</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 9. BMW Collection -->
+    <div class="c-card" data-ctags="bmw">
+      <div class="c-card-head"><div class="c-card-title">BMW Collection</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/frontGrille_012.png" alt="BMW manufacturing line"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/frontSeat_007.png" alt="BMW assembly"></div>
+          <div class="c-ph-t"><img src="images/rearBumper_021.png" alt="Welding station"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">18,400 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Full Pipeline</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/BMW</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 10. Ford Collection -->
+    <div class="c-card" data-ctags="ford">
+      <div class="c-card-head"><div class="c-card-title">Ford Collection</div><span class="c-badge">In Library</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/frontSeat_007.png" alt="Ford assembly plant"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Ford interior"></div>
+          <div class="c-ph-t"><img src="images/rearBumper_021.png" alt="Ford body"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">14,600 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">EV + ICE Lines</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/Ford</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- 11. Toyota Collection -->
+    <div class="c-card" data-ctags="toyota">
+      <div class="c-card-head"><div class="c-card-title">Toyota Collection</div><span class="c-badge">On Demand</span></div>
+      <div class="c-photos">
+        <div class="c-ph-main"><img src="images/rearBumper_021.png" alt="Toyota smart factory" style="object-position:center top;filter:brightness(.88) contrast(1.06) saturate(1.15);"></div>
+        <div class="c-ph-thumbs">
+          <div class="c-ph-t"><img src="images/frontGrille_012.png" alt="Toyota assembly"></div>
+          <div class="c-ph-t"><img src="images/frontSeat_007.png" alt="Fastening ops"></div>
+        </div>
+      </div>
+      <div class="c-tags">
+        <div class="c-tag">15,200 images</div>
+        <div class="c-tag">✓ Labelled</div>
+        <div class="c-tag">Smart Factory</div>
+      </div>
+      <div class="c-card-foot">
+        <span class="c-card-path">carAuto/Toyota</span>
+        <button class="c-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+  </div><!-- /c-grid -->
+
+  <!-- CTA -->
+  <div class="c-cta-wrap">
+    <div class="c-cta">
+      <div>
+        <h2>Ready to train smarter robots?</h2>
+        <p>Structured, fully-labelled automotive datasets captured from live OEM production environments — plug directly into your robotics training pipeline today.</p>
+      </div>
+      <div class="c-cta-btns">
+        <button class="c-btn-primary">Request Full Access</button>
+        <button class="c-btn-outline">View Documentation</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /optC -->
+
+<!-- ══════════════════════════════════════
+     OPTION D — Sidebar + Live Catalog View
+══════════════════════════════════════ -->
+<div id="optD" class="opt">
+
+  <!-- Nav -->
+  <nav class="d-nav">
+    <a class="d-logo" href="homepage.html">
+      <div class="d-logo-icon">D</div>
+      <div><div class="d-logo-name">DataraAI</div><div class="d-logo-sub">Data-as-a-Service</div></div>
+    </a>
+    <div class="d-nav-links">
+      <a class="d-nav-item" href="homepage.html"><span class="d-nl">Home</span><span class="d-ns">Overview</span></a>
+      <a class="d-nav-item" href="homepage.html#products"><span class="d-nl">Solutions</span><span class="d-ns">Full Stack</span></a>
+      <a class="d-nav-item active" href="#"><span class="d-nl">RoboDataHub</span><span class="d-ns">Dataset Catalog</span></a>
+      <a class="d-nav-item" href="roboeyeview.html"><span class="d-nl">RoboEyeView</span><span class="d-ns">Visual Intelligence</span></a>
+      <a class="d-nav-item" href="company.html"><span class="d-nl">Company</span><span class="d-ns">Team / Mission</span></a>
+    </div>
+    <div class="d-nav-right">
+      <div class="d-admin-chip"><span class="d-acl">Admin</span><span class="d-acn">Datara AI</span></div>
+      <button class="d-btn-so">Sign Out</button>
+    </div>
+  </nav>
+
+  <!-- Subbar -->
+  <div class="d-subbar">
+    <div class="d-bc">
+      <a href="robodatahub.html">RoboDataHub</a>
+      <span class="d-bc-sep">›</span>
+      <span class="d-bc-cur">CARAUTOMATION</span>
+    </div>
+    <div class="d-sbr">
+      <span class="d-items-l">Items: <strong id="d-count">16</strong></span>
+      <div class="d-live-p"><div class="d-live-d"></div><span class="d-live-l">Live Connection</span></div>
+      <button class="d-btn-imp">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1.5v7M3 6l3 3 3-3M1.5 10.5h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Import Data
+      </button>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="d-hero">
+    <div>
+      <div class="d-hero-tag"><div class="d-hero-tag-dot"></div><span>Automotive · Robotics AI</span></div>
+      <h1>RoboDataHub<br>Automotive</h1>
+      <p class="d-hero-desc">High-fidelity, fully-labelled manufacturing datasets captured from live OEM production floors — built for robotics automation training pipelines.</p>
+      <div class="d-hero-stats">
+        <div class="d-hs"><span class="d-hs-val">16</span><span class="d-hs-lbl">Datasets</span></div>
+        <div class="d-hs"><span class="d-hs-val">5</span><span class="d-hs-lbl">OEM Brands</span></div>
+        <div class="d-hs"><span class="d-hs-val g">Live</span><span class="d-hs-lbl">Status</span></div>
+        <div class="d-hs"><span class="d-hs-val g">Public</span><span class="d-hs-lbl">Access</span></div>
+      </div>
+    </div>
+    <div class="d-hero-img">
+      <img src="images/frontGrille_012.png" alt="Automotive production line">
+      <div class="d-hero-img-ov"></div>
+      <div class="d-hero-badge"><div class="d-hb-b">Featured · Robotics AI</div><div class="d-hb-n">Assembly Line — Live Capture</div></div>
+      <div class="d-hero-pill"><strong>16</strong> datasets available</div>
+    </div>
+  </div>
+
+  <!-- Stats Band -->
+  <div class="d-stats-band">
+    <div class="d-stats-inner">
+      <div class="d-sb"><span class="d-sb-val">5,500<sup>+</sup></span><span class="d-sb-lbl">Total Hours</span></div>
+      <div class="d-sb"><span class="d-sb-val">5<sup> OEMs</sup></span><span class="d-sb-lbl">Partner Brands</span></div>
+      <div class="d-sb"><span class="d-sb-val">26<sup> ds</sup></span><span class="d-sb-lbl">Total Datasets</span></div>
+      <div class="d-sb"><span class="d-sb-val">98.4<sup>%</sup></span><span class="d-sb-lbl">Label Accuracy</span></div>
+      <div class="d-sb"><span class="d-sb-val">10<sup> types</sup></span><span class="d-sb-lbl">Operation Classes</span></div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="d-body">
+
+    <!-- Sidebar -->
+    <div class="d-sidebar">
+      <div style="margin-bottom:20px;">
+        <div class="d-sidebar-label" style="margin-bottom:8px;">Filter by Task</div>
+        <a href="#d-assembly" class="d-sidebar-item active">
+          <div class="d-sidebar-dot" style="background:#00e5a0;"></div>
+          <span class="d-sidebar-text">Assembly Line</span>
+        </a>
+        <a href="#d-qc" class="d-sidebar-item">
+          <div class="d-sidebar-dot" style="background:#6b7280;"></div>
+          <span class="d-sidebar-text">QC Inspection</span>
+        </a>
+        <a href="#d-paint" class="d-sidebar-item">
+          <div class="d-sidebar-dot" style="background:#6b7280;"></div>
+          <span class="d-sidebar-text">Paint &amp; Body</span>
+        </a>
+        <a href="#d-wiring" class="d-sidebar-item">
+          <div class="d-sidebar-dot" style="background:#6b7280;"></div>
+          <span class="d-sidebar-text">Wiring &amp; Sensors</span>
+        </a>
+        <a href="#d-cars" class="d-sidebar-item">
+          <div class="d-sidebar-dot" style="background:#6b7280;"></div>
+          <span class="d-sidebar-text">Cars</span>
+        </a>
+      </div>
+      <div style="padding-top:16px;border-top:1px solid rgba(255,255,255,0.04);">
+        <div class="d-sidebar-label" style="margin-bottom:8px;">Filter by Brand</div>
+        <button class="d-sidebar-item d-brand-filter active" data-dbrand="all">
+          <div class="d-sidebar-dot" style="background:#00e5a0;"></div>
+          <span class="d-sidebar-text">All Brands</span>
+        </button>
+        <button class="d-sidebar-item d-brand-filter" data-dbrand="bmw">
+          <div class="d-sidebar-dot" style="background:#60a5fa;"></div>
+          <span class="d-sidebar-text">BMW</span>
+        </button>
+        <button class="d-sidebar-item d-brand-filter" data-dbrand="ford">
+          <div class="d-sidebar-dot" style="background:#34d399;"></div>
+          <span class="d-sidebar-text">Ford</span>
+        </button>
+        <button class="d-sidebar-item d-brand-filter" data-dbrand="toyota">
+          <div class="d-sidebar-dot" style="background:#f87171;"></div>
+          <span class="d-sidebar-text">Toyota</span>
+        </button>
+        <button class="d-sidebar-item d-brand-filter" data-dbrand="tesla">
+          <div class="d-sidebar-dot" style="background:#f87171;"></div>
+          <span class="d-sidebar-text">Tesla</span>
+        </button>
+        <button class="d-sidebar-item d-brand-filter" data-dbrand="audi">
+          <div class="d-sidebar-dot" style="background:#9ca3af;"></div>
+          <span class="d-sidebar-text">Audi</span>
+        </button>
+        <button class="d-sidebar-item d-brand-filter" data-dbrand="multi">
+          <div class="d-sidebar-dot" style="background:#1de9b6;"></div>
+          <span class="d-sidebar-text">Multi</span>
+        </button>
+      </div>
+      <div style="padding:16px 12px 0;margin-top:auto;">
+        <button style="width:100%;background:#00e5a0;color:#000;border:none;padding:9px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Get Access</button>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="d-main">
+
+      <!-- Assembly Line -->
+      <div id="d-assembly" style="margin-bottom:40px;">
+        <div class="d-sec-head">
+          <div class="d-sec-dot"></div>
+          <span class="d-sec-title">Assembly Line</span>
+          <div class="d-sec-line"></div>
+          <span class="d-sec-count">7 datasets</span>
+        </div>
+        <div class="d-ds-grid">
+          <div class="d-card" data-dbrand="bmw">
+            <div class="d-card-head"><div class="d-card-title">Front Grille Assembly</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Front grille assembly"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">2,100 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/BMW/frontGrille</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="ford">
+            <div class="d-card-head"><div class="d-card-title">Front Seat Installation</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontSeat_007.png" alt="Front seat installation"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">1,400 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Ford/frontSeat</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="toyota">
+            <div class="d-card-head"><div class="d-card-title">Rear Bumper Assembly</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Rear bumper assembly"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">1,100 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Toyota/rearBumper</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Windshield Installation</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Windshield installation" style="object-position:30% center;"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">960 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/windshield</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="ford">
+            <div class="d-card-head"><div class="d-card-title">Door Panel Trim Fitting</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Door panel trim" style="object-position:center 70%;"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">820 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Ford/doorPanel</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Dashboard &amp; Console Fitment</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontSeat_007.png" alt="Dashboard fitment" style="object-position:center 20%;"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">740 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/dashboard</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="audi">
+            <div class="d-card-head"><div class="d-card-title">Audi Door Panel Assembly</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Audi door panel assembly"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">950 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/doorPanel</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QC Inspection -->
+      <div id="d-qc" style="margin-bottom:40px;">
+        <div class="d-sec-head">
+          <div class="d-sec-dot"></div>
+          <span class="d-sec-title">QC Inspection</span>
+          <div class="d-sec-line"></div>
+          <span class="d-sec-count">7 datasets</span>
+        </div>
+        <div class="d-ds-grid">
+          <div class="d-card" data-dbrand="bmw">
+            <div class="d-card-head"><div class="d-card-title">Passenger Seat QC Inspection</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Passenger seat QC"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Seg Masks</div><div class="d-tag">900 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/BMW/passengerSeatQC</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="tesla">
+            <div class="d-card-head"><div class="d-card-title">Grille &amp; Fascia Gap Inspection</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Grille gap inspection" style="filter:brightness(0.85);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Defect Labels</div><div class="d-tag">680 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Tesla/grilleFascia</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Underbody Structural Inspection</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Underbody inspection" style="filter:brightness(0.75);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Seg Masks</div><div class="d-tag">540 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/underbody</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="toyota">
+            <div class="d-card-head"><div class="d-card-title">End-of-Line Vehicle Audit</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="End-of-line audit" style="object-position:right center;filter:brightness(0.9);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">1,050 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Toyota/eolAudit</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="bmw">
+            <div class="d-card-head"><div class="d-card-title">Paint Defect Detection</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Paint defect detection" style="filter:hue-rotate(10deg) brightness(0.85);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Defect Labels</div><div class="d-tag">610 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/BMW/paintDefect</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Torque Verification Scan</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Torque verification" style="filter:brightness(0.8) saturate(0.7);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Bbox</div><div class="d-tag">430 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/torqueScan</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="audi">
+            <div class="d-card-head"><div class="d-card-title">Audi Paint Surface QC Scan</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Audi paint QC" style="filter:brightness(0.85) hue-rotate(10deg);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Defect Labels</div><div class="d-tag">520 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/paintSurfaceQC</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paint & Body -->
+      <div id="d-paint" style="margin-bottom:40px;">
+        <div class="d-sec-head">
+          <div class="d-sec-dot"></div>
+          <span class="d-sec-title">Paint &amp; Body</span>
+          <div class="d-sec-line"></div>
+          <span class="d-sec-count">4 datasets</span>
+        </div>
+        <div class="d-ds-grid">
+          <div class="d-card" data-dbrand="tesla">
+            <div class="d-card-head"><div class="d-card-title">Spray Paint Application</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Spray paint" style="filter:hue-rotate(20deg) brightness(0.8);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Seg Masks</div><div class="d-tag">1,300 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Tesla/sprayPaint</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Surface Sanding &amp; Prep</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Surface sanding" style="filter:hue-rotate(200deg) brightness(0.75);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">480 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/sanding</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Body Panel Seam Sealing</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontSeat_007.png" alt="Seam sealing" style="filter:hue-rotate(270deg) brightness(0.8);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">620 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/seamSealing</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="audi">
+            <div class="d-card-head"><div class="d-card-title">Audi Primer &amp; Base Coat</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Audi primer coat" style="filter:hue-rotate(180deg) brightness(0.8);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">780 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/primerCoat</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wiring & Sensors -->
+      <div id="d-wiring" style="margin-bottom:40px;">
+        <div class="d-sec-head">
+          <div class="d-sec-dot"></div>
+          <span class="d-sec-title">Wiring &amp; Sensors</span>
+          <div class="d-sec-line"></div>
+          <span class="d-sec-count">4 datasets</span>
+        </div>
+        <div class="d-ds-grid">
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Engine Harness Routing</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontSeat_007.png" alt="Engine harness" style="filter:brightness(0.6) saturate(0.4);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">860 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/engineHarness</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Sensor Module Installation</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Sensor module" style="filter:brightness(0.6) saturate(0.4);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Bbox</div><div class="d-tag">720 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/sensorModule</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Interior Connector Plug-In</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Connector plug-in" style="filter:brightness(0.65) saturate(0.4);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Edge Cases</div><div class="d-tag">490 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/connectorPlugIn</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="audi">
+            <div class="d-card-head"><div class="d-card-title">Audi Sensor Array Wiring</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontSeat_007.png" alt="Audi sensor wiring" style="filter:brightness(0.6) saturate(0.4);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">410 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/sensorWiring</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+        </div>
+      </div>
+      <!-- Cars -->
+      <div id="d-cars" style="margin-bottom:40px;">
+        <div class="d-sec-head">
+          <div class="d-sec-dot"></div>
+          <span class="d-sec-title">Cars</span>
+          <div class="d-sec-line"></div>
+          <span class="d-sec-count">6 datasets</span>
+        </div>
+        <div class="d-ds-grid">
+          <div class="d-card" data-dbrand="bmw">
+            <div class="d-card-head"><div class="d-card-title">BMW 3-Series Full Exterior</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="BMW 3-Series exterior"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">360° Capture</div><div class="d-tag">1,800 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/BMW/3series/exterior</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="ford">
+            <div class="d-card-head"><div class="d-card-title">Ford F-150 Cabin Interior</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontSeat_007.png" alt="Ford F-150 cabin"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Task Labels</div><div class="d-tag">1,450 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Ford/f150/cabin</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="toyota">
+            <div class="d-card-head"><div class="d-card-title">Toyota Camry Rear Assembly</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/rearBumper_021.png" alt="Toyota Camry rear"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Bbox</div><div class="d-tag">1,120 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Toyota/camry/rear</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="tesla">
+            <div class="d-card-head"><div class="d-card-title">Tesla Model 3 Passenger Compartment</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Tesla Model 3 passenger" style="object-position:center 20%;"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Seg</div><div class="d-tag">980 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Tesla/model3/passenger</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="multi">
+            <div class="d-card-head"><div class="d-card-title">Multi-Brand Door Fitment</div><span class="d-badge">In Library</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/frontGrille_012.png" alt="Door fitment multi-brand" style="object-position:center 70%;filter:brightness(0.85);"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EXO-Centric</div><div class="d-tag">Edge Cases</div><div class="d-tag">2,200 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/multi/doorFitment</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+          <div class="d-card" data-dbrand="audi">
+            <div class="d-card-head"><div class="d-card-title">Audi A4 Passenger Compartment</div><span class="d-badge-od">On-demand</span></div>
+            <div class="d-photos">
+              <div class="d-ph-main"><img src="images/passengerSeat_0100_Rotate_left_45_degrees.png" alt="Audi A4 passenger" style="object-position:center 20%;"></div>
+              <div class="d-ph-thumbs">
+                <div class="d-ph-t"><img src="images/frontSeat_007.png"></div>
+                <div class="d-ph-t"><img src="images/rearBumper_021.png"></div>
+                <div class="d-ph-t"><img src="images/frontGrille_012.png"></div>
+              </div>
+            </div>
+            <div class="d-tags"><div class="d-tag">EGO-Centric</div><div class="d-tag">Seg</div><div class="d-tag">980 hrs</div></div>
+            <div class="d-card-foot"><span class="d-card-path">carAuto/Audi/a4/passenger</span><button class="d-btn-open">Open folder <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /d-main -->
+  </div><!-- /d-body -->
+
+  <!-- CTA -->
+  <div class="d-cta-wrap">
+    <div class="d-cta">
+      <div>
+        <h2>Ready to train smarter robots?</h2>
+        <p>Structured, fully-labelled automotive datasets captured from live OEM production environments — plug directly into your robotics training pipeline today.</p>
+      </div>
+      <div class="d-cta-btns">
+        <button class="d-btn-primary">Request Full Access</button>
+        <button class="d-btn-outline">View Documentation</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /optD -->
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.opt').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('opt'+id).classList.add('active');
+  document.querySelectorAll('.sw-btn').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
+}
+
+// Brand filter — Option D (sidebar)
+document.querySelectorAll('#optD .d-brand-filter').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('#optD .d-brand-filter').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var brand = btn.dataset.dbrand;
+    document.querySelectorAll('#optD .d-card').forEach(function(card) {
+      card.style.display = (brand === 'all' || card.dataset.dbrand === brand) ? '' : 'none';
+    });
+  });
+});
+
+// Filter pills — Option C (functional)
+document.querySelectorAll('.c-filter').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.c-filter').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.dataset.cf;
+    document.querySelectorAll('#c-cardGrid .c-card').forEach(function(card) {
+      var tags = card.dataset.ctags || '';
+      card.style.display = (f === 'all' || tags.includes(f)) ? '' : 'none';
+    });
+    var visible = [...document.querySelectorAll('#c-cardGrid .c-card')].filter(function(c){ return c.style.display !== 'none'; }).length;
+    var el = document.getElementById('c-count');
+    if (el) el.textContent = visible;
+  });
+});
+</script>
+</body>
+</html>
