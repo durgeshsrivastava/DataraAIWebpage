@@ -1,22 +1,13 @@
 const express = require('express');
 const path = require('path');
+const serveIndex = require('serve-index');
 
 const app = express();
 
 const publicPath = path.join(__dirname, '..', 'client');
 
-app.use(express.static(publicPath, { index: 'robotics.html' }));
+app.use(express.static(publicPath, { index: 'homepage.html' }));
+app.use('/', serveIndex(publicPath, { icons: true, view: 'details' }));
 
-app.get('*', function(req, res){
-    res.sendFile(path.join(__dirname, '..', 'client', 'error.html'));
-});
-
-app.get('/about_us', function(req, res){
-    res.sendFile(path.join(__dirname, '..', 'client', 'about_us.html'));
-});
-
-app.get('/datacenter', function(req, res){
-  res.sendFile(path.join(__dirname, '..', 'client', 'datacenter.html'));
-});
-
+app.listen(3000, () => console.log('Server running at http://localhost:3000'));
 module.exports = app;

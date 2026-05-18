@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Option A Variants</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #07090a; color: #f9fafb; }
+
+  /* ── Picker ── */
+  .picker { position: fixed; top: 0; left: 0; right: 0; z-index: 999; background: rgba(4,6,8,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; gap: 8px; padding: 12px 36px; }
+  .picker-label { font-size: 11px; font-weight: 700; color: #4b5563; text-transform: uppercase; letter-spacing: .12em; margin-right: 6px; }
+  .pick-btn { padding: 7px 20px; border-radius: 8px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: #9ca3af; transition: all .2s; }
+  .pick-btn:hover { border-color: #1de9b6; color: #1de9b6; }
+  .pick-btn.active { background: #1de9b6; color: #040608; border-color: #1de9b6; }
+
+  .option { display: none; padding: 88px 56px 80px; max-width: 1380px; margin: 0 auto; }
+  .option.active { display: block; }
+
+  /* ── Shared header ── */
+  .sec-eyebrow { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #1de9b6; background: rgba(29,233,182,0.07); border: 1px solid rgba(29,233,182,0.2); padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
+  .sec-eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: #1de9b6; flex-shrink:0; }
+  .sec-title { font-size: 44px; font-weight: 900; letter-spacing: -1.8px; color: #fff; line-height: 1.05; margin-bottom: 10px; }
+  .sec-sub { font-size: 16px; color: #6b7280; margin-bottom: 48px; }
+
+  /* ── Shared badge ── */
+  .badge { display: inline-block; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; padding: 3px 10px; border-radius: 4px; }
+  .badge-lib { background: rgba(34,197,94,0.1); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+  .badge-pat { background: rgba(245,158,11,0.1); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+
+  /* ═══════════════════════════════════════════
+     VARIANT 1 — Frosted glass, centered content
+  ═══════════════════════════════════════════ */
+  .v1-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .v1-card { border-radius: 22px; padding: 36px 24px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: transform .25s, box-shadow .25s; position: relative; overflow: hidden; backdrop-filter: blur(12px); }
+  .v1-card:hover { transform: translateY(-6px); }
+  .v1-card.c1 { background: rgba(29,233,182,0.06); border: 1px solid rgba(29,233,182,0.2); box-shadow: 0 8px 40px rgba(29,233,182,0.05); }
+  .v1-card.c2 { background: rgba(30,136,229,0.06); border: 1px solid rgba(30,136,229,0.2); box-shadow: 0 8px 40px rgba(30,136,229,0.05); }
+  .v1-card.c3 { background: rgba(167,139,250,0.06); border: 1px solid rgba(167,139,250,0.2); box-shadow: 0 8px 40px rgba(167,139,250,0.05); }
+  .v1-card.c4 { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); box-shadow: 0 8px 40px rgba(245,158,11,0.05); }
+  .v1-card:hover.c1 { box-shadow: 0 20px 60px rgba(29,233,182,0.12); }
+  .v1-card:hover.c2 { box-shadow: 0 20px 60px rgba(30,136,229,0.12); }
+  .v1-card:hover.c3 { box-shadow: 0 20px 60px rgba(167,139,250,0.12); }
+  .v1-card:hover.c4 { box-shadow: 0 20px 60px rgba(245,158,11,0.12); }
+  .v1-icon { width: 72px; height: 72px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+  .v1-card.c1 .v1-icon { background: rgba(29,233,182,0.1); border: 1.5px solid rgba(29,233,182,0.3); }
+  .v1-card.c2 .v1-icon { background: rgba(30,136,229,0.1); border: 1.5px solid rgba(30,136,229,0.3); }
+  .v1-card.c3 .v1-icon { background: rgba(167,139,250,0.1); border: 1.5px solid rgba(167,139,250,0.3); }
+  .v1-card.c4 .v1-icon { background: rgba(245,158,11,0.1); border: 1.5px solid rgba(245,158,11,0.3); }
+  .v1-icon svg { width: 36px; height: 36px; }
+  .v1-name { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -.5px; margin: 12px 0 6px; line-height: 1.1; }
+  .v1-tagline { font-size: 12.5px; color: rgba(255,255,255,0.45); margin-bottom: 20px; line-height: 1.5; }
+  .v1-bullets { display: flex; flex-direction: column; align-items: center; gap: 9px; margin-bottom: 24px; width: 100%; }
+  .v1-bullet { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7); }
+  .v1-bdot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .v1-card.c1 .v1-bdot { background: #1de9b6; }
+  .v1-card.c2 .v1-bdot { background: #60a5fa; }
+  .v1-card.c3 .v1-bdot { background: #a78bfa; }
+  .v1-card.c4 .v1-bdot { background: #f59e0b; }
+  .v1-link { font-size: 12.5px; font-weight: 800; text-decoration: none; margin-top: auto; letter-spacing: .03em; }
+  .v1-card.c1 .v1-link { color: #1de9b6; }
+  .v1-card.c2 .v1-link { color: #60a5fa; }
+  .v1-card.c3 .v1-link { color: #a78bfa; }
+  .v1-card.c4 .v1-link { color: #f59e0b; }
+
+  /* ═══════════════════════════════════════════
+     VARIANT 2 — Dark glass, top colour bar, centered
+  ═══════════════════════════════════════════ */
+  .v2-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .v2-card { background: #0c0f12; border-radius: 22px; padding: 0 0 32px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: transform .25s, box-shadow .25s; overflow: hidden; border: 1px solid rgba(255,255,255,0.07); }
+  .v2-card:hover { transform: translateY(-6px); }
+  .v2-card:hover.c1 { border-color: rgba(29,233,182,0.25); box-shadow: 0 20px 60px rgba(29,233,182,0.1); }
+  .v2-card:hover.c2 { border-color: rgba(30,136,229,0.25); box-shadow: 0 20px 60px rgba(30,136,229,0.1); }
+  .v2-card:hover.c3 { border-color: rgba(167,139,250,0.25); box-shadow: 0 20px 60px rgba(167,139,250,0.1); }
+  .v2-card:hover.c4 { border-color: rgba(245,158,11,0.25); box-shadow: 0 20px 60px rgba(245,158,11,0.1); }
+  .v2-top { width: 100%; padding: 32px 24px 24px; display: flex; flex-direction: column; align-items: center; }
+  .v2-card.c1 .v2-top { background: linear-gradient(180deg, rgba(29,233,182,0.1) 0%, transparent 100%); border-bottom: 1px solid rgba(29,233,182,0.1); }
+  .v2-card.c2 .v2-top { background: linear-gradient(180deg, rgba(30,136,229,0.1) 0%, transparent 100%); border-bottom: 1px solid rgba(30,136,229,0.1); }
+  .v2-card.c3 .v2-top { background: linear-gradient(180deg, rgba(167,139,250,0.1) 0%, transparent 100%); border-bottom: 1px solid rgba(167,139,250,0.1); }
+  .v2-card.c4 .v2-top { background: linear-gradient(180deg, rgba(245,158,11,0.1) 0%, transparent 100%); border-bottom: 1px solid rgba(245,158,11,0.1); }
+  .v2-icon { width: 68px; height: 68px; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .v2-card.c1 .v2-icon { background: rgba(29,233,182,0.12); border: 1.5px solid rgba(29,233,182,0.3); }
+  .v2-card.c2 .v2-icon { background: rgba(30,136,229,0.12); border: 1.5px solid rgba(30,136,229,0.3); }
+  .v2-card.c3 .v2-icon { background: rgba(167,139,250,0.12); border: 1.5px solid rgba(167,139,250,0.3); }
+  .v2-card.c4 .v2-icon { background: rgba(245,158,11,0.12); border: 1.5px solid rgba(245,158,11,0.3); }
+  .v2-icon svg { width: 34px; height: 34px; }
+  .v2-name { font-size: 21px; font-weight: 900; color: #fff; letter-spacing: -.5px; line-height: 1.1; }
+  .v2-body { padding: 22px 24px 0; display: flex; flex-direction: column; align-items: center; width: 100%; flex: 1; }
+  .v2-tagline { font-size: 12.5px; font-weight: 600; margin-bottom: 16px; }
+  .v2-card.c1 .v2-tagline { color: rgba(29,233,182,0.7); }
+  .v2-card.c2 .v2-tagline { color: rgba(96,165,250,0.7); }
+  .v2-card.c3 .v2-tagline { color: rgba(167,139,250,0.7); }
+  .v2-card.c4 .v2-tagline { color: rgba(245,158,11,0.7); }
+  .v2-bullets { display: flex; flex-direction: column; align-items: center; gap: 9px; margin-bottom: 24px; width: 100%; }
+  .v2-bullet { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.65); }
+  .v2-bdot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .v2-card.c1 .v2-bdot { background: #1de9b6; }
+  .v2-card.c2 .v2-bdot { background: #60a5fa; }
+  .v2-card.c3 .v2-bdot { background: #a78bfa; }
+  .v2-card.c4 .v2-bdot { background: #f59e0b; }
+  .v2-link { font-size: 12.5px; font-weight: 800; text-decoration: none; margin-top: auto; }
+  .v2-card.c1 .v2-link { color: #1de9b6; }
+  .v2-card.c2 .v2-link { color: #60a5fa; }
+  .v2-card.c3 .v2-link { color: #a78bfa; }
+  .v2-card.c4 .v2-link { color: #f59e0b; }
+
+  /* ═══════════════════════════════════════════
+     VARIANT 3 — Bold name, icon centred, pill bullets
+  ═══════════════════════════════════════════ */
+  .v3-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .v3-card { border-radius: 22px; padding: 38px 24px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: transform .25s, box-shadow .25s; position: relative; overflow: hidden; }
+  .v3-card:hover { transform: translateY(-6px); }
+  .v3-card.c1 { background: linear-gradient(150deg,#0c2118,#07100d); border: 1px solid rgba(29,233,182,0.22); }
+  .v3-card.c2 { background: linear-gradient(150deg,#091525,#060e18); border: 1px solid rgba(30,136,229,0.22); }
+  .v3-card.c3 { background: linear-gradient(150deg,#130e24,#0c0916); border: 1px solid rgba(167,139,250,0.22); }
+  .v3-card.c4 { background: linear-gradient(150deg,#1a1303,#110d02); border: 1px solid rgba(245,158,11,0.22); }
+  .v3-card:hover.c1 { box-shadow: 0 20px 60px rgba(29,233,182,0.12); }
+  .v3-card:hover.c2 { box-shadow: 0 20px 60px rgba(30,136,229,0.12); }
+  .v3-card:hover.c3 { box-shadow: 0 20px 60px rgba(167,139,250,0.12); }
+  .v3-card:hover.c4 { box-shadow: 0 20px 60px rgba(245,158,11,0.12); }
+  .v3-icon { width: 72px; height: 72px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+  .v3-card.c1 .v3-icon { background: rgba(29,233,182,0.1); border: 1.5px solid rgba(29,233,182,0.28); }
+  .v3-card.c2 .v3-icon { background: rgba(30,136,229,0.1); border: 1.5px solid rgba(30,136,229,0.28); }
+  .v3-card.c3 .v3-icon { background: rgba(167,139,250,0.1); border: 1.5px solid rgba(167,139,250,0.28); }
+  .v3-card.c4 .v3-icon { background: rgba(245,158,11,0.1); border: 1.5px solid rgba(245,158,11,0.28); }
+  .v3-icon svg { width: 36px; height: 36px; }
+  .v3-name { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: -.6px; margin-bottom: 8px; line-height: 1.1; }
+  .v3-tagline { font-size: 12.5px; color: rgba(255,255,255,0.42); margin-bottom: 22px; line-height: 1.5; }
+  .v3-pills { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 26px; width: 100%; }
+  .v3-pill { display: inline-flex; align-items: center; justify-content: center; gap: 7px; font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 20px; width: 100%; }
+  .v3-card.c1 .v3-pill { background: rgba(29,233,182,0.07); color: rgba(29,233,182,0.85); border: 1px solid rgba(29,233,182,0.14); }
+  .v3-card.c2 .v3-pill { background: rgba(96,165,250,0.07); color: rgba(96,165,250,0.85); border: 1px solid rgba(96,165,250,0.14); }
+  .v3-card.c3 .v3-pill { background: rgba(167,139,250,0.07); color: rgba(167,139,250,0.85); border: 1px solid rgba(167,139,250,0.14); }
+  .v3-card.c4 .v3-pill { background: rgba(245,158,11,0.07); color: rgba(245,158,11,0.85); border: 1px solid rgba(245,158,11,0.14); }
+  .v3-link { font-size: 12.5px; font-weight: 800; text-decoration: none; margin-top: auto; }
+  .v3-card.c1 .v3-link { color: #1de9b6; }
+  .v3-card.c2 .v3-link { color: #60a5fa; }
+  .v3-card.c3 .v3-link { color: #a78bfa; }
+  .v3-card.c4 .v3-link { color: #f59e0b; }
+
+  /* ═══════════════════════════════════════════
+     VARIANT 4 — Compact glass, icon + name inline top, centred bullets
+  ═══════════════════════════════════════════ */
+  .v4-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .v4-card { border-radius: 22px; padding: 32px 28px 30px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: transform .25s, box-shadow .25s; }
+  .v4-card:hover { transform: translateY(-6px); }
+  .v4-card.c1 { background: rgba(10,20,16,0.9); border: 1px solid rgba(29,233,182,0.18); }
+  .v4-card.c2 { background: rgba(8,14,24,0.9); border: 1px solid rgba(30,136,229,0.18); }
+  .v4-card.c3 { background: rgba(14,10,24,0.9); border: 1px solid rgba(167,139,250,0.18); }
+  .v4-card.c4 { background: rgba(20,14,4,0.9); border: 1px solid rgba(245,158,11,0.18); }
+  .v4-card:hover.c1 { box-shadow: 0 20px 60px rgba(29,233,182,0.1); border-color: rgba(29,233,182,0.35); }
+  .v4-card:hover.c2 { box-shadow: 0 20px 60px rgba(30,136,229,0.1); border-color: rgba(30,136,229,0.35); }
+  .v4-card:hover.c3 { box-shadow: 0 20px 60px rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.35); }
+  .v4-card:hover.c4 { box-shadow: 0 20px 60px rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.35); }
+  .v4-icon { width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .v4-card.c1 .v4-icon { background: rgba(29,233,182,0.1); border: 1.5px solid rgba(29,233,182,0.28); }
+  .v4-card.c2 .v4-icon { background: rgba(30,136,229,0.1); border: 1.5px solid rgba(30,136,229,0.28); }
+  .v4-card.c3 .v4-icon { background: rgba(167,139,250,0.1); border: 1.5px solid rgba(167,139,250,0.28); }
+  .v4-card.c4 .v4-icon { background: rgba(245,158,11,0.1); border: 1.5px solid rgba(245,158,11,0.28); }
+  .v4-icon svg { width: 32px; height: 32px; }
+  .v4-name { font-size: 22px; font-weight: 900; color: #fff; letter-spacing: -.5px; margin-bottom: 4px; line-height: 1.1; }
+  .v4-sub { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 18px; }
+  .v4-card.c1 .v4-sub { color: rgba(29,233,182,0.6); }
+  .v4-card.c2 .v4-sub { color: rgba(96,165,250,0.6); }
+  .v4-card.c3 .v4-sub { color: rgba(167,139,250,0.6); }
+  .v4-card.c4 .v4-sub { color: rgba(245,158,11,0.6); }
+  .v4-divider { width: 40px; height: 2px; border-radius: 2px; margin: 0 auto 18px; }
+  .v4-card.c1 .v4-divider { background: rgba(29,233,182,0.3); }
+  .v4-card.c2 .v4-divider { background: rgba(96,165,250,0.3); }
+  .v4-card.c3 .v4-divider { background: rgba(167,139,250,0.3); }
+  .v4-card.c4 .v4-divider { background: rgba(245,158,11,0.3); }
+  .v4-bullets { display: flex; flex-direction: column; align-items: center; gap: 9px; margin-bottom: 24px; width: 100%; }
+  .v4-bullet { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.68); }
+  .v4-bdot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .v4-card.c1 .v4-bdot { background: #1de9b6; }
+  .v4-card.c2 .v4-bdot { background: #60a5fa; }
+  .v4-card.c3 .v4-bdot { background: #a78bfa; }
+  .v4-card.c4 .v4-bdot { background: #f59e0b; }
+  .v4-link { font-size: 12.5px; font-weight: 800; text-decoration: none; margin-top: auto; }
+  .v4-card.c1 .v4-link { color: #1de9b6; }
+  .v4-card.c2 .v4-link { color: #60a5fa; }
+  .v4-card.c3 .v4-link { color: #a78bfa; }
+  .v4-card.c4 .v4-link { color: #f59e0b; }
+</style>
+</head>
+<body>
+
+<div class="picker">
+  <span class="picker-label">Variant:</span>
+  <button class="pick-btn active" onclick="show(1)">A1 — Frosted Glass</button>
+  <button class="pick-btn" onclick="show(2)">A2 — Dark + Top Glow</button>
+  <button class="pick-btn" onclick="show(3)">A3 — Pill Bullets</button>
+  <button class="pick-btn" onclick="show(4)">A4 — Compact + Divider</button>
+</div>
+
+<!-- ═══ SVG ICONS (reused across all variants) ═══ -->
+<svg style="display:none">
+  <symbol id="ico-hub" viewBox="0 0 48 48" fill="none">
+    <rect x="6" y="14" width="36" height="26" rx="4" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M6 22h36M6 30h36" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"/>
+    <circle cx="12" cy="18" r="2" fill="currentColor"/>
+    <circle cx="12" cy="26" r="2" fill="currentColor"/>
+    <circle cx="12" cy="34" r="2" fill="currentColor"/>
+    <path d="M18 8h12M24 8v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="ico-eye" viewBox="0 0 48 48" fill="none">
+    <circle cx="24" cy="24" r="10" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="24" cy="24" r="4" fill="currentColor"/>
+    <path d="M24 6v6M24 36v6M6 24h6M36 24h6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M10.5 10.5l4.2 4.2M33.3 33.3l4.2 4.2M10.5 37.5l4.2-4.2M33.3 14.7l4.2-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="ico-hand" viewBox="0 0 48 48" fill="none">
+    <path d="M24 10c-4 0-7 3-7 7v4h14v-4c0-4-3-7-7-7z" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="14" y="21" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M10 28h4M34 28h4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="20" cy="28" r="2" fill="currentColor"/>
+    <circle cx="28" cy="28" r="2" fill="currentColor"/>
+    <path d="M20 35v5M28 35v5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="ico-task" viewBox="0 0 48 48" fill="none">
+    <rect x="8" y="30" width="32" height="10" rx="3" stroke="currentColor" stroke-width="2.5"/>
+    <path d="M16 30v-8l8-8 8 8v8" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M24 14v-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="24" cy="6" r="2.5" fill="currentColor"/>
+    <path d="M20 30v-4h8v4" stroke="currentColor" stroke-width="2"/>
+    <circle cx="14" cy="35" r="2" fill="currentColor"/>
+    <circle cx="34" cy="35" r="2" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<!-- ═══════════════════════ VARIANT 1 ═══════════════════════ -->
+<div class="option active" id="opt1">
+  <div class="sec-eyebrow"><span class="dot"></span>Products</div>
+  <div class="sec-title">The Full Physical AI Data Stack</div>
+  <p class="sec-sub">Four products. Built for production-grade robot training.</p>
+  <div class="v1-grid">
+
+    <div class="v1-card c1">
+      <div class="v1-icon"><svg style="color:#1de9b6"><use href="#ico-hub"/></svg></div>
+      <span class="badge badge-lib">Core Platform</span>
+      <div class="v1-name">RoboDataHub</div>
+      <p class="v1-tagline">Central intelligence layer for Physical AI training data</p>
+      <div class="v1-bullets">
+        <div class="v1-bullet"><span class="v1-bdot"></span>EGO + EXO labelled datasets</div>
+        <div class="v1-bullet"><span class="v1-bdot"></span>4 industry verticals</div>
+        <div class="v1-bullet"><span class="v1-bdot"></span>500K+ annotated sequences</div>
+      </div>
+      <a href="#" class="v1-link">Browse datasets →</a>
+    </div>
+
+    <div class="v1-card c2">
+      <div class="v1-icon"><svg style="color:#60a5fa"><use href="#ico-eye"/></svg></div>
+      <span class="badge badge-pat">Patented IP</span>
+      <div class="v1-name">RoboEyeView</div>
+      <p class="v1-tagline">Converts external camera feeds into robot-eye perspective</p>
+      <div class="v1-bullets">
+        <div class="v1-bullet"><span class="v1-bdot"></span>EXO → EGO view synthesis</div>
+        <div class="v1-bullet"><span class="v1-bdot"></span>85% → 95%+ accuracy</div>
+        <div class="v1-bullet"><span class="v1-bdot"></span>60% labelling cost reduction</div>
+      </div>
+      <a href="#" class="v1-link">Learn more →</a>
+    </div>
+
+    <div class="v1-card c3">
+      <div class="v1-icon"><svg style="color:#a78bfa"><use href="#ico-hand"/></svg></div>
+      <span class="badge badge-pat">Patented IP</span>
+      <div class="v1-name">RoboHandMotion</div>
+      <p class="v1-tagline">Precision hand & tool interaction data for dexterous robots</p>
+      <div class="v1-bullets">
+        <div class="v1-bullet"><span class="v1-bdot"></span>Finger-level motion capture</div>
+        <div class="v1-bullet"><span class="v1-bdot"></span>Tool + object interaction</div>
+        <div class="v1-bullet"><span class="v1-bdot"></span>Humanoid-ready format</div>
+      </div>
+      <a href="#" class="v1-link">Learn more →</a>
+    </div>
+
+    <div class="v1-card c4">
+      <div class="v1-icon"><svg style="color:#f59e0b"><use href="#ico-task"/></svg></div>
+      <span class="badge badge-lib">Task Intelligence</span>
+      <div class="v1-name">RoboTaskManipulator</div>
+      <p class="v1-tagline">Full task workflows for assembly, pick-place & cabling</p>
+      <div class="v1-bullets">
+        <div class="v1-bullet"><span class="v1-bdot"></span>Assembly & pick-place data</div>
+        <div class="v1-bullet"><span class="v1-bdot"></span>95% precision at Peer Robotics</div>
+        <div class="v1-bullet"><span class="v1-bdot"></span>Multi-step task sequences</div>
+      </div>
+      <a href="#" class="v1-link">See case study →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ VARIANT 2 ═══════════════════════ -->
+<div class="option" id="opt2">
+  <div class="sec-eyebrow"><span class="dot"></span>Products</div>
+  <div class="sec-title">The Full Physical AI Data Stack</div>
+  <p class="sec-sub">Four products. Built for production-grade robot training.</p>
+  <div class="v2-grid">
+
+    <div class="v2-card c1">
+      <div class="v2-top">
+        <div class="v2-icon"><svg style="color:#1de9b6"><use href="#ico-hub"/></svg></div>
+        <div class="v2-name">RoboDataHub</div>
+      </div>
+      <div class="v2-body">
+        <p class="v2-tagline">Central AI training data library</p>
+        <div class="v2-bullets">
+          <div class="v2-bullet"><span class="v2-bdot"></span>EGO + EXO labelled datasets</div>
+          <div class="v2-bullet"><span class="v2-bdot"></span>4 industry verticals</div>
+          <div class="v2-bullet"><span class="v2-bdot"></span>500K+ annotated sequences</div>
+        </div>
+        <a href="#" class="v2-link">Browse datasets →</a>
+      </div>
+    </div>
+
+    <div class="v2-card c2">
+      <div class="v2-top">
+        <div class="v2-icon"><svg style="color:#60a5fa"><use href="#ico-eye"/></svg></div>
+        <div class="v2-name">RoboEyeView</div>
+      </div>
+      <div class="v2-body">
+        <p class="v2-tagline">EXO → EGO view synthesis</p>
+        <div class="v2-bullets">
+          <div class="v2-bullet"><span class="v2-bdot"></span>Patented view synthesis</div>
+          <div class="v2-bullet"><span class="v2-bdot"></span>85% → 95%+ accuracy</div>
+          <div class="v2-bullet"><span class="v2-bdot"></span>60% labelling cost cut</div>
+        </div>
+        <a href="#" class="v2-link">Learn more →</a>
+      </div>
+    </div>
+
+    <div class="v2-card c3">
+      <div class="v2-top">
+        <div class="v2-icon"><svg style="color:#a78bfa"><use href="#ico-hand"/></svg></div>
+        <div class="v2-name">RoboHandMotion</div>
+      </div>
+      <div class="v2-body">
+        <p class="v2-tagline">Dexterous motion capture data</p>
+        <div class="v2-bullets">
+          <div class="v2-bullet"><span class="v2-bdot"></span>Finger-level motion capture</div>
+          <div class="v2-bullet"><span class="v2-bdot"></span>Tool + object interaction</div>
+          <div class="v2-bullet"><span class="v2-bdot"></span>Humanoid-ready format</div>
+        </div>
+        <a href="#" class="v2-link">Learn more →</a>
+      </div>
+    </div>
+
+    <div class="v2-card c4">
+      <div class="v2-top">
+        <div class="v2-icon"><svg style="color:#f59e0b"><use href="#ico-task"/></svg></div>
+        <div class="v2-name">RoboTaskManipulator</div>
+      </div>
+      <div class="v2-body">
+        <p class="v2-tagline">End-to-end task intelligence</p>
+        <div class="v2-bullets">
+          <div class="v2-bullet"><span class="v2-bdot"></span>Assembly & pick-place data</div>
+          <div class="v2-bullet"><span class="v2-bdot"></span>95% precision at Peer Robotics</div>
+          <div class="v2-bullet"><span class="v2-bdot"></span>Multi-step task sequences</div>
+        </div>
+        <a href="#" class="v2-link">See case study →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ VARIANT 3 ═══════════════════════ -->
+<div class="option" id="opt3">
+  <div class="sec-eyebrow"><span class="dot"></span>Products</div>
+  <div class="sec-title">The Full Physical AI Data Stack</div>
+  <p class="sec-sub">Four products. Built for production-grade robot training.</p>
+  <div class="v3-grid">
+
+    <div class="v3-card c1">
+      <div class="v3-icon"><svg style="color:#1de9b6"><use href="#ico-hub"/></svg></div>
+      <div class="v3-name">RoboDataHub</div>
+      <p class="v3-tagline">Central intelligence layer for Physical AI training data</p>
+      <div class="v3-pills">
+        <div class="v3-pill">EGO + EXO labelled datasets</div>
+        <div class="v3-pill">4 industry verticals</div>
+        <div class="v3-pill">500K+ annotated sequences</div>
+      </div>
+      <a href="#" class="v3-link">Browse datasets →</a>
+    </div>
+
+    <div class="v3-card c2">
+      <div class="v3-icon"><svg style="color:#60a5fa"><use href="#ico-eye"/></svg></div>
+      <div class="v3-name">RoboEyeView</div>
+      <p class="v3-tagline">Converts external camera feeds into robot-eye perspective</p>
+      <div class="v3-pills">
+        <div class="v3-pill">EXO → EGO view synthesis</div>
+        <div class="v3-pill">85% → 95%+ accuracy</div>
+        <div class="v3-pill">60% labelling cost cut</div>
+      </div>
+      <a href="#" class="v3-link">Learn more →</a>
+    </div>
+
+    <div class="v3-card c3">
+      <div class="v3-icon"><svg style="color:#a78bfa"><use href="#ico-hand"/></svg></div>
+      <div class="v3-name">RoboHandMotion</div>
+      <p class="v3-tagline">Precision hand & tool interaction data for dexterous robots</p>
+      <div class="v3-pills">
+        <div class="v3-pill">Finger-level motion capture</div>
+        <div class="v3-pill">Tool + object interaction</div>
+        <div class="v3-pill">Humanoid-ready format</div>
+      </div>
+      <a href="#" class="v3-link">Learn more →</a>
+    </div>
+
+    <div class="v3-card c4">
+      <div class="v3-icon"><svg style="color:#f59e0b"><use href="#ico-task"/></svg></div>
+      <div class="v3-name">RoboTaskManipulator</div>
+      <p class="v3-tagline">Full task workflows for assembly, pick-place & cabling</p>
+      <div class="v3-pills">
+        <div class="v3-pill">Assembly & pick-place data</div>
+        <div class="v3-pill">95% precision — Peer Robotics</div>
+        <div class="v3-pill">Multi-step task sequences</div>
+      </div>
+      <a href="#" class="v3-link">See case study →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ VARIANT 4 ═══════════════════════ -->
+<div class="option" id="opt4">
+  <div class="sec-eyebrow"><span class="dot"></span>Products</div>
+  <div class="sec-title">The Full Physical AI Data Stack</div>
+  <p class="sec-sub">Four products. Built for production-grade robot training.</p>
+  <div class="v4-grid">
+
+    <div class="v4-card c1">
+      <div class="v4-icon"><svg style="color:#1de9b6"><use href="#ico-hub"/></svg></div>
+      <div class="v4-name">RoboDataHub</div>
+      <div class="v4-sub">Core Platform</div>
+      <div class="v4-divider"></div>
+      <div class="v4-bullets">
+        <div class="v4-bullet"><span class="v4-bdot"></span>EGO + EXO labelled datasets</div>
+        <div class="v4-bullet"><span class="v4-bdot"></span>4 industry verticals</div>
+        <div class="v4-bullet"><span class="v4-bdot"></span>500K+ annotated sequences</div>
+      </div>
+      <a href="#" class="v4-link">Browse datasets →</a>
+    </div>
+
+    <div class="v4-card c2">
+      <div class="v4-icon"><svg style="color:#60a5fa"><use href="#ico-eye"/></svg></div>
+      <div class="v4-name">RoboEyeView</div>
+      <div class="v4-sub">Patented IP</div>
+      <div class="v4-divider"></div>
+      <div class="v4-bullets">
+        <div class="v4-bullet"><span class="v4-bdot"></span>EXO → EGO view synthesis</div>
+        <div class="v4-bullet"><span class="v4-bdot"></span>85% → 95%+ accuracy</div>
+        <div class="v4-bullet"><span class="v4-bdot"></span>60% labelling cost cut</div>
+      </div>
+      <a href="#" class="v4-link">Learn more →</a>
+    </div>
+
+    <div class="v4-card c3">
+      <div class="v4-icon"><svg style="color:#a78bfa"><use href="#ico-hand"/></svg></div>
+      <div class="v4-name">RoboHandMotion</div>
+      <div class="v4-sub">Patented IP</div>
+      <div class="v4-divider"></div>
+      <div class="v4-bullets">
+        <div class="v4-bullet"><span class="v4-bdot"></span>Finger-level motion capture</div>
+        <div class="v4-bullet"><span class="v4-bdot"></span>Tool + object interaction</div>
+        <div class="v4-bullet"><span class="v4-bdot"></span>Humanoid-ready format</div>
+      </div>
+      <a href="#" class="v4-link">Learn more →</a>
+    </div>
+
+    <div class="v4-card c4">
+      <div class="v4-icon"><svg style="color:#f59e0b"><use href="#ico-task"/></svg></div>
+      <div class="v4-name">RoboTaskManipulator</div>
+      <div class="v4-sub">Task Intelligence</div>
+      <div class="v4-divider"></div>
+      <div class="v4-bullets">
+        <div class="v4-bullet"><span class="v4-bdot"></span>Assembly & pick-place data</div>
+        <div class="v4-bullet"><span class="v4-bdot"></span>95% precision — Peer Robotics</div>
+        <div class="v4-bullet"><span class="v4-bdot"></span>Multi-step task sequences</div>
+      </div>
+      <a href="#" class="v4-link">See case study →</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function show(n) {
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('active'));
+    document.querySelectorAll('.pick-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('opt' + n).classList.add('active');
+    document.querySelectorAll('.pick-btn')[n - 1].classList.add('active');
+  }
+</script>
+</body>
+</html>
