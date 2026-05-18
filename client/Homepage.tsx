@@ -474,7 +474,7 @@ const Homepage: React.FC = () => {
             <a href="#" className="pd-link">Learn more →</a>
           </div>
 
-          <div className="pd-card c3">
+          <div className="pd-card c3" onClick={() => { window.location.href = 'robohandmotion.html'; }}>
             <div className="pd-icon purple">
               <svg style={{ color: '#a78bfa' }}><use href="#ico-hand" /></svg>
             </div>
@@ -486,10 +486,10 @@ const Homepage: React.FC = () => {
               <div className="pd-pill">Tool + object interaction</div>
               <div className="pd-pill">Humanoid-ready format</div>
             </div>
-            <a href="#" className="pd-link">Learn more →</a>
+            <a href="robohandmotion.html" className="pd-link">Learn more →</a>
           </div>
 
-          <div className="pd-card c4">
+          <div className="pd-card c4" onClick={() => { window.location.href = 'robotaskmanipulator.html'; }}>
             <div className="pd-icon orange">
               <svg style={{ color: '#f59e0b' }}><use href="#ico-task" /></svg>
             </div>
@@ -501,7 +501,7 @@ const Homepage: React.FC = () => {
               <div className="pd-pill">95% precision — Peer Robotics</div>
               <div className="pd-pill">Multi-step task sequences</div>
             </div>
-            <a href="#" className="pd-link">See case study →</a>
+            <a href="robotaskmanipulator.html" className="pd-link">See case study →</a>
           </div>
         </div>
       </section>
